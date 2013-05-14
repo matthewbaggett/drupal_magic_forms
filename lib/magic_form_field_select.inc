@@ -4,7 +4,11 @@ class magic_form_field_select extends magic_form_field{
   protected $options;
 
   public function add_option($value, $key = null){
-    $this->options[$key] = $value;
+    if($key){
+      $this->options[$key] = $value;
+    }else{
+      $this->options[] = $value;
+    }
   }
 
   public function get_options(){
