@@ -7,7 +7,7 @@ class magic_form_field {
   protected $value = null;
   protected $disabled = false;
 
-  public static function factory($name = null, $label = null, $value = null){
+  public static function factory($name = null, $label = null, $value = null) {
     $class = get_called_class();
     $instance = new $class($name, $label, $value);
     return $instance;
@@ -71,7 +71,7 @@ class magic_form_field {
     return $this;
   }
 
-  public function is_disabled(){
+  public function is_disabled() {
     return $this->disabled;
   }
 }
