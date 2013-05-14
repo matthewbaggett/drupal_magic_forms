@@ -1,0 +1,28 @@
+<?php
+
+require_once("lib/magic_form.inc");
+require_once("lib/magic_form_field.inc");
+require_once("lib/magic_form_field_select.inc");
+require_once("lib/magic_form_field_text.inc");
+require_once("lib/magic_form_field_textarea.inc");
+
+/**
+ * Crunch through a view
+ *
+ * @param string       $file File of the template to call.
+ * @param array|object $view Optional view array.
+ *
+ * @return string
+ */
+function magic_forms_template_view($file, $view = null) {
+  $file = DRUPAL_ROOT . "/" . drupal_get_path('module','magic_forms') . '/templates/' . $file;
+  if (!file_exists($file)) {
+    return "Cannot find {$file}";
+  }
+  extract((array)$view);
+  ob_start();
+  require($file);
+  $markup = ob_get_contents();
+  ob_end_clean();
+  return $markup;
+}
