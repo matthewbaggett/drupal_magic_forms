@@ -32,3 +32,18 @@ function magic_forms_template_view($file, $view = null) {
   ob_end_clean();
   return $markup;
 }
+
+/**
+ * CSS class mangler
+ * Mangle a string like "Layout Magic Doodah" to "layout-magic-doodah" for use as a CSS class
+ *
+ * @param $text text string to mangle
+ *
+ * @return string css class
+ */
+function magic_forms_mangle_to_css_class($text) {
+  $text = str_replace(" ", "-", $text);
+  $text = preg_replace("/[^a-zA-Z0-9-]+/", "", $text);
+  $text = strtolower($text);
+  return $text;
+}
