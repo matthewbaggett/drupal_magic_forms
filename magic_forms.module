@@ -37,7 +37,7 @@ function magic_forms_template_view($file, $view = null) {
  * CSS class mangler
  * Mangle a string like "Layout Magic Doodah" to "layout-magic-doodah" for use as a CSS class
  *
- * @param $text text string to mangle
+ * @param string      $text text string to mangle
  *
  * @return string css class
  */
