@@ -1,0 +1,8 @@
+<input
+  type="button"
+  name="<?php echo $field->get_name(); ?>"
+  value="<?php echo $field->get_label() ?>"
+  <?php if ($field->is_disabled()): ?>
+    disabled="disabled"
+  <?php endif; ?>
+  />

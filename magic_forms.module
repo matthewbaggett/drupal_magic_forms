@@ -2,6 +2,7 @@
 
 require_once("lib/magic_form.inc");
 require_once("lib/magic_form_field.inc");
+require_once("lib/magic_form_field_button.inc");
 require_once("lib/magic_form_field_datatable.inc");
 require_once("lib/magic_form_field_multi.inc");
 require_once("lib/magic_form_field_radio.inc");
