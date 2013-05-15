@@ -1,3 +1,5 @@
-<label for="<?php echo $field->get_name(); ?>">
-  <?php echo $field->get_label(); ?>
-</label>
+<?php if(strlen($field->get_label()) > 0): ?>
+  <label for="<?php echo $field->get_name(); ?>">
+    <?php echo $field->get_label(); ?>
+  </label>
+<?php endif; ?>
