@@ -4,7 +4,7 @@ class magic_form_group extends magic_form_item {
   private $fields;
   private $group_name;
 
-  public function __construct($group_name = null){
+  public function __construct($group_name = null) {
     $this->group_name = $group_name;
   }
 
@@ -17,7 +17,7 @@ class magic_form_group extends magic_form_item {
     return $this->fields;
   }
 
-  public function get_group_name(){
+  public function get_group_name() {
     return t($this->group_name);
   }
 
