@@ -14,7 +14,7 @@ class magic_form {
     return magic_forms_template_view("form.phtml", $view);
   }
 
-  public function get_action(){
+  public function get_action() {
     return $_SERVER['REQUEST_URI'];
   }
 }

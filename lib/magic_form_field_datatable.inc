@@ -22,7 +22,7 @@ class magic_form_field_datatable extends magic_form_field {
     return $this->rows;
   }
 
-  public function get_headings(){
+  public function get_headings() {
     return array_keys(end($this->rows));
   }
 

@@ -8,20 +8,20 @@
         <div class="radio_group_option">
           <?php if (!$field->is_label_after()): ?>
             <label
-              for="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label);?>"
+              for="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label); ?>"
               >
               <?php echo $option_label; ?>
             </label>
           <?php endif; ?>
           <input
-            id="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label);?>"
+            id="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label); ?>"
             type="radio"
             name="<?php echo $field->get_name(); ?>"
             value="<?php echo $key; ?>"
             />
           <?php if ($field->is_label_after()): ?>
             <label
-              for="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label);?>"
+              for="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label); ?>"
               >
               <?php echo $option_label; ?>
             </label>

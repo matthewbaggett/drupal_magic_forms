@@ -1,14 +1,14 @@
 <?php
 
-class magic_form_group extends magic_form_item{
+class magic_form_group extends magic_form_item {
   private $fields;
 
-  public function add_field(magic_form_field $field){
+  public function add_field(magic_form_field $field) {
     $this->fields[] = $field;
     return $this;
   }
 
-  public function get_fields(){
+  public function get_fields() {
     return $this->fields;
   }
 

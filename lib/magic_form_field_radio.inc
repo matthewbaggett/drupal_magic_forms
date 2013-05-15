@@ -4,16 +4,16 @@ class magic_form_field_radio extends magic_form_field_multi {
 
   protected $labels = 'after';
 
-  public function set_labels_before(){
+  public function set_labels_before() {
     $this->labels = 'before';
   }
 
-  public function set_labels_after(){
+  public function set_labels_after() {
     $this->labels = 'after';
   }
 
-  public function is_label_after(){
-    if($this->labels == 'after'){
+  public function is_label_after() {
+    if ($this->labels == 'after') {
       return TRUE;
     }
     return FALSE;
