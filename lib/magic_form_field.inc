@@ -1,6 +1,6 @@
 <?php
 
-class magic_form_field {
+class magic_form_field extends magic_form_item{
   protected $name = null;
   protected $label = null;
   protected $default_value = null;

@@ -2,7 +2,7 @@
 class magic_form {
   private $form_elements;
 
-  public function add_field(magic_form_field $field) {
+  public function add_field(magic_form_item $field) {
     $this->form_elements[] = $field;
     return $this;
   }

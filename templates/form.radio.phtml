@@ -1,18 +1,21 @@
-<?php require("form.label.phtml"); ?>
+<div class="form_row">
 
-<?php if (count($field->get_options()) > 0): ?>
-  <div class="radio_group">
-    <?php foreach ($field->get_options() as $key => $option_label): ?>
-      <?php if(!$field->is_label_after()): ?>
-        <label for=""><?php echo $option_label; ?></label>
-      <?php endif; ?>
+  <?php require("form.label.phtml"); ?>
 
-      <input type="radio" name="<?php echo $field->get_name(); ?>" value="<?php echo $key; ?>"/>
+  <?php if (count($field->get_options()) > 0): ?>
+    <div class="radio_group">
+      <?php foreach ($field->get_options() as $key => $option_label): ?>
+        <?php if (!$field->is_label_after()): ?>
+          <label for=""><?php echo $option_label; ?></label>
+        <?php endif; ?>
 
-      <?php if($field->is_label_after()): ?>
-        <label for=""><?php echo $option_label; ?></label>
-      <?php endif; ?>
-    <?php endforeach; ?>
-  </div>
-<?php endif; ?>
+        <input type="radio" name="<?php echo $field->get_name(); ?>" value="<?php echo $key; ?>"/>
 
+        <?php if ($field->is_label_after()): ?>
+          <label for=""><?php echo $option_label; ?></label>
+        <?php endif; ?>
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
+
+</div>

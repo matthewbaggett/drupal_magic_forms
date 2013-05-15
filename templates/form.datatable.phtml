@@ -1,20 +1,23 @@
-<?php require("form.label.phtml"); ?>
+<div class="form_row">
 
-<table>
-  <thead>
+  <?php require("form.label.phtml"); ?>
+
+  <table>
+    <thead>
     <tr>
-      <?php foreach($field->get_headings() as $heading): ?>
+      <?php foreach ($field->get_headings() as $heading): ?>
         <td><?php echo $heading; ?></td>
       <?php endforeach; ?>
     </tr>
-  </thead>
-  <tbody>
-    <?php foreach($field->get_rows() as $row): ?>
+    </thead>
+    <tbody>
+    <?php foreach ($field->get_rows() as $row): ?>
       <tr>
-        <?php foreach($row as $cell_name => $cell_value): ?>
+        <?php foreach ($row as $cell_name => $cell_value): ?>
           <td><?php echo $cell_value; ?></td>
-        <?php endforeach?>
+        <?php endforeach ?>
       </tr>
     <?php endforeach; ?>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
