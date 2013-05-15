@@ -10,6 +10,11 @@ class magic_form {
   public function __toString() {
     $view = new StdClass();
     $view->form_rows = $this->form_elements;
+    $view->action = $this->get_action();
     return magic_forms_template_view("form.phtml", $view);
+  }
+
+  public function get_action(){
+    return $_SERVER['REQUEST_URI'];
   }
 }
