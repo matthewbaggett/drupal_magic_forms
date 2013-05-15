@@ -6,8 +6,8 @@
     name="<?php echo $field->get_name(); ?>"
     id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
     >
-    <?php if($field->null_value_allowed()): ?>
-      <option value=""> --- </option>
+    <?php if ($field->null_value_allowed()): ?>
+      <option value=""> ---</option>
     <?php endif; ?>
     <?php if (count($field->get_options()) > 0): ?>
       <?php foreach ($field->get_options() as $key => $option_label): ?>
