@@ -1,8 +1,12 @@
 <div class="form_group">
+  <?php if(strlen($field->get_group_name()) > 0): ?>
+    <h3><?php echo $field->get_group_name(); ?></h3>
+  <?php endif; ?>
   <?php foreach ($field->get_fields() as $field): ?>
     <div class="form_row">
       <?php echo $field; ?>
       <div class="clear"></div>
     </div>
   <?php endforeach; ?>
+
 </div>
