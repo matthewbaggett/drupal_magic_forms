@@ -1,0 +1,12 @@
+<div class="form_row">
+  <?php require("form.label.phtml"); ?>
+
+  <textarea
+    id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
+    type="text"
+    name="<?php echo $field->get_name(); ?>"
+    <?php if ($field->is_disabled()): ?>
+      disabled="disabled"
+    <?php endif; ?>
+    ><?php echo $field->get_value() ?></textarea>
+</div>
