@@ -4,17 +4,19 @@ form.magic_form {
     width: 100%;
 }
 
-form.magic_form .form_row {
+form.magic_form .form_row,
+form.magic_form .form_group {
     float: left;
     display: block;
     width: 100%;
     margin-bottom: 10px;
 }
 
+form.magic_form .form_row {
+
+}
+
 form.magic_form .form_group {
-    float: left;
-    display: block;
-    width: 100%;
     border: 1px solid #DDDDDD;
     border-radius: 5px;
     padding: 5px 5px 5px 5px;
@@ -40,4 +42,8 @@ form.magic_form .radio_group .radio_group_option label {
 form.magic_form .radio_group .radio_group_option input {
     float: left;
     display: block;
+}
+
+form.magic_form .clear{
+    clear: both;
 }
