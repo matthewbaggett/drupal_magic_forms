@@ -11,7 +11,7 @@ class magic_form {
     self::cleanup_expired_forms();
   }
 
-  static public function cleanup_expired_forms(){
+  static public function cleanup_expired_forms() {
     // Expire old magic forms
     foreach ($_SESSION['magic_forms'] as $form_id => $form_container) {
       if (strtotime($form_container['created']) < strtotime(self::inactivity_max_time . " ago")) {
@@ -28,7 +28,7 @@ class magic_form {
   }
 
   public function add_field(magic_form_item $field) {
-    $this->form_elements[] = $field;
+    $this->form_elements[$field->get_name()] = $field;
     return $this;
   }
 
@@ -50,7 +50,22 @@ class magic_form {
   }
 
   public function do_submit() {
-    $this->submit_function->__invoke();
+    $this->populate_with_request();
+    $this->submit_function->__invoke($this);
+  }
+
+  private function populate_with_request(){
+    foreach($_REQUEST as $key => $value){
+      switch($key){
+        case 'magic_form_id':
+          // Do nothing;
+          break;
+        default:
+          if($this->form_elements[$key]){
+            $this->form_elements[$key]->set_value($value);
+          }
+      }
+    }
   }
 
   public function get_form_id() {
@@ -66,6 +81,5 @@ class magic_form {
       $form = unserialize($_SESSION['magic_forms'][$magic_form_id]['form']);
       $form->do_submit();
     }
-    die($magic_form_id);
   }
 }
