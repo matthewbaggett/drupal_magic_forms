@@ -9,7 +9,7 @@ class magic_form_group extends magic_form_item {
   }
 
   public function add_field(magic_form_field $field) {
-    $this->fields[] = $field;
+    $this->fields[$field->get_name()] = $field;
     return $this;
   }
 

@@ -32,6 +32,23 @@ class magic_form {
     return $this;
   }
 
+  public function get_field($name){
+    foreach($this->form_elements as $element_name => $element){
+      if($element_name == $name){
+        return $this->form_elements[$name];
+      }
+      if(get_class($element) == 'magic_form_group'){
+        $sub_fields = $element->get_fields();
+        foreach($sub_fields as $sub_element_name => $sub_element){
+          if($sub_element_name == $name){
+            return $sub_fields[$sub_element_name];
+          }
+        }
+      }
+    }
+    return FALSE;
+  }
+
   public function __toString() {
     $view = new StdClass();
     $view->form_rows = $this->form_elements;
@@ -60,9 +77,11 @@ class magic_form {
         case 'magic_form_id':
           // Do nothing;
           break;
+
         default:
-          if($this->form_elements[$key]){
-            $this->form_elements[$key]->set_value($value);
+          $item = $this->get_field($key);
+          if($item){
+            $item->set_value($value);
           }
       }
     }
