@@ -32,15 +32,15 @@ class magic_form {
     return $this;
   }
 
-  public function get_field($name){
-    foreach($this->form_elements as $element_name => $element){
-      if($element_name == $name){
+  public function get_field($name) {
+    foreach ($this->form_elements as $element_name => $element) {
+      if ($element_name == $name) {
         return $this->form_elements[$name];
       }
-      if(get_class($element) == 'magic_form_group'){
+      if (get_class($element) == 'magic_form_group') {
         $sub_fields = $element->get_fields();
-        foreach($sub_fields as $sub_element_name => $sub_element){
-          if($sub_element_name == $name){
+        foreach ($sub_fields as $sub_element_name => $sub_element) {
+          if ($sub_element_name == $name) {
             return $sub_fields[$sub_element_name];
           }
         }
@@ -71,16 +71,16 @@ class magic_form {
     $this->submit_function->__invoke($this);
   }
 
-  private function populate_with_request(){
-    foreach($_REQUEST as $key => $value){
-      switch($key){
+  private function populate_with_request() {
+    foreach ($_REQUEST as $key => $value) {
+      switch ($key) {
         case 'magic_form_id':
           // Do nothing;
           break;
 
         default:
           $item = $this->get_field($key);
-          if($item){
+          if ($item) {
             $item->set_value($value);
           }
       }

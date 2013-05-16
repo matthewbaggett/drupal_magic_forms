@@ -27,7 +27,7 @@ class magic_form_group extends magic_form_item {
     return magic_forms_template_view("form.group.phtml", $view);
   }
 
-  public function get_name(){
+  public function get_name() {
     return $this->get_group_name();
   }
 }
