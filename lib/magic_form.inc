@@ -1,16 +1,17 @@
 <?php
 class magic_form {
   private $form_id;
-
   private $form_elements;
-
   private $submit_function;
 
   const inactivity_max_time = '15 minutes';
 
   public function __construct() {
     $this->form_id = uniqid('magic_form_');
+    self::cleanup_expired_forms();
+  }
 
+  static public function cleanup_expired_forms(){
     // Expire old magic forms
     foreach ($_SESSION['magic_forms'] as $form_id => $form_container) {
       if (strtotime($form_container['created']) < strtotime(self::inactivity_max_time . " ago")) {
@@ -60,6 +61,7 @@ class magic_form {
     if (!isset($_SESSION['magic_forms'][$magic_form_id])) {
       drupal_set_message("Uhoh... The form expired after " . self::inactivity_max_time . "! Please try again."); #
       header("Location: {$_SERVER['HTTP_REFERER']}");
+      exit;
     } else {
       $form = unserialize($_SESSION['magic_forms'][$magic_form_id]['form']);
       $form->do_submit();

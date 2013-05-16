@@ -18,6 +18,8 @@ function magic_forms_init() {
   if (isset($_POST['magic_form_id'])) {
     magic_form::process($_POST['magic_form_id']);
   }
+
+  magic_form::cleanup_expired_forms();
 }
 
 /**
