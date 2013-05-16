@@ -11,6 +11,7 @@ require_once("lib/magic_form_field_select.inc");
 require_once("lib/magic_form_field_text.inc");
 require_once("lib/magic_form_field_textarea.inc");
 require_once("lib/magic_form_group.inc");
+require_once("lib/magic_serialisable_closure.inc");
 
 /**
  * Crunch through a view
