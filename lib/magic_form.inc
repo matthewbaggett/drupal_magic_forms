@@ -13,9 +13,13 @@ class magic_form {
 
   static public function cleanup_expired_forms() {
     // Expire old magic forms
-    foreach ($_SESSION['magic_forms'] as $form_id => $form_container) {
-      if (strtotime($form_container['created']) < strtotime(self::inactivity_max_time . " ago")) {
-        unset($_SESSION['magic_forms'][$form_id]);
+    if(isset($_SESSION)){
+      if(isset($_SESSION['magic_forms'])){
+        foreach ($_SESSION['magic_forms'] as $form_id => $form_container) {
+          if (strtotime($form_container['created']) < strtotime(self::inactivity_max_time . " ago")) {
+            unset($_SESSION['magic_forms'][$form_id]);
+          }
+        }
       }
     }
   }
