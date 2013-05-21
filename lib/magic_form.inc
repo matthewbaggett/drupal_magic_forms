@@ -36,6 +36,12 @@ class magic_form {
     return $this;
   }
 
+  public function add_fields(){
+    foreach(func_get_args() as $argument){
+      $this->add_field($argument);
+    }
+  }
+
   public function get_field($name) {
     foreach ($this->form_elements as $element_name => $element) {
       if ($element_name == $name) {
