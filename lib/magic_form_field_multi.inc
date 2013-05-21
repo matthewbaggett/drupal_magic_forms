@@ -33,7 +33,7 @@ class magic_form_field_multi extends magic_form_field {
    */
   public function add_options($array_of_options){
     foreach($array_of_options as $key => $value){
-      $this->add_option($key, $value);
+      $this->add_option($value, $key);
     }
     return $this;
   }
