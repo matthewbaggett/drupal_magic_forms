@@ -34,4 +34,10 @@ class magic_form_group extends magic_form_item {
   static public function factory($group_name = null){
     return new magic_form_group($group_name);
   }
+
+  public function add_fields(){
+    foreach(func_get_args() as $argument){
+      $this->add_field($argument);
+    }
+  }
 }
