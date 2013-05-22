@@ -30,4 +30,8 @@ class magic_form_group extends magic_form_item {
   public function get_name() {
     return $this->get_group_name();
   }
+
+  static public function factory($group_name = null){
+    return new magic_form_group($group_name);
+  }
 }
