@@ -3,3 +3,5 @@ description = More sensible forms for Drupal
 package = Forms
 core = 7.x
 stylesheets[all][] = css/magic_forms.css
+scripts[] = js/magic_forms.js
+

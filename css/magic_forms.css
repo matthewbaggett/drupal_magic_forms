@@ -47,3 +47,9 @@ form.magic_form .radio_group .radio_group_option input {
 form.magic_form .clear {
     clear: both;
 }
+
+form.magic_form input.changed,
+form.magic_form select.changed,
+form.magic_form textarea.changed{
+    border: 1px solid red;
+}
