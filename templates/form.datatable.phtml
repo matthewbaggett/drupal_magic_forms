@@ -2,7 +2,9 @@
 
   <?php require("form.label.phtml"); ?>
 
-  <table>
+  <table
+    id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
+    >
     <thead>
     <tr>
       <?php foreach ($field->get_headings() as $heading): ?>
