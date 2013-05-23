@@ -8,7 +8,19 @@ class magic_form {
 
   public function __construct() {
     $this->form_id = uniqid('magic_form_');
-    self::cleanup_expired_forms();
+    //self::cleanup_expired_forms();
+    self::remove_other_forms();
+  }
+
+  static public function remove_other_forms() {
+    // Expire old magic forms
+    if(isset($_SESSION)){
+      if(isset($_SESSION['magic_forms'])){
+        foreach ($_SESSION['magic_forms'] as $form_id => $form_container) {
+            unset($_SESSION['magic_forms'][$form_id]);
+        }
+      }
+    }
   }
 
   static public function cleanup_expired_forms() {
