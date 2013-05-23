@@ -1,4 +1,4 @@
-<div class="form_group">
+<div class="form_group field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>">
   <?php if (strlen($field->get_group_name()) > 0): ?>
     <h3><?php echo $field->get_group_name(); ?></h3>
   <?php endif; ?>
