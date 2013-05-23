@@ -6,10 +6,12 @@ class magic_form_field_radio extends magic_form_field_multi {
 
   public function set_labels_before() {
     $this->labels = 'before';
+    return $this;
   }
 
   public function set_labels_after() {
     $this->labels = 'after';
+    return $this;
   }
 
   public function is_label_after() {

@@ -8,7 +8,7 @@ class magic_form_group extends magic_form_item {
     $this->group_name = $group_name;
   }
 
-  public function add_field(magic_form_field $field) {
+  public function add_field(magic_form_item $field) {
     $this->fields[$field->get_name()] = $field;
     return $this;
   }
@@ -39,5 +39,6 @@ class magic_form_group extends magic_form_item {
     foreach(func_get_args() as $argument){
       $this->add_field($argument);
     }
+    return $this;
   }
 }

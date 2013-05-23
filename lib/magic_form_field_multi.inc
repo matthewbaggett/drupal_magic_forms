@@ -13,6 +13,7 @@ class magic_form_field_multi extends magic_form_field {
     } else {
       $this->options[] = $value;
     }
+    return $this;
   }
 
   /**

@@ -19,7 +19,8 @@ form.magic_form .form_row {
 form.magic_form .form_group {
     border: 1px solid #DDDDDD;
     border-radius: 5px;
-    padding: 5px 5px 5px 5px;
+    padding: 1% 1% 1% 1%;
+    width: 98%;
 }
 
 form.magic_form .radio_group {
