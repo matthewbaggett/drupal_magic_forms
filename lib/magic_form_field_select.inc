@@ -11,10 +11,12 @@ class magic_form_field_select extends magic_form_field_multi {
 
   public function allow_null_value() {
     $this->allow_null_value = true;
+    return $this;
   }
 
   public function ban_null_value() {
     $this->allow_null_value = false;
+    return $this;
   }
 
   public function null_value_allowed() {
