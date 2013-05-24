@@ -16,6 +16,14 @@ class magic_form_field_datatable extends magic_form_field {
 
   public function add_row($keyed_row) {
     $this->rows[] = $keyed_row;
+    return $this;
+  }
+
+  public function add_rows($array_of_rows){
+    foreach($array_of_rows as $row){
+      $this->add_row($row);
+    }
+    return $this;
   }
 
   public function get_rows() {
