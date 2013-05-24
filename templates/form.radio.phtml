@@ -18,6 +18,9 @@
             type="radio"
             name="<?php echo $field->get_name(); ?>"
             value="<?php echo $key; ?>"
+            <?php if($key == $field->get_value()):?>
+              checked="checked"
+            <?php endif; ?>
             />
           <?php if ($field->is_label_after()): ?>
             <label
