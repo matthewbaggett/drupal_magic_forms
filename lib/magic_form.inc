@@ -1,15 +1,24 @@
 <?php
 class magic_form {
-  private $form_id;
+  private $form_id = null;
   private $form_elements;
   private $submit_function;
 
   const inactivity_max_time = '15 minutes';
 
   public function __construct() {
-    $this->form_id = uniqid('magic_form_');
+    if($this->form_id === null){
+      $this->form_id = uniqid('magic_form_');
+    }
     //self::cleanup_expired_forms();
-    self::remove_other_forms();
+    //self::remove_other_forms();
+  }
+
+  public function __destruct() {
+    $_SESSION['magic_forms'][$this->form_id] = array(
+      'created' => date("Y-m-d H:i:s"),
+      'form' => serialize($this),
+    );
   }
 
   static public function remove_other_forms() {
@@ -17,7 +26,7 @@ class magic_form {
     if(isset($_SESSION)){
       if(isset($_SESSION['magic_forms'])){
         foreach ($_SESSION['magic_forms'] as $form_id => $form_container) {
-            unset($_SESSION['magic_forms'][$form_id]);
+          unset($_SESSION['magic_forms'][$form_id]);
         }
       }
     }
@@ -34,13 +43,6 @@ class magic_form {
         }
       }
     }
-  }
-
-  public function __destruct() {
-    $_SESSION['magic_forms'][$this->form_id] = array( #
-      'created' => date("Y-m-d H:i:s"),
-      'form' => serialize($this),
-    );
   }
 
   public function add_field(magic_form_item $field) {
