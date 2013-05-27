@@ -52,5 +52,10 @@ form.magic_form .clear {
 form.magic_form input.changed,
 form.magic_form select.changed,
 form.magic_form textarea.changed{
+    /* border: 1px solid red; */
+}
+form.magic_form input.error,
+form.magic_form select.error,
+form.magic_form textarea.error{
     border: 1px solid red;
 }

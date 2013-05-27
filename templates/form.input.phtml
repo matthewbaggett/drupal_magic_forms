@@ -6,6 +6,7 @@
     type="text"
     name="<?php echo $field->get_name(); ?>"
     value="<?php echo $field->get_value() ?>"
+    class="<?php $field->get_classes(); ?>"
     <?php if ($field->is_disabled()): ?>
       disabled="disabled"
     <?php endif; ?>
