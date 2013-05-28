@@ -1,5 +1,6 @@
 <?php
 
-class magic_form_item {
+class magic_form_item
+{
 
 }
