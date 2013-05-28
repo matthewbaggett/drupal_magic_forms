@@ -6,6 +6,8 @@ class magic_form_field extends magic_form_item {
   protected $default_value = null;
   protected $value = null;
   protected $disabled = false;
+  protected $errors = array();
+  protected $classes = array();
 
   public static function factory($name = null, $label = null, $value = null) {
     $class = get_called_class();
@@ -73,5 +75,26 @@ class magic_form_field extends magic_form_item {
 
   public function is_disabled() {
     return $this->disabled;
+  }
+
+  public function add_error($error){
+    $this->errors[] = $error;
+    return $this;
+  }
+
+  public function has_errors(){
+    return count($this->errors) > 0 ? true : false;
+  }
+
+  public function add_class($class){
+    $this->classes[] = $class;
+    return $this;
+  }
+
+  public function get_classes(){
+    if($this->has_errors()){
+      $this->add_class("error");
+    }
+    return implode(" ", $this->classes);
   }
 }

@@ -123,4 +123,13 @@ class magic_form {
       $form->do_submit();
     }
   }
+
+  public function add_error($message, $element = null){
+    drupal_set_message($message, 'error');
+
+    $field = get_field($element);
+    if($field instanceof magic_form_field){
+      $field->add_error($message);
+    }
+  }
 }
