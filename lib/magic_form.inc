@@ -134,4 +134,19 @@ class magic_form {
       $field->add_error($message);
     }
   }
+
+  public function add_default($value, $element = null){
+    $field = get_field($element);
+    if($field instanceof magic_form_field){
+      $field->set_value($value);
+    }
+    return $this;
+  }
+
+  public function set_defaults($defaults){
+    foreach($defaults as $element_name => $value){
+      $this->add_default($value, $element_name);
+    }
+    return $this;
+  }
 }
