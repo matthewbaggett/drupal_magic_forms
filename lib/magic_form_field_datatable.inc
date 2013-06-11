@@ -3,7 +3,7 @@
 class magic_form_field_datatable extends magic_form_field {
   protected $rows;
 
-  public static function factory($name = null, $label = null) {
+  public static function factory($name = null, $label = null, $value = null) {
     $class = get_called_class();
     $instance = new $class($name, $label);
     return $instance;
