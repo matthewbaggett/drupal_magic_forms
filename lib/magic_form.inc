@@ -129,14 +129,14 @@ class magic_form {
   public function add_error($message, $element = null){
     drupal_set_message($message, 'error');
 
-    $field = get_field($element);
+    $field = $this->get_field($element);
     if($field instanceof magic_form_field){
       $field->add_error($message);
     }
   }
 
   public function add_default($value, $element = null){
-    $field = get_field($element);
+    $field = $this->get_field($element);
     if($field instanceof magic_form_field){
       $field->set_value($value);
     }
