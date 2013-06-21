@@ -44,12 +44,12 @@ class magic_form_field extends magic_form_item {
     return $this;
   }
 
-  public function get_default_valu() {
-    return $this->default_valu;
+  public function get_default_value() {
+    return $this->default_value;
   }
 
-  public function set_default_value($default_valu) {
-    $this->default_valu = $default_valu;
+  public function set_default_value($default_value) {
+    $this->default_value = $default_value;
     return $this;
   }
 
