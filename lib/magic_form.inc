@@ -117,7 +117,7 @@ class magic_form {
 
   public static function process($magic_form_id) {
     if (!isset($_SESSION['magic_forms'][$magic_form_id])) {
-      drupal_set_message("Uhoh... The form expired after " . self::inactivity_max_time . "! Please try again."); #
+      drupal_set_message("Uhoh... The form expired after " . self::inactivity_max_time . "! Please try again.", "error"); 
       header("Location: {$_SERVER['HTTP_REFERER']}");
       exit;
     } else {
