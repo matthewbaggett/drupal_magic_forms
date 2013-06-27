@@ -13,9 +13,13 @@
         </tr>
         </thead>
         <tbody>
+        <?php $row_count = 0; ?>
         <?php foreach ($field->get_rows() as $row): ?>
-            <tr>
+          <?php $row_count++; ?>
+            <tr class="<?php echo $row_count%2?'even':'odd'?>">
+
                 <?php foreach ($row as $cell_name => $cell_value): ?>
+
                     <td><?php echo $cell_value; ?></td>
                 <?php endforeach ?>
             </tr>
