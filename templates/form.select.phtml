@@ -15,7 +15,7 @@
       <?php foreach ($field->get_options() as $key => $option_label): ?>
         <option
           value="<?php echo $key; ?>"
-          <?php if($key == $field->get_value()):?>
+          <?php if ($key == $field->get_value()): ?>
             selected="selected"
           <?php endif; ?>
           >
