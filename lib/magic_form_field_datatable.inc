@@ -2,6 +2,7 @@
 
 class magic_form_field_datatable extends magic_form_field {
   protected $rows;
+  private $columns;
 
   public static function factory($name = null, $label = null, $value = null) {
     $class = get_called_class();
@@ -31,12 +32,21 @@ class magic_form_field_datatable extends magic_form_field {
   }
 
   public function get_headings() {
-    return array_keys(end($this->rows));
+    if(count($this->columns)){
+      return $this->columns;
+    }else{
+      return array_keys(end($this->rows));
+    }
   }
 
   public function __toString() {
     $view = new StdClass();
     $view->field = $this;
     return magic_forms_template_view("form.datatable.phtml", $view);
+  }
+
+  public function define_columns($columns){
+    $this->columns = $columns;
+    return $this;
   }
 }
