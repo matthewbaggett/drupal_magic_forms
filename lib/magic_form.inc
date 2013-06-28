@@ -63,9 +63,11 @@ class magic_form {
       }
       if (get_class($element) == 'magic_form_group') {
         $sub_fields = $element->get_fields();
-        foreach ($sub_fields as $sub_element_name => $sub_element) {
-          if ($sub_element_name == $name) {
-            return $sub_fields[$sub_element_name];
+        if(count($sub_fields) > 0){
+          foreach ($sub_fields as $sub_element_name => $sub_element) {
+            if ($sub_element_name == $name) {
+              return $sub_fields[$sub_element_name];
+            }
           }
         }
       }
