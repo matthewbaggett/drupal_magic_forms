@@ -1,4 +1,4 @@
-<div class="form_row field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>">
+<div class="form_row form_radio field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>">
 
   <?php require("form.label.phtml"); ?>
 
@@ -13,15 +13,17 @@
               <?php echo $option_label; ?>
             </label>
           <?php endif; ?>
-          <input
-            id="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label); ?>"
-            type="radio"
-            name="<?php echo $field->get_name(); ?>"
-            value="<?php echo $key; ?>"
-            <?php if ($key == $field->get_value()): ?>
-              checked="checked"
-            <?php endif; ?>
-            />
+          <div class="widget">
+            <input
+              id="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label); ?>"
+              type="radio"
+              name="<?php echo $field->get_name(); ?>"
+              value="<?php echo $key; ?>"
+              <?php if ($key == $field->get_value()): ?>
+                checked="checked"
+              <?php endif; ?>
+              />
+          </div>
           <?php if ($field->is_label_after()): ?>
             <label
               for="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label); ?>"

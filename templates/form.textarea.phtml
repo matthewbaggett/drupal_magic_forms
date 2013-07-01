@@ -1,15 +1,15 @@
-<div class="form_row field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>">
+<div class="form_row form_textarea field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>">
   <?php require("form.label.phtml"); ?>
-
-  <textarea
-    id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
-    type="text"
-    name="<?php echo $field->get_name(); ?>"
-    class="<?php echo $field->get_classes(); ?>"
-    <?php if ($field->is_disabled()): ?>
-      disabled="disabled"
-    <?php endif; ?>
-    ><?php echo $field->get_value() ?></textarea>
-
+  <div class="widget">
+    <textarea
+      id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
+      type="text"
+      name="<?php echo $field->get_name(); ?>"
+      class="<?php echo $field->get_classes(); ?>"
+      <?php if ($field->is_disabled()): ?>
+        disabled="disabled"
+      <?php endif; ?>
+      ><?php echo $field->get_value() ?></textarea>
+  </div>
   <div class="clear"></div>
 </div>
