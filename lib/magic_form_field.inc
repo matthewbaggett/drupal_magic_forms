@@ -94,6 +94,11 @@ class magic_form_field extends magic_form_item {
     if ($this->has_errors()) {
       $this->add_class("error");
     }
+    if ($this->is_disabled()){
+      $this->add_class('disabled');
+    }else{
+      $this->add_class('enabled');
+    }
     return implode(" ", $this->classes);
   }
 }
