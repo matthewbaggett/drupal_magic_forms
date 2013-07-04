@@ -4,7 +4,7 @@ class magic_form {
   private $form_elements;
   private $submit_function;
 
-  const inactivity_max_time = '15 minutes';
+  const inactivity_max_time = '24 hours';
 
   public function __construct() {
     if($this->form_id === null){
@@ -15,6 +15,10 @@ class magic_form {
   }
 
   public function __destruct() {
+    $this->__save();
+  }
+
+  public function __save(){
     $_SESSION['magic_forms'][$this->form_id] = array(
       'created' => date("Y-m-d H:i:s"),
       'form' => serialize($this),
@@ -38,6 +42,7 @@ class magic_form {
       if(isset($_SESSION['magic_forms'])){
         foreach ($_SESSION['magic_forms'] as $form_id => $form_container) {
           if (strtotime($form_container['created']) < strtotime(self::inactivity_max_time . " ago")) {
+            drupal_set_message("'Removing magic form #{$form_id}, created at ".date("Y-m-d H:i:s", strtotime($form_container['created'])));
             unset($_SESSION['magic_forms'][$form_id]);
           }
         }
@@ -47,6 +52,7 @@ class magic_form {
 
   public function add_field(magic_form_item $field) {
     $this->form_elements[$field->get_name()] = $field;
+    $this->__save();
     return $this;
   }
 
@@ -72,6 +78,7 @@ class magic_form {
         }
       }
     }
+    watchdog("Remedy Ticket form: Cannot find field: {$name}", "warning");
     return FALSE;
   }
 
@@ -80,6 +87,7 @@ class magic_form {
     $view->form_rows = $this->form_elements;
     $view->action = $this->get_action();
     $view->form_id = $this->get_form_id();
+    $this->__save();
     return magic_forms_template_view("form.phtml", $view);
   }
 
