@@ -42,7 +42,15 @@ class magic_form {
       if(isset($_SESSION['magic_forms'])){
         foreach ($_SESSION['magic_forms'] as $form_id => $form_container) {
           if (strtotime($form_container['created']) < strtotime(self::inactivity_max_time . " ago")) {
-            drupal_set_message("'Removing magic form #{$form_id}, created at ".date("Y-m-d H:i:s", strtotime($form_container['created'])));
+            watchdog(
+              "magic_forms",
+              "Removing magic form #@form_id, created at @date",
+              array(
+                   '@form_id' => $form_id,
+                   '@date' => date("Y-m-d H:i:s", strtotime($form_container['created']))
+              ),
+              WATCHDOG_INFO
+            );
             unset($_SESSION['magic_forms'][$form_id]);
           }
         }
