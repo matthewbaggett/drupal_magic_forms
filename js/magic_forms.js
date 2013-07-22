@@ -77,7 +77,10 @@ function magic_form_field(type, name, label, value) {
   };
 
   this.on_change = function(callback){
-    this._get_input_field().bind('change', callback);
+    this.
+      _get_input_field()
+        .unbind('change')
+        .bind('change', callback);
     return this;
   };
 
