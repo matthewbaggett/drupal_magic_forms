@@ -66,7 +66,11 @@ function magic_form_field(type, name, label, value) {
       key: option_key,
       value: option_value
     });
-    jQuery('.form_row.field-' + this.name + ' select').append("<option value=\"" + option_key + "\">" + option_value + "</option>")
+    jQuery('.form_row.field-' + this.name + ' select')
+      .append("<option value=\"" + option_key + "\">" + option_value + "</option>")
+    var option_id = 'durks';
+    jQuery('.form_row.field-' + this.name + ' .radio_group')
+      .append("<div class=\"radio_group_option\"><input id=\"" + option_id + "\" type=\"radio\" value=\"" + option_key + "\"><label for=\"" + option_id + "\">" + option_value + "</label></div>");
     return this;
   };
 
