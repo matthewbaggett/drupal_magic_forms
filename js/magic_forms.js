@@ -161,7 +161,7 @@ function magic_form_field(type, name, label, value) {
     while(radio = this.options.shift()){
       var name = this.name + "_" +  radio.key;
       radio_html += "<div class=\"radio_group_option\">";
-      radio_html += "  <input id=\"" + name + "\" type=\"radio\" value=\"" + radio.key + "\">";
+      radio_html += "  <input name=\"" + this.name + "\" id=\"" + name + "\" type=\"radio\" value=\"" + radio.key + "\">";
       radio_html += "  <label for=\"" + name + "\"></label>" + radio.value + "</label>";
       radio_html += "</div>";
     }
