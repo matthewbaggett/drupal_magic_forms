@@ -182,7 +182,7 @@ function magic_form_group(name, label) {
     return '' +
       '<div class="form_group field-' + this.name + '">' +
       '<h3>' + this.label + '</h3>' +
-      this.get_fields_html() +
+      '<div class="group-inside">' + this.get_fields_html() + '</div>' +
       '</div>'
 
   };

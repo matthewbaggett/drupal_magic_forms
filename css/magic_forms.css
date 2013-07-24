@@ -23,7 +23,14 @@ form.magic_form .form_group {
     border: 1px solid #DDDDDD;
     border-radius: 5px;
     padding: 1% 1% 1% 1%;
-    width: 98%;
+    width: 97.5%;
+}
+
+form.magic_form .form_group .group-inside{
+    float: left; display: block;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 7px;
 }
 
 form.magic_form .radio_group {
