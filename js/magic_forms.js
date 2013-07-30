@@ -30,10 +30,9 @@ function magic_form_field(type, name, label, value) {
   this.set_value = function (value){
     this.value = value;
     console.log("Setting " + this.label + " to " + value);
-    this._get_input_field()
-      .val(value)
-      .attr('placeholder', value)
-      .trigger('change');
+    this._get_input_field().val(value);
+    this._get_input_field().attr('placeholder', value)
+    this._get_input_field().trigger('change');
     return this;
   };
 
@@ -66,7 +65,11 @@ function magic_form_field(type, name, label, value) {
       key: option_key,
       value: option_value
     });
-    jQuery('.form_row.field-' + this.name + ' select').append("<option value=\"" + option_key + "\">" + option_value + "</option>")
+    jQuery('.form_row.field-' + this.name + ' select')
+      .append("<option value=\"" + option_key + "\">" + option_value + "</option>")
+    var option_id = this.name + '_' + option_key;
+    jQuery('.form_row.field-' + this.name + ' .radio_group')
+      .append("<div class=\"radio_group_option\"><input name=\"" + this.name + "\" id=\"" + option_id + "\" type=\"radio\" value=\"" + option_key + "\"><label for=\"" + option_id + "\">" + option_value + "</label></div>");
     return this;
   };
 
@@ -77,7 +80,10 @@ function magic_form_field(type, name, label, value) {
   };
 
   this.on_change = function(callback){
-    this._get_input_field().bind('change', callback);
+    this.
+      _get_input_field()
+        .unbind('change')
+        .bind('change', callback);
     return this;
   };
 
@@ -155,7 +161,7 @@ function magic_form_field(type, name, label, value) {
     while(radio = this.options.shift()){
       var name = this.name + "_" +  radio.key;
       radio_html += "<div class=\"radio_group_option\">";
-      radio_html += "  <input id=\"" + name + "\" type=\"radio\" value=\"" + radio.key + "\">";
+      radio_html += "  <input name=\"" + this.name + "\" id=\"" + name + "\" type=\"radio\" value=\"" + radio.key + "\">";
       radio_html += "  <label for=\"" + name + "\"></label>" + radio.value + "</label>";
       radio_html += "</div>";
     }
@@ -176,7 +182,7 @@ function magic_form_group(name, label) {
     return '' +
       '<div class="form_group field-' + this.name + '">' +
       '<h3>' + this.label + '</h3>' +
-      this.get_fields_html() +
+      '<div class="group-inside">' + this.get_fields_html() + '</div>' +
       '</div>'
 
   };
