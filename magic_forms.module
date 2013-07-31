@@ -15,6 +15,10 @@ require_once("lib/magic_form_field_hidden.inc");
 require_once("lib/magic_form_group.inc");
 require_once("lib/magic_serialisable_closure.inc");
 
+/**
+ * Initialisation
+ * Do not remote hook_init(), its used to detect magic_forms installation presence.
+ */
 function magic_forms_init()
 {
     if (isset($_POST['magic_form_id'])) {
