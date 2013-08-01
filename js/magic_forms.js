@@ -105,7 +105,7 @@ function magic_form_field(type, name, label, value) {
         '<div class="form_row form_input field-' + this.name + '">' +
         '  <label for="' + this.name + '">' + this.label + '</label>' +
         '  <div class="widget">' +
-        '    <input type="text" placeholder="' + this.value + '" class="' + (this.disabled?'disabled':'enabled') + '" value="' + this.value + '" name="' + this.name + '" id="' + this.name + '">' +
+        '    <input type="text" placeholder="' + this.value + '" class="' + (this.disabled?'disabled':'enabled') + '" value="' + this.value + '" name="' + this.name + '" id="' + this.name + '" ' + (this.disabled?'disabled="disabled"':'') + '>' +
         '  </div>' +
         '  <div class="clear"></div>' +
         '</div>';
@@ -114,7 +114,7 @@ function magic_form_field(type, name, label, value) {
         '<div class="form_row form_textarea field-' + this.name + '">' +
         '  <label for="' + this.name + '">' + this.label + '</label>' +
         '  <div class="widget">' +
-        '    <textarea type="text" class="' + (this.disabled?'disabled':'enabled') + '" name="' + this.name + '" id="' + this.name + '">' + this.value + '</textarea>' +
+        '    <textarea type="text" class="' + (this.disabled?'disabled':'enabled') + '" name="' + this.name + '" id="' + this.name + '" ' + (this.disabled?'disabled="disabled"':'') + '>' + this.value + '</textarea>' +
         '  </div>' +
         '  <div class="clear"></div>' +
       '</div>';
@@ -123,7 +123,7 @@ function magic_form_field(type, name, label, value) {
         '<div class="form_row form_select field-' + this.name + '">' +
         '  <label for="' + this.name + '">' + this.label + '</label>' +
         '  <div class="widget">' +
-        '    <select class="' + (this.disabled?'disabled':'enabled') + '" name="' + this.name + '" id="' + this.name + '">' + this.html_select_options() + '</select>' +
+        '    <select class="' + (this.disabled?'disabled':'enabled') + '" name="' + this.name + '" id="' + this.name + '" ' + (this.disabled?'disabled="disabled"':'') + '>' + this.html_select_options() + '</select>' +
         '  </div>' +
         '  <div class="clear"></div>' +
         '</div>';
@@ -139,7 +139,7 @@ function magic_form_field(type, name, label, value) {
       return '' +
         '<div class="form_row form_submit field-' + this.name + '">' +
         '  <div class="widget">' +
-        '    <input type="submit" class="' + (this.disabled?'disabled':'enabled') + '" name="' + this.name + '" id="' + this.name + '" value="' + this.label + '"/>' +
+        '    <input type="submit" class="' + (this.disabled?'disabled':'enabled') + '" name="' + this.name + '" id="' + this.name + '" value="' + this.label + '"/ ' + (this.disabled?'disabled="disabled"':'') + '>' +
         '  </div>' +
         '  <div class="clear"></div>' +
         '</div>';
@@ -163,7 +163,7 @@ function magic_form_field(type, name, label, value) {
     while(radio = this.options.shift()){
       var name = this.name + "_" +  radio.key;
       radio_html += "<div class=\"radio_group_option\">";
-      radio_html += "  <input name=\"" + this.name + "\" id=\"" + name + "\" type=\"radio\" value=\"" + radio.key + "\">";
+      radio_html += "  <input name=\"" + this.name + "\" id=\"" + name + "\" type=\"radio\" value=\"" + radio.key + '" ' + (this.disabled?'disabled="disabled"':'') + '>';
       radio_html += "  <label for=\"" + name + "\"></label>" + radio.value + "</label>";
       radio_html += "</div>";
     }
