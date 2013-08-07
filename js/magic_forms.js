@@ -15,6 +15,7 @@ function magic_form_field(type, name, label, value) {
   this.value = value;
   this.options = [];
   this.disabled = false;
+  this.events = [];
 
   this._get_mass_selector = function(){
     return '' +
@@ -76,6 +77,7 @@ function magic_form_field(type, name, label, value) {
   this.empty = function(){
     this.options = [];
     jQuery('.form_row.field-' + this.name + ' select option').remove();
+    jQuery('.form_row.field-' + this.name + ' .radio_group .radio_group_option').remove();
     return this;
   };
 
@@ -143,6 +145,11 @@ function magic_form_field(type, name, label, value) {
         '  </div>' +
         '  <div class="clear"></div>' +
         '</div>';
+    }else if(this.type == 'hidden'){
+      return '' +
+        '<div class="form_row form_hidden field-' + this.name + '">' +
+        '    <input type="hidden" value="' + this.value + '" name="' + this.name + '" id="' + this.name + '">' +
+        '</div>';
     }else{
       return 'Unsupported type: ' + this.type;
     }
@@ -169,6 +176,16 @@ function magic_form_field(type, name, label, value) {
     }
     return radio_html;
   };
+
+  this.attach = function(event, callback){
+    this.events[event] = callback;
+  }
+
+  this.rebind = function(){
+    jQuery.each(this.events, function(event, callback){
+      this._get_input_field().unbind(event).bind(event, callback);
+    });
+  }
 
 }
 
