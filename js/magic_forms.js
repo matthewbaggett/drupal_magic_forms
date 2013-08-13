@@ -30,7 +30,7 @@ function magic_form_field(type, name, label, value) {
 
   this.set_value = function (value){
     this.value = value;
-    console.log("Setting " + this.label + " to " + value);
+    //console.log("Setting " + this.label + " to " + value);
     this._get_input_field().val(value);
     this._get_input_field().attr('placeholder', value)
     this._get_input_field().trigger('change');
