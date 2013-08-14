@@ -44,12 +44,8 @@ function magic_form_field(type, name, label, value) {
     // If its an option, we got a little more heavy liftin' to do.
     var select = jQuery('.form_row.field-' + this.name + ' select');
     if(select.length > 0){
-      console.log(this.name + " Got options");
       jQuery('option', select).removeAttr('selected');
       jQuery('option[value=' + value + ']', select).attr('selected', 'selected');
-      console.log(jQuery('option[value=' + value + ']', select), "Selected");
-    }else{
-      console.log(this.name + " No options");
     }
 
     // Trigger changed state.
