@@ -21,11 +21,14 @@ function magic_form_field(type, name, label, value) {
     return '' +
       '.form_row.field-' + this.name + ' input,' +
       '.form_row.field-' + this.name + ' textarea,' +
-      '.form_row.field-' + this.name + ' select';
+      '.form_row.field-' + this.name + ' select,' +
+      '.form_row.field-' + this.name + '.form_radio .radio_group input[type=radio]'
   };
 
   this._get_input_field = function(){
-    return jQuery(this._get_mass_selector());
+    var selector = this._get_mass_selector();
+    //console.log(selector, "Selector for " + this.name);
+    return jQuery(selector);
   };
 
   this.set_value = function (value){
