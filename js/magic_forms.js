@@ -32,10 +32,27 @@ function magic_form_field(type, name, label, value) {
   };
 
   this.set_value = function (value){
+    if(typeof(value) !== 'undefined'){
+      value = value.toString();
+    }
     this.value = value;
-    //console.log("Setting " + this.label + " to " + value);
+
+    // Set the value
     this._get_input_field().val(value);
-    this._get_input_field().attr('placeholder', value)
+    this._get_input_field().attr('placeholder', value);
+
+    // If its an option, we got a little more heavy liftin' to do.
+    var select = jQuery('.form_row.field-' + this.name + ' select');
+    if(select.length > 0){
+      console.log(this.name + " Got options");
+      jQuery('option', select).removeAttr('selected');
+      jQuery('option[value=' + value + ']', select).attr('selected', 'selected');
+      console.log(jQuery('option[value=' + value + ']', select), "Selected");
+    }else{
+      console.log(this.name + " No options");
+    }
+
+    // Trigger changed state.
     this._get_input_field().trigger('change');
     return this;
   };
