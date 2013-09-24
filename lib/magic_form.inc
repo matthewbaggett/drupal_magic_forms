@@ -3,6 +3,7 @@ class magic_form {
   private $form_id = null;
   private $form_elements;
   private $submit_function;
+  private $action = null;
 
   const inactivity_max_time = '24 hours';
 
@@ -100,7 +101,16 @@ class magic_form {
   }
 
   public function get_action() {
-    return $_SERVER['REQUEST_URI'];
+    if($this->action){
+      return $this->action;
+    }else{
+      return $_SERVER['REQUEST_URI'];
+    }
+  }
+
+  public function set_action($target){
+    $this->action = $target;
+    return $this;
   }
 
   public function submit($submit_function) {
