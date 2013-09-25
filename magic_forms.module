@@ -18,9 +18,9 @@ require_once("lib/magic_serialisable_closure.inc");
 
 /**
  * Initialisation
- * Do not remote hook_init(), its used to detect magic_forms installation presence.
+ * Do not remove hook_page_alter(), its used to detect magic_forms installation presence & do the magic that makes
+ * magic_forms magical.
  */
-//function magic_forms_init()
 function magic_forms_page_alter()
 {
     if (isset($_POST['magic_form_id'])) {
