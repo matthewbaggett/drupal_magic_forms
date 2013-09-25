@@ -20,7 +20,8 @@ require_once("lib/magic_serialisable_closure.inc");
  * Initialisation
  * Do not remote hook_init(), its used to detect magic_forms installation presence.
  */
-function magic_forms_init()
+//function magic_forms_init()
+function magic_forms_page_alter()
 {
     if (isset($_POST['magic_form_id'])) {
         magic_form::process($_POST['magic_form_id']);
