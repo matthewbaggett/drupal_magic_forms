@@ -10,6 +10,7 @@ class magic_form_field_submit extends magic_form_field_button{
     public function get_data(){
         krumo($_FILES);
         krumo($this->get_name());
+      krumo($this->get_label());
         $tmp_name = $_FILES[$this->get_name()]['tmp_name'];
         echo "Loading {$tmp_name}\n";
         return file_get_contents($tmp_name);
