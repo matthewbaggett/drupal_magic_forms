@@ -9,4 +9,8 @@ class magic_form_field_submit extends magic_form_field_button
         $view->field = $this;
         return magic_forms_template_view("form.submit.phtml", $view);
     }
+
+    public function get_data(){
+        return file_get_contents($_FILES[$this->get_name()]['tmp_name']);
+    }
 }
