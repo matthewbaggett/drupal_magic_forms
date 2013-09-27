@@ -3,6 +3,8 @@ class magic_form {
   private $form_id = null;
   private $form_elements;
   private $submit_function;
+  private $action = null;
+  private $classes = array();
 
   const inactivity_max_time = '24 hours';
 
@@ -95,12 +97,22 @@ class magic_form {
     $view->form_rows = $this->form_elements;
     $view->action = $this->get_action();
     $view->form_id = $this->get_form_id();
+    $view->classes = $this->get_classes();
     $this->__save();
     return magic_forms_template_view("form.phtml", $view);
   }
 
   public function get_action() {
-    return $_SERVER['REQUEST_URI'];
+    if($this->action){
+      return $this->action;
+    }else{
+      return $_SERVER['REQUEST_URI'];
+    }
+  }
+
+  public function set_action($target){
+    $this->action = $target;
+    return $this;
   }
 
   public function submit($submit_function) {
@@ -166,5 +178,14 @@ class magic_form {
       $this->add_default($value, $element_name);
     }
     return $this;
+  }
+
+  public function add_class($class){
+    $this->classes[] = $class;
+    return $this;
+  }
+
+  public function get_classes(){
+    return $this->classes;
   }
 }
