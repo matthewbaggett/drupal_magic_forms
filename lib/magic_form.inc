@@ -72,6 +72,13 @@ class magic_form {
     }
   }
 
+  /**
+   * Get a named field.
+   *
+   * @param $name
+   *
+   * @return magic_form_field
+   */
   public function get_field($name) {
     foreach ($this->form_elements as $element_name => $element) {
       if ($element_name == $name) {
