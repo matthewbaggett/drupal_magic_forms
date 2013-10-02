@@ -6,6 +6,17 @@ class magic_form_field_date extends magic_form_field_text{
   protected $_support_time = true;
 
   /**
+   * @param null $name Internal Name for this field
+   * @param null $label Visible Name for this field
+   * @param null $value Default or Initial Value
+   *
+   * @return magic_form_field_date
+   */
+  public static function factory($name = null, $label = null, $value = null) {
+    return parent::factory($name, $label, $value);
+  }
+
+  /**
    * Sanitise the date given
    * @return string
    */
