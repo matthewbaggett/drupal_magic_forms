@@ -47,7 +47,7 @@ class magic_form_field_date extends magic_form_field_text{
    *
    * @param $state bool true or false
    *
-   * @return $this magic_form_field_date
+   * @return magic_form_field_date $this
    */
   public function set_support_date($state){
     $this->_support_date = $state;
@@ -68,7 +68,7 @@ class magic_form_field_date extends magic_form_field_text{
    *
    * @param $state bool true or false
    *
-   * @return $this magic_form_field_date
+   * @return magic_form_field_date $this
    */
   public function set_support_time($state){
     $this->_support_time = $state;
