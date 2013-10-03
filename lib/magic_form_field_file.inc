@@ -15,7 +15,7 @@ class magic_form_field_file extends magic_form_field
     }
 
     public function has_file(){
-        if($_FILES[$this->get_name()]['tmp_name'] !== false){
+        if($_FILES[$this->get_name()]['tmp_name'] != false){
           return true;
         }
         return false;
