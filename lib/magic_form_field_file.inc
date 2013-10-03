@@ -13,4 +13,11 @@ class magic_form_field_file extends magic_form_field
         $tmp_name = $_FILES[$this->get_name()]['tmp_name'];
         return file_get_contents($tmp_name);
     }
+
+    public function has_file(){
+        if($_FILES[$this->get_name()]['tmp_name'] !== false){
+          return true;
+        }
+        return false;
+    }
 }
