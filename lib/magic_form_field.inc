@@ -8,6 +8,13 @@ class magic_form_field extends magic_form_item {
   protected $errors = array();
   protected $classes = array();
 
+  /**
+   * @param null $name Internal Name for this field
+   * @param null $label Visible Name for this field
+   * @param null $value Default or Initial Value
+   *
+   * @return magic_form_field
+   */
   public static function factory($name = null, $label = null, $value = null) {
     $class = get_called_class();
     $instance = new $class($name, $label, $value);
@@ -26,28 +33,64 @@ class magic_form_field extends magic_form_item {
     return magic_forms_template_view("form.input.phtml", $view);
   }
 
+  /**
+   * Get the name of this widget
+   *
+   * @return string
+   */
   public function get_name() {
     return $this->name;
   }
 
+  /**
+   * Set the name for this widget
+   *
+   * @param $name
+   *
+   * @return $this
+   */
   public function set_name($name) {
     $this->name = $name;
     return $this;
   }
 
+  /**
+   * Get the label of this widget
+   *
+   * @return string
+   */
   public function get_label() {
     return $this->label;
   }
 
+  /**
+   * Set the label for this widget
+   *
+   * @param $name
+   *
+   * @return $this
+   */
   public function set_label($label) {
     $this->label = $label;
     return $this;
   }
 
+  /**
+   * Get the default value of this widget
+   *
+   * @return string
+   */
   public function get_default_value() {
     return $this->default_value;
   }
 
+  /**
+   * Set the default value of this widget
+   *
+   * @param $default_value
+   *
+   * @return $this
+   */
   public function set_default_value($default_value) {
     $this->default_value = $default_value;
     return $this;

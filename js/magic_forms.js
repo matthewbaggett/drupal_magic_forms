@@ -32,6 +32,7 @@ function magic_form_field(type, name, label, value) {
   };
 
   this.set_value = function (value){
+    console.log("Set_Value(" + value + ") on " + this.name);
     if(typeof(value) !== 'undefined'){
       value = value.toString();
     }

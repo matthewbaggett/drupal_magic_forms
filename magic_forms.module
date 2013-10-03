@@ -12,9 +12,17 @@ require_once("lib/magic_form_field_select.inc");
 require_once("lib/magic_form_field_submit.inc");
 require_once("lib/magic_form_field_text.inc");
 require_once("lib/magic_form_field_textarea.inc");
+
+// Depend on magic_form_field_text being loaded already
+require_once("lib/magic_form_field_date.inc");
 require_once("lib/magic_form_field_hidden.inc");
+require_once("lib/magic_form_field_number.inc");
+
+// Groups support
 require_once("lib/magic_form_group.inc");
-require_once("lib/magic_serialisable_closure.inc");
+
+// Magic Clojure.
+require_once("lib/magic_serialisable_clojure.inc");
 
 /**
  * Initialisation
