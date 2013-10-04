@@ -106,13 +106,19 @@ function magic_form_field(type, name, label, value) {
 
   this.disable = function(){
     this.disabled = true;
-    this._get_input_field().attr('disabled', 'disabled').addClass('disabled');
+    this._get_input_field()
+      .attr('disabled', 'disabled')
+      .addClass('disabled')
+      .removeClass('enabled');
     return this;
   }
 
   this.enable = function(){
     this.disabled = false;
-    this._get_input_field().removeAttr('disabled').removeClass('disabled');
+    this._get_input_field()
+      .removeAttr('disabled')
+      .addClass('enabled')
+      .removeClass('disabled');
     return this;
   }
 
