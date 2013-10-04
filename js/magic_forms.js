@@ -27,12 +27,10 @@ function magic_form_field(type, name, label, value) {
 
   this._get_input_field = function(){
     var selector = this._get_mass_selector();
-    //console.log(selector, "Selector for " + this.name);
     return jQuery(selector);
   };
 
   this.set_value = function (value){
-    console.log("Set_Value(" + value + ") on " + this.name);
     if(typeof(value) !== 'undefined'){
       value = value.toString();
     }
