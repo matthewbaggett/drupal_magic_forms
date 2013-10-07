@@ -3,7 +3,7 @@
 /**
  * Set module weight.
  */
-function active_record_update_7001() {
+function magic_forms_update_7001() {
   db_update('system')
     ->fields(array('weight' => -35))
     ->condition('name', 'magic_forms', '=')
