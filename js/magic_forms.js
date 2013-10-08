@@ -123,7 +123,7 @@ function magic_form_field(type, name, label, value) {
   }
 
   this.html = function(){
-    if(this.type == 'input'){
+    if(this.type == 'input' || this.type == 'text'){
       return '' +
         '<div class="form_row form_input field-' + this.name + '">' +
         '  <label for="' + this.name + '">' + this.label + '</label>' +
@@ -251,6 +251,30 @@ var magic_form = {
   },
   form_group: function(name, label){
     return new magic_form_group(name, label);
+  },
+  parse_from_json: function(selector, json){
+    jQuery.each(json, function(i, item){
+      console.log(item);
+      var field = new magic_form_field(item.type);
+      field.name = item.name;
+      field.label = item.label;
+      field.disabled = item.disabled;
+      field.value = item.value;
+
+      if(typeof(item.options) !== 'undefined'){
+        jQuery.each(item.options, function (k,v){
+          field.add_option(k,v);
+        });
+      }
+
+      var html = field.html();
+
+      console.log(html,"Adding");
+
+      selector.append(html);
+
+      field.set_value(item.value);
+    })
   }
 
 }
