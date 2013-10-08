@@ -7,7 +7,7 @@
       name="<?php echo $field->get_name(); ?>"
       class="<?php echo $field->get_classes(); ?>"
       <?php if ($field->is_disabled()): ?>
-        disabled="disabled"
+        readonly
       <?php endif; ?>
       ><?php echo $field->get_value() ?></textarea>
   </div>
