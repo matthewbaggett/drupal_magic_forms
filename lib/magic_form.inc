@@ -99,6 +99,31 @@ class magic_form {
     return FALSE;
   }
 
+  public function get_fields(){
+    $fields = array();
+    foreach ($this->form_elements as $element_name => $element) {
+      if (get_class($element) == 'magic_form_group') {
+        $sub_fields = $element->get_fields();
+        if(count($sub_fields) > 0){
+          foreach ($sub_fields as $sub_element_name => $sub_element) {
+              $fields[$sub_element_name] = $sub_fields[$sub_element_name];
+          }
+        }
+      }else{
+        $fields[$element_name] = $element;
+      }
+    }
+    if($_REQUEST['magic_form_id'] == $this->get_form_id()){
+      foreach($_REQUEST as $key => $value){
+        $field = new magic_form_field();
+        $field->set_name($key);
+        $field->set_value($value);
+        $fields[$key] = $field;
+      }
+    }
+    return $fields;
+  }
+
   public function __toString() {
     $view = new StdClass();
     $view->form_rows = $this->form_elements;
