@@ -24,6 +24,9 @@ require_once("lib/magic_form_group.inc");
 // Magic Clojure.
 require_once("lib/magic_serialisable_clojure.inc");
 
+define("MAGIC_FORMS_MAX_ACTIVE_FORMS", 5);
+define("MAGIC_FORMS_DEBUG", TRUE);
+
 /**
  * Initialisation
  * Do not remove hook_page_alter(), its used to detect magic_forms installation presence & do the magic that makes
@@ -31,11 +34,23 @@ require_once("lib/magic_serialisable_clojure.inc");
  */
 function magic_forms_page_alter()
 {
-    if (isset($_POST['magic_form_id'])) {
-        magic_form::process($_POST['magic_form_id']);
+    if (isset($_SESSION['magic_forms'])) {
+      if(MAGIC_FORMS_DEBUG){
+        drupal_set_message("Magic Forms Memory: " . strlen(serialize($_SESSION['magic_forms'])) . " bytes");
+        $forms_unserialised = array();
+        foreach($_SESSION['magic_forms'] as $i => $form){
+          $form_unserialised = $form;
+          $form_unserialised['form'] = unserialize($form_unserialised['form']);
+          $forms_unserialised[$i] = $form_unserialised;
+        }
+        krumo($forms_unserialised);
+      }
+      if (isset($_REQUEST['magic_form_id'])) {
+          magic_form::remove_other_forms($_REQUEST['magic_form_id']);
+          magic_form::process($_REQUEST['magic_form_id']);
+      }
+      magic_form::cleanup_expired_forms();
     }
-
-    magic_form::cleanup_expired_forms();
 }
 
 /**
