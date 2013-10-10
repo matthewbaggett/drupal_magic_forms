@@ -84,6 +84,13 @@ class magic_serialisable_closure
             $used_vars[$var] = $static_vars[$var];
         }
 
+        // Exclude the session from this, this was such a painful fault...
+        if(isset($used_vars['user'])){
+          if(isset($used_vars['user']->session)){
+            $used_vars['user']->session = '';
+          }
+        }
+
         return $used_vars;
     }
 
