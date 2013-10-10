@@ -31,7 +31,7 @@ function magic_form_field(type, name, label, value) {
   };
 
   this.set_value = function (value){
-    if(typeof(value) !== 'undefined'){
+    if(typeof(value) !== 'undefined' && value !== null){
       value = value.toString();
     }
     this.value = value;
