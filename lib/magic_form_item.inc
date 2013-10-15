@@ -1,5 +1,4 @@
 <?php
-
 class magic_form_item
 {
   public function __toJsonArray(){
