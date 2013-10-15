@@ -1,6 +1,6 @@
 {
     "name": "matthewbaggett/drupal_magic_forms",
-    "type": "Drupal Module",
+    "type": "Drupal-Module",
     "description": "Because Drupal Forms blow.",
     "license": "GPLv2",
     "require": {
