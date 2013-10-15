@@ -15,6 +15,9 @@ form.magic_form .form_group {
 form.magic_form .form_row {
 
 }
+form.magic_form .form_row.form_hidden{
+    display: none;
+}
 form.magic_form .form_row .widget{
     float: left; display: block;
 }

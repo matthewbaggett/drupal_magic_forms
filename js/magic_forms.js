@@ -27,13 +27,11 @@ function magic_form_field(type, name, label, value) {
 
   this._get_input_field = function(){
     var selector = this._get_mass_selector();
-    //console.log(selector, "Selector for " + this.name);
     return jQuery(selector);
   };
 
   this.set_value = function (value){
-    console.log("Set_Value(" + value + ") on " + this.name);
-    if(typeof(value) !== 'undefined'){
+    if(typeof(value) !== 'undefined' && value !== null){
       value = value.toString();
     }
     this.value = value;
@@ -108,23 +106,29 @@ function magic_form_field(type, name, label, value) {
 
   this.disable = function(){
     this.disabled = true;
-    this._get_input_field().attr('disabled', 'disabled').addClass('disabled');
+    this._get_input_field()
+      .attr('readonly', 'readonly')
+      .addClass('disabled')
+      .removeClass('enabled');
     return this;
   }
 
   this.enable = function(){
     this.disabled = false;
-    this._get_input_field().removeAttr('disabled').removeClass('disabled');
+    this._get_input_field()
+      .removeAttr('readonly')
+      .addClass('enabled')
+      .removeClass('disabled');
     return this;
   }
 
   this.html = function(){
-    if(this.type == 'input'){
+    if(this.type == 'input' || this.type == 'text'){
       return '' +
         '<div class="form_row form_input field-' + this.name + '">' +
         '  <label for="' + this.name + '">' + this.label + '</label>' +
         '  <div class="widget">' +
-        '    <input type="text" placeholder="' + this.value + '" class="' + (this.disabled?'disabled':'enabled') + '" value="' + this.value + '" name="' + this.name + '" id="' + this.name + '" ' + (this.disabled?'disabled="disabled"':'') + '>' +
+        '    <input type="text" placeholder="' + this.value + '" class="' + (this.disabled?'disabled':'enabled') + '" value="' + this.value + '" name="' + this.name + '" id="' + this.name + '" ' + (this.disabled?'readonly':'') + '>' +
         '  </div>' +
         '  <div class="clear"></div>' +
         '</div>';
@@ -133,7 +137,7 @@ function magic_form_field(type, name, label, value) {
         '<div class="form_row form_textarea field-' + this.name + '">' +
         '  <label for="' + this.name + '">' + this.label + '</label>' +
         '  <div class="widget">' +
-        '    <textarea type="text" class="' + (this.disabled?'disabled':'enabled') + '" name="' + this.name + '" id="' + this.name + '" ' + (this.disabled?'disabled="disabled"':'') + '>' + this.value + '</textarea>' +
+        '    <textarea type="text" class="' + (this.disabled?'disabled':'enabled') + '" name="' + this.name + '" id="' + this.name + '" ' + (this.disabled?'readonly':'') + '>' + this.value + '</textarea>' +
         '  </div>' +
         '  <div class="clear"></div>' +
       '</div>';
@@ -142,7 +146,7 @@ function magic_form_field(type, name, label, value) {
         '<div class="form_row form_select field-' + this.name + '">' +
         '  <label for="' + this.name + '">' + this.label + '</label>' +
         '  <div class="widget">' +
-        '    <select class="' + (this.disabled?'disabled':'enabled') + '" name="' + this.name + '" id="' + this.name + '" ' + (this.disabled?'disabled="disabled"':'') + '>' + this.html_select_options() + '</select>' +
+        '    <select class="' + (this.disabled?'disabled':'enabled') + '" name="' + this.name + '" id="' + this.name + '" ' + (this.disabled?'readonly':'') + '>' + this.html_select_options() + '</select>' +
         '  </div>' +
         '  <div class="clear"></div>' +
         '</div>';
@@ -158,7 +162,7 @@ function magic_form_field(type, name, label, value) {
       return '' +
         '<div class="form_row form_submit field-' + this.name + '">' +
         '  <div class="widget">' +
-        '    <input type="submit" class="' + (this.disabled?'disabled':'enabled') + '" name="' + this.name + '" id="' + this.name + '" value="' + this.label + '"/ ' + (this.disabled?'disabled="disabled"':'') + '>' +
+        '    <input type="submit" class="' + (this.disabled?'disabled':'enabled') + '" name="' + this.name + '" id="' + this.name + '" value="' + this.label + '"/ ' + (this.disabled?'readonly':'') + '>' +
         '  </div>' +
         '  <div class="clear"></div>' +
         '</div>';
@@ -187,7 +191,7 @@ function magic_form_field(type, name, label, value) {
     while(radio = this.options.shift()){
       var name = this.name + "_" +  radio.key;
       radio_html += "<div class=\"radio_group_option\">";
-      radio_html += "  <input name=\"" + this.name + "\" id=\"" + name + "\" type=\"radio\" value=\"" + radio.key + '" ' + (this.disabled?'disabled="disabled"':'') + '>';
+      radio_html += "  <input name=\"" + this.name + "\" id=\"" + name + "\" type=\"radio\" value=\"" + radio.key + '" ' + (this.disabled?'readonly':'') + '>';
       radio_html += "  <label for=\"" + name + "\"></label>" + radio.value + "</label>";
       radio_html += "</div>";
     }
@@ -247,6 +251,30 @@ var magic_form = {
   },
   form_group: function(name, label){
     return new magic_form_group(name, label);
+  },
+  parse_from_json: function(selector, json){
+    jQuery.each(json, function(i, item){
+      console.log(item);
+      var field = new magic_form_field(item.type);
+      field.name = item.name;
+      field.label = item.label;
+      field.disabled = item.disabled;
+      field.value = item.value;
+
+      if(typeof(item.options) !== 'undefined'){
+        jQuery.each(item.options, function (k,v){
+          field.add_option(k,v);
+        });
+      }
+
+      var html = field.html();
+
+      console.log(html,"Adding");
+
+      selector.append(html);
+
+      field.set_value(item.value);
+    })
   }
 
 }

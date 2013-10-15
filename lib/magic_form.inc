@@ -12,8 +12,8 @@ class magic_form {
     if($this->form_id === null){
       $this->form_id = uniqid('magic_form_');
     }
-    //self::cleanup_expired_forms();
-    //self::remove_other_forms();
+    self::cleanup_expired_forms();
+    //self::remove_other_forms($this->form_id);
   }
 
   public function __destruct() {
@@ -27,15 +27,31 @@ class magic_form {
     );
   }
 
-  static public function remove_other_forms() {
+  static public function remove_other_forms($exception_id = null) {
     // Expire old magic forms
     if(isset($_SESSION)){
       if(isset($_SESSION['magic_forms'])){
         foreach ($_SESSION['magic_forms'] as $form_id => $form_container) {
-          unset($_SESSION['magic_forms'][$form_id]);
+          if($exception_id !== $form_id || $exception_id === null){
+            self::_dispose_form($form_id);
+          }
         }
       }
     }
+  }
+
+  static private function _dispose_form($form_id){
+    $form_container = $_SESSION['magic_forms'][$form_id];
+    watchdog(
+      "magic_forms",
+      "Removing magic form #@form_id, created at @date",
+      array(
+           '@form_id' => $form_id,
+           '@date' => date("Y-m-d H:i:s", strtotime($form_container['created']))
+      ),
+      WATCHDOG_INFO
+    );
+    unset($_SESSION['magic_forms'][$form_id]);
   }
 
   static public function cleanup_expired_forms() {
@@ -44,16 +60,22 @@ class magic_form {
       if(isset($_SESSION['magic_forms'])){
         foreach ($_SESSION['magic_forms'] as $form_id => $form_container) {
           if (strtotime($form_container['created']) < strtotime(self::inactivity_max_time . " ago")) {
-            watchdog(
-              "magic_forms",
-              "Removing magic form #@form_id, created at @date",
-              array(
-                   '@form_id' => $form_id,
-                   '@date' => date("Y-m-d H:i:s", strtotime($form_container['created']))
-              ),
-              WATCHDOG_INFO
-            );
-            unset($_SESSION['magic_forms'][$form_id]);
+            self::_dispose_form($form_id);
+          }
+        }
+        if(count($_SESSION['magic_forms']) >= MAGIC_FORMS_MAX_ACTIVE_FORMS){
+          $forms_by_time = array();
+          foreach ($_SESSION['magic_forms'] as $form_id => $form_container) {
+            $forms_by_time[strtotime($form_container['created'])] = $form_id;
+          }
+
+          // Pop off the items to preserve.
+          for($i=1; $i < 5; $i++){
+            array_pop($forms_by_time);
+          }
+
+          foreach($forms_by_time as $form_id){
+            self::_dispose_form($form_id);
           }
         }
       }
@@ -97,6 +119,31 @@ class magic_form {
     }
     watchdog("Remedy Ticket form: Cannot find field: {$name}", "warning");
     return FALSE;
+  }
+
+  public function get_fields(){
+    $fields = array();
+    foreach ($this->form_elements as $element_name => $element) {
+      if (get_class($element) == 'magic_form_group') {
+        $sub_fields = $element->get_fields();
+        if(count($sub_fields) > 0){
+          foreach ($sub_fields as $sub_element_name => $sub_element) {
+              $fields[$sub_element_name] = $sub_fields[$sub_element_name];
+          }
+        }
+      }else{
+        $fields[$element_name] = $element;
+      }
+    }
+    if($_REQUEST['magic_form_id'] == $this->get_form_id()){
+      foreach($_REQUEST as $key => $value){
+        $field = new magic_form_field();
+        $field->set_name($key);
+        $field->set_value($value);
+        $fields[$key] = $field;
+      }
+    }
+    return $fields;
   }
 
   public function __toString() {
