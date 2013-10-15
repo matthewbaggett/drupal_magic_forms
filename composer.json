@@ -1,0 +1,8 @@
+{
+    "name": "matthewbaggett/drupal_magic_forms",
+    "description": "Because Drupal Forms blow.",
+    "license": "GPLv2",
+    "require": {
+
+    }
+}
