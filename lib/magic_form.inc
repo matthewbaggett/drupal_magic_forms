@@ -3,6 +3,7 @@ class magic_form {
   private $form_id = null;
   private $form_elements;
   private $submit_function;
+  private $submit_destination = null;
   private $action = null;
   private $classes = array();
 
@@ -122,28 +123,15 @@ class magic_form {
   }
 
   public function get_fields(){
-    $fields = array();
-    foreach ($this->form_elements as $element_name => $element) {
-      if (get_class($element) == 'magic_form_group') {
-        $sub_fields = $element->get_fields();
-        if(count($sub_fields) > 0){
-          foreach ($sub_fields as $sub_element_name => $sub_element) {
-              $fields[$sub_element_name] = $sub_fields[$sub_element_name];
-          }
-        }
-      }else{
-        $fields[$element_name] = $element;
+
+    $all_elements = array();
+    $all_elements = array_merge($all_elements, $this->form_elements);
+    foreach($all_elements as &$element){
+      if($element instanceof magic_form_group){
+        $all_elements = array_merge($all_elements, $element->get_fields());
       }
     }
-    if($_REQUEST['magic_form_id'] == $this->get_form_id()){
-      foreach($_REQUEST as $key => $value){
-        $field = new magic_form_field();
-        $field->set_name($key);
-        $field->set_value($value);
-        $fields[$key] = $field;
-      }
-    }
-    return $fields;
+    return $all_elements;
   }
 
   public function __toString() {
@@ -172,6 +160,15 @@ class magic_form {
   public function submit($submit_function) {
     $this->submit_function = new magic_serialisable_closure($submit_function);
     return $this;
+  }
+
+  public function set_submit_destination($submit_destination){
+    $this->submit_destination = $submit_destination;
+    return $this;
+  }
+
+  public function get_submit_destination(){
+    return $this->submit_destination;
   }
 
   public function do_submit() {
