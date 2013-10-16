@@ -8,7 +8,7 @@ class magic_form_field_select extends magic_form_field_multi
     {
         $view = new StdClass();
         $view->field = $this;
-        return magic_forms_template_view("form.select.phtml", $view);
+        return $this->render("form.select.phtml", $view);
     }
 
     public function allow_null_value()

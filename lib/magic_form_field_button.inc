@@ -19,6 +19,6 @@ class magic_form_field_button extends magic_form_field {
   public function __toString() {
     $view = new StdClass();
     $view->field = $this;
-    return magic_forms_template_view("form.button.phtml", $view);
+    return $this->render("form.button.phtml", $view);
   }
 }

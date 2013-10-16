@@ -1,9 +1,12 @@
 <?php
 class magic_form {
+  const MAGIC_FORM_RENDER_MODE_VIEW = 'view';
+  const MAGIC_FORM_RENDER_MODE_EDIT = 'edit';
   private $form_id = null;
   private $form_elements;
   private $submit_function;
   private $submit_destination = null;
+  private $render_mode = self::MAGIC_FORM_RENDER_MODE_EDIT;
   private $action = null;
   private $classes = array();
 
@@ -26,6 +29,15 @@ class magic_form {
       'created' => date("Y-m-d H:i:s"),
       'form' => serialize($this),
     );
+  }
+
+  public function set_render_mode($render_mode){
+    $this->render_mode = $render_mode;
+    return $this;
+  }
+
+  public function get_render_mode(){
+    return $this->render_mode;
   }
 
   static public function remove_other_forms($exception_id = null) {
@@ -140,8 +152,9 @@ class magic_form {
     $view->action = $this->get_action();
     $view->form_id = $this->get_form_id();
     $view->classes = $this->get_classes();
+    $view->scope = $this;
     $this->__save();
-    return magic_forms_template_view("form.phtml", $view);
+    return magic_forms_template_view($this->get_render_mode() . "/" . "form.phtml", $view);
   }
 
   public function get_action() {

@@ -42,7 +42,7 @@ class magic_form_field_datatable extends magic_form_field {
   public function __toString() {
     $view = new StdClass();
     $view->field = $this;
-    return magic_forms_template_view("form.datatable.phtml", $view);
+    return $this->render("form.datatable.phtml", $view);
   }
 
   public function define_columns($columns){

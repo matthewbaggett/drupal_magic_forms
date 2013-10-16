@@ -29,6 +29,6 @@ class magic_form_field_radio extends magic_form_field_multi
     {
         $view = new StdClass();
         $view->field = $this;
-        return magic_forms_template_view("form.radio.phtml", $view);
+        return $this->render("form.radio.phtml", $view);
     }
 }

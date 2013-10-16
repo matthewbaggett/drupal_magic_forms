@@ -30,7 +30,7 @@ class magic_form_field extends magic_form_item {
   public function __toString() {
     $view = new StdClass();
     $view->field = $this;
-    return magic_forms_template_view("form.input.phtml", $view);
+    return $this->render("form.input.phtml", $view);
   }
 
   /**
