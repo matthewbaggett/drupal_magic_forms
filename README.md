@@ -1,4 +1,4 @@
-Drupal Magic Forms
+Objective Forms
 ==================
 
 A slightly less hateful implementation of form handling for Drupal.
