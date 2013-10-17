@@ -103,6 +103,7 @@ class magic_form {
 
   public function add_fields(){
     foreach(func_get_args() as $argument){
+      $argument->set_scope($this);
       $this->add_field($argument);
     }
   }

@@ -12,6 +12,7 @@ class magic_form_group extends magic_form_item
 
     public function add_field(magic_form_item $field)
     {
+        $field->set_scope($this->get_scope());
         $this->fields[$field->get_name()] = $field;
         return $this;
     }
