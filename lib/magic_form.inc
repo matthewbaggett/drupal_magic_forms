@@ -149,6 +149,10 @@ class magic_form {
   public function __toString() {
     $view = new StdClass();
     $view->form_rows = $this->form_elements;
+    foreach($view->form_rows as &$row){
+      /* @var $row magic_form_item */
+      $row->set_scope($this);
+    }
     $view->action = $this->get_action();
     $view->form_id = $this->get_form_id();
     $view->classes = $this->get_classes();
