@@ -139,12 +139,19 @@ class magic_form {
 
     $all_elements = array();
     $all_elements = array_merge($all_elements, $this->form_elements);
+    $output_elements = array();
+
+    $output_elements = array_merge($output_elements, $all_elements);
+
     foreach($all_elements as &$element){
       if($element instanceof magic_form_group){
-        $all_elements = array_merge($all_elements, $element->get_fields());
+        foreach($element->get_fields() as $field){
+          $output_elements[] = $field;
+        }
       }
     }
-    return $all_elements;
+
+    return $output_elements;
   }
 
   public function __toString() {
@@ -203,9 +210,14 @@ class magic_form {
 
         default:
           $item = $this->get_field($key);
-          if ($item) {
-            $item->set_value($value);
+
+          if (!$item instanceof magic_form_field) {
+            $item = new magic_form_field();
+            $item->set_name($key);
+            $item->set_label($key);
           }
+          $item->set_value($value);
+          $this->form_elements[$key] = $item;
       }
     }
   }
