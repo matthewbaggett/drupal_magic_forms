@@ -25,6 +25,12 @@ class magic_form_item
   }
 
   public function render($template, $view){
-    return magic_forms_template_view($this->get_scope()->get_render_mode() . "/" . $template, $view);
+    $scope = $this->get_scope();
+    if(!$scope instanceof magic_form){
+      $render_mode = 'edit';
+    }else{
+      $render_mode = $scope->get_render_mode();
+    }
+    return magic_forms_template_view($render_mode . "/" . $template, $view);
   }
 }
