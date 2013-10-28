@@ -66,9 +66,9 @@ class magic_form_field extends magic_form_item {
   /**
    * Set the label for this widget
    *
-   * @param $name
+   * @param $label Label for this widget
    *
-   * @return $this
+   * @return magic_form_field
    */
   public function set_label($label) {
     $this->label = $label;
@@ -89,7 +89,7 @@ class magic_form_field extends magic_form_item {
    *
    * @param $default_value
    *
-   * @return $this
+   * @return magic_form_field
    */
   public function set_default_value($default_value) {
     $this->default_value = $default_value;
@@ -100,6 +100,11 @@ class magic_form_field extends magic_form_item {
     return $this->value;
   }
 
+  /**
+   * @param $value
+   *
+   * @return magic_form_field
+   */
   public function set_value($value) {
     $this->value = $value;
     return $this;

@@ -4,6 +4,13 @@ class magic_form_field_datatable extends magic_form_field {
   protected $rows;
   private $columns;
 
+  /**
+   * @param null $name
+   * @param null $label
+   * @param null $value
+   *
+   * @return magic_form_datatable
+   */
   public static function factory($name = null, $label = null, $value = null) {
     $class = get_called_class();
     $instance = new $class($name, $label);
