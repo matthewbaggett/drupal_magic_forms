@@ -33,7 +33,7 @@ class magic_form_field_multi extends magic_form_field
      *
      * @param $array_of_options
      *
-     * @return $this
+     * @return magic_form_field_multi
      */
     public function add_options($array_of_options)
     {
@@ -45,6 +45,32 @@ class magic_form_field_multi extends magic_form_field
             }
           }
           $this->add_option($value, $key);
+        }
+        return $this;
+    }
+
+    /**
+     * Remove an option by key
+     *
+     * @param $key_of_option
+     *
+     * @return magic_form_field_multi
+     */
+    public function remove_option($key_of_option){
+        unset($this->options[$key_of_option]);
+        return $this;
+    }
+
+    /**
+     * Remove an array of options by key
+     *
+     * @param $array_of_keys
+     *
+     * @return magic_form_field_multi
+     */
+    public function remove_options($array_of_keys){
+        foreach ($array_of_keys as $key) {
+            $this->remove_option($key);
         }
         return $this;
     }
