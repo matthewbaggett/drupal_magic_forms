@@ -89,6 +89,18 @@ function magic_form_field(type, name, label, value) {
     return this;
   };
 
+  this.remove_option = function (option_key){
+    var options = this.options;
+    jQuery(options).each(function(i, item){
+      if(item.key == option_key){
+        options.splice(i, 1);
+      }
+    });
+
+    jQuery('.form_row.field-' + this.name + ' select option[value=' + option_key + ']').remove();
+    jQuery('.form_row.field-' + this.name + ' .radio_group radio_group_option input[value=' + option_key + ']' ).parent().remove();
+  }
+
   this.empty = function(){
     this.options = [];
     jQuery('.form_row.field-' + this.name + ' select option').remove();
