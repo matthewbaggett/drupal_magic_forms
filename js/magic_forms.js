@@ -266,7 +266,7 @@ var magic_form = {
   },
   parse_from_json: function(selector, json){
     jQuery.each(json, function(i, item){
-      console.log(item);
+      //console.log(item);
       var field = new magic_form_field(item.type);
       field.name = item.name;
       field.label = item.label;
@@ -281,7 +281,7 @@ var magic_form = {
 
       var html = field.html();
 
-      console.log(html,"Adding");
+      //console.log(html,"Adding");
 
       selector.append(html);
 
