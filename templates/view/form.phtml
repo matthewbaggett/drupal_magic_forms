@@ -1,5 +1,8 @@
 <form
     action="<?php echo $action ?>"
+    <?php if($view->form_name): ?>
+    id="<?php echo "magic_form_{$view->form_name}"; ?>"
+    <?php endif; ?>
     class="magic_form <?php echo implode(" ", $classes); ?>"
     method="POST"
     enctype="multipart/form-data"

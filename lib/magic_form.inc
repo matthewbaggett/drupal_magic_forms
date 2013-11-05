@@ -9,15 +9,18 @@ class magic_form {
   private $render_mode = self::MAGIC_FORM_RENDER_MODE_EDIT;
   private $action = null;
   private $classes = array();
+  private $form_name = null;
 
   const inactivity_max_time = '24 hours';
 
-  public function __construct() {
+  public function __construct($form_name = null) {
     if($this->form_id === null){
       $this->form_id = uniqid('magic_form_');
     }
     self::cleanup_expired_forms();
     //self::remove_other_forms($this->form_id);
+
+    $this->set_form_name($form_name);
   }
 
   public function __destruct() {
@@ -29,6 +32,15 @@ class magic_form {
       'created' => date("Y-m-d H:i:s"),
       'form' => serialize($this),
     );
+  }
+
+  public function set_form_name($name){
+    $this->form_name = $name;
+    return $this;
+  }
+
+  public function get_form_name(){
+    return $this->form_name;
   }
 
   public function set_render_mode($render_mode){
@@ -162,6 +174,7 @@ class magic_form {
       $row->set_scope($this);
     }
     $view->action = $this->get_action();
+    $view->form_name = $this->get_form_name();
     $view->form_id = $this->get_form_id();
     $view->classes = $this->get_classes();
     $view->scope = $this;
@@ -267,6 +280,11 @@ class magic_form {
   }
 
   public function get_classes(){
-    return $this->classes;
+    $classes = array();
+    if($this->get_form_name()){
+      $classes[] = magic_forms_mangle_to_css_class($this->get_form_name());
+    }
+    $classes = array_merge($classes, $this->classes);
+    return $classes;
   }
 }
