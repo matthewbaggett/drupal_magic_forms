@@ -35,6 +35,8 @@ class magic_form {
   }
 
   public function set_form_name($name){
+    $name = str_replace(" ", "-", $name);
+    $name = str_replace("_", "-", $name);
     $this->form_name = $name;
     return $this;
   }
