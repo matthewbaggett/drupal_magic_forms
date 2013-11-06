@@ -4,10 +4,17 @@ class magic_form_group extends magic_form_item
 {
     private $fields;
     private $group_name;
+    private $group_label;
 
-    public function __construct($group_name = null)
+    public function __construct($group_name = null, $group_label = null)
     {
-        $this->group_name = $group_name;
+        $this->set_group_name($group_name);
+        $this->set_group_label($group_label);
+
+        // Support legacy behaviour
+        if($group_label === null && $group_name !== null){
+            $this->set_group_label($group_name);
+        }
     }
 
     public function add_field(magic_form_item $field)
@@ -22,9 +29,24 @@ class magic_form_group extends magic_form_item
         return $this->fields;
     }
 
+    public function set_group_name($group_name){
+        $this->group_name = $group_name;
+        return $this;
+    }
+
     public function get_group_name()
     {
-        return t($this->group_name);
+        return $this->group_name;
+    }
+
+    public function set_group_label($group_label){
+        $this->group_label = $group_label;
+        return $this;
+    }
+
+    public function get_group_label()
+    {
+        return t($this->group_label);
     }
 
     public function __toString()
