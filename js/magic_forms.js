@@ -5,7 +5,7 @@ jQuery(document).ready(function () {
   });
 });
 
-function magic_form_field(type, name, label, value) {
+function magic_form_field(type, name, label, value, default_value) {
   if(typeof(value) == 'undefined'){
     value = '';
   }
@@ -13,9 +13,11 @@ function magic_form_field(type, name, label, value) {
   this.name = name;
   this.label = label;
   this.value = value;
+  this.default_value = default_value;
   this.options = [];
   this.disabled = false;
   this.events = [];
+
 
   this._get_mass_selector = function(){
     return '' +
@@ -38,7 +40,7 @@ function magic_form_field(type, name, label, value) {
 
     // Set the value
     this._get_input_field().val(value);
-    this._get_input_field().attr('placeholder', value);
+    this._get_input_field().attr('placeholder', this.default_value);
 
     // If its an option, we got a little more heavy liftin' to do.
     var select = jQuery('.form_row.field-' + this.name + ' select');
@@ -135,12 +137,13 @@ function magic_form_field(type, name, label, value) {
   }
 
   this.html = function(){
+      console.log(this, this.name);
     if(this.type == 'input' || this.type == 'text'){
       return '' +
         '<div class="form_row form_input field-' + this.name + '">' +
         '  <label for="' + this.name + '">' + this.label + '</label>' +
         '  <div class="widget">' +
-        '    <input type="text" placeholder="' + this.value + '" class="' + (this.disabled?'disabled':'enabled') + '" value="' + this.value + '" name="' + this.name + '" id="' + this.name + '" ' + (this.disabled?'readonly':'') + '>' +
+        '    <input type="text" placeholder="' + this.placeholder + '" class="' + (this.disabled?'disabled':'enabled') + '" value="' + this.value + '" name="' + this.name + '" id="' + this.name + '" ' + (this.disabled?'readonly':'') + '>' +
         '  </div>' +
         '  <div class="clear"></div>' +
         '</div>';
@@ -272,6 +275,12 @@ var magic_form = {
       field.label = item.label;
       field.disabled = item.disabled;
       field.value = item.value;
+      if(item.default_value != null){
+        field.default_value = item.default_value;
+          console.log("default_value on " + item.name + " is " + item.default_value);
+      }else{
+          console.log("No default_value on " + item.name);
+      }
 
       if(typeof(item.options) !== 'undefined'){
         jQuery.each(item.options, function (k,v){
