@@ -4,6 +4,7 @@ require_once("lib/magic_form.inc");
 require_once("lib/magic_form_item.inc");
 require_once("lib/magic_form_field.inc");
 require_once("lib/magic_form_field_button.inc");
+require_once("lib/magic_form_field_checkbox.inc");
 require_once("lib/magic_form_field_datatable.inc");
 require_once("lib/magic_form_field_file.inc");
 require_once("lib/magic_form_field_multi.inc");
@@ -23,6 +24,9 @@ require_once("lib/magic_form_group.inc");
 
 // Magic Clojure.
 require_once("lib/magic_serialisable_clojure.inc");
+
+// Implementation for form-able objects.
+require_once("lib/magic_form_support.inc");
 
 if(!defined('MAGIC_FORMS_MAX_ACTIVE_FORMS'))      define("MAGIC_FORMS_MAX_ACTIVE_FORMS", 5);
 if(!defined('MAGIC_FORMS_DEBUG'))                 define("MAGIC_FORMS_DEBUG", FALSE);
