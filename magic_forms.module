@@ -37,7 +37,8 @@ if(!defined('MAGIC_FORMS_SERIALISED_MAX_BYTES'))  define("MAGIC_FORMS_SERIALISED
  * Do not remove hook_page_alter(), its used to detect magic_forms installation presence & do the magic that makes
  * magic_forms magical.
  */
-function magic_forms_page_alter()
+//function magic_forms_page_alter()
+function magic_forms_init()
 {
    if (isset($_SESSION['magic_forms'])) {
 
