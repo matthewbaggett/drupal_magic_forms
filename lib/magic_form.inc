@@ -10,6 +10,7 @@ class magic_form {
   private $action = null;
   private $classes = array();
   private $form_name = null;
+  private $fields_to_omit = array();
 
   const inactivity_max_time = '24 hours';
 
@@ -120,6 +121,19 @@ class magic_form {
       $argument->set_scope($this);
       $this->add_field($argument);
     }
+    return $this;
+  }
+
+  public function omit_field($name){
+    $this->fields_to_omit[] = $name;
+    return $this;
+  }
+
+  public function omit_fields(){
+    foreach(func_get_args() as $name){
+      $this->omit_field($name);
+    }
+    return $this;
   }
 
   /**
@@ -174,6 +188,9 @@ class magic_form {
     foreach($view->form_rows as &$row){
       /* @var $row magic_form_item */
       $row->set_scope($this);
+      if(in_array($row->get_name(), $this->fields_to_omit)){
+         unlink($row);
+      }
     }
     $view->action = $this->get_action();
     $view->form_name = $this->get_form_name();
