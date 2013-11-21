@@ -3,6 +3,9 @@
     class="magic_form <?php echo implode(" ", $classes); ?>"
     method="POST"
     enctype="multipart/form-data"
+    <?php if(!$autocomplete): ?>
+    autocomplete='off'
+    <?php endif; ?>
     >
   <input type="hidden" name="magic_form_id" value="<?php echo $form_id ?>"/>
   <?php foreach ($form_rows as $form_row): ?>

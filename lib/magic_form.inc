@@ -11,6 +11,7 @@ class magic_form {
   private $classes = array();
   private $form_name = null;
   private $fields_to_omit = array();
+  private $autocomplete = false;
 
   const inactivity_max_time = '24 hours';
 
@@ -44,6 +45,20 @@ class magic_form {
 
   public function get_form_name(){
     return $this->form_name;
+  }
+
+  public function set_autocomplete_enable(){
+    return $this->set_autocomplete(true);
+  }
+  public function set_autocomplete_disable(){
+    return $this->set_autocomplete(false);
+  }
+  public function set_autocomplete($mode){
+    $this->autocomplete = $mode;
+    return $this;
+  }
+  public function get_autocomplete(){
+    return $this->autocomplete;
   }
 
   public function set_render_mode($render_mode){
@@ -196,6 +211,7 @@ class magic_form {
     $view->form_name = $this->get_form_name();
     $view->form_id = $this->get_form_id();
     $view->classes = $this->get_classes();
+    $view->autocomplete = $this->autocomplete;
     $view->scope = $this;
     $this->__save();
     return magic_forms_template_view($this->get_render_mode() . "/" . "form.phtml", $view);
