@@ -28,7 +28,7 @@ require_once("lib/magic_serialisable_clojure.inc");
 // Implementation for form-able objects.
 require_once("lib/magic_form_support.inc");
 
-if(!defined('MAGIC_FORMS_MAX_ACTIVE_FORMS'))      define("MAGIC_FORMS_MAX_ACTIVE_FORMS", 5);
+if(!defined('MAGIC_FORMS_MAX_ACTIVE_FORMS'))      define("MAGIC_FORMS_MAX_ACTIVE_FORMS", 100);
 if(!defined('MAGIC_FORMS_DEBUG'))                 define("MAGIC_FORMS_DEBUG", FALSE);
 if(!defined('MAGIC_FORMS_SERIALISED_MAX_BYTES'))  define("MAGIC_FORMS_SERIALISED_MAX_BYTES", 5000000); // 500KB
 
