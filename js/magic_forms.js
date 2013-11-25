@@ -45,8 +45,8 @@ function magic_form_field(type, name, label, value, default_value) {
     // If its an option, we got a little more heavy liftin' to do.
     var select = jQuery('.form_row.field-' + this.name + ' select');
     if(select.length > 0){
-      jQuery('option', select).removeAttr('selected');
-      jQuery('option[value=' + value + ']', select).attr('selected', 'selected');
+      jQuery("option", select).removeAttr('selected');
+      jQuery("option[value='" + value + "']", select).attr('selected', 'selected');
     }
 
     // Trigger changed state.
