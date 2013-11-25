@@ -137,7 +137,7 @@ function magic_form_field(type, name, label, value, default_value) {
   }
 
   this.html = function(){
-      console.log(this, this.name);
+    //console.log(this, this.name);
     if(this.type == 'input' || this.type == 'text'){
       return '' +
         '<div class="form_row form_input field-' + this.name + '">' +
@@ -277,9 +277,9 @@ var magic_form = {
       field.value = item.value;
       if(item.default_value != null){
         field.default_value = item.default_value;
-          console.log("default_value on " + item.name + " is " + item.default_value);
+        //console.log("default_value on " + item.name + " is " + item.default_value);
       }else{
-          console.log("No default_value on " + item.name);
+        //console.log("No default_value on " + item.name);
       }
 
       if(typeof(item.options) !== 'undefined'){
