@@ -5,4 +5,4 @@ core = 7.x
 stylesheets[all][] = css/magic_forms.css
 scripts[] = js/magic_forms.js
 
-suggests[] = active_record
+dependencies[] = active_record

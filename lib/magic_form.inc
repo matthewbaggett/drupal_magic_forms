@@ -1,17 +1,23 @@
 <?php
-class magic_form {
+class magic_form extends active_record{
+  protected $_table = "magic_forms";
+
   const MAGIC_FORM_RENDER_MODE_VIEW = 'view';
   const MAGIC_FORM_RENDER_MODE_EDIT = 'edit';
-  private $form_id = null;
-  private $form_elements;
-  private $submit_function;
-  private $submit_destination = null;
-  private $render_mode = self::MAGIC_FORM_RENDER_MODE_EDIT;
-  private $action = null;
-  private $classes = array();
-  private $form_name = null;
-  private $fields_to_omit = array();
-  private $autocomplete = false;
+
+  public $magic_form_id;
+  public $form_id = null;
+  public $created;
+  public $uid;
+  public $form_elements;
+  public $submit_function;
+  public $submit_destination = null;
+  public $render_mode = self::MAGIC_FORM_RENDER_MODE_EDIT;
+  public $action = null;
+  public $classes = array();
+  public $form_name = null;
+  public $fields_to_omit = array();
+  public $autocomplete = false;
 
   const inactivity_max_time = '24 hours';
 
@@ -19,21 +25,59 @@ class magic_form {
     if($this->form_id === null){
       $this->form_id = uniqid('magic_form_');
     }
-    self::cleanup_expired_forms();
-    //self::remove_other_forms($this->form_id);
-
     $this->set_form_name($form_name);
+    $this->created = date("Y-m-d H:i:s");
+    $this->uid = user_active_record::current()->uid;
   }
 
   public function __destruct() {
-    $this->__save();
+    // TODO: Work out why this crashes Apache. :| Hard.
+    //$this->save(false);
   }
 
   public function __save(){
-    $_SESSION['magic_forms'][$this->form_id] = array(
-      'created' => date("Y-m-d H:i:s"),
-      'form' => serialize($this),
-    );
+    return $this->save(true);
+  }
+
+  public function __pre_save(){
+    $this->__magic_form_serialise();
+  }
+
+  public function __post_save(){
+    $this->__magic_form_deserialise();
+  }
+
+  public function __post_construct(){
+    $this->__magic_form_deserialise();
+  }
+
+  private function __magic_form_serialise() {
+    if (is_array($this->form_elements)      || is_object($this->form_elements))       $this->form_elements      = $this->__encode($this->form_elements);
+    if (is_array($this->submit_function)    || is_object($this->submit_function))     $this->submit_function    = $this->__encode($this->submit_function);
+    if (is_array($this->submit_destination) || is_object($this->submit_destination))  $this->submit_destination = $this->__encode($this->submit_destination);
+    if (is_array($this->classes)            || is_object($this->classes))             $this->classes            = $this->__encode($this->classes);
+    if (is_array($this->fields_to_omit)     || is_object($this->fields_to_omit))      $this->fields_to_omit     = $this->__encode($this->fields_to_omit);
+    if (is_array($this->autocomplete)       || is_object($this->autocomplete))        $this->autocomplete       = $this->__encode($this->autocomplete);
+  }
+  private function __magic_form_deserialise(){
+    if(is_string($this->form_elements))       $this->form_elements      = $this->__decode($this->form_elements);
+    if(is_string($this->submit_function))     $this->submit_function    = $this->__decode($this->submit_function);
+    if(is_string($this->submit_destination))  $this->submit_destination = $this->__decode($this->submit_destination);
+    if(is_string($this->classes))             $this->classes            = $this->__decode($this->classes);
+    if(is_string($this->fields_to_omit))      $this->fields_to_omit     = $this->__decode($this->fields_to_omit);
+    if(is_string($this->autocomplete))        $this->autocomplete       = $this->__decode($this->autocomplete);
+  }
+
+  public function __encode($thing){
+    $serialised = serialize($thing);
+    $encoded = base64_encode($serialised);
+    return $encoded;
+  }
+
+  public function __decode($encoded){
+    $serialized = base64_decode($encoded);
+    $thing = unserialize($serialized);
+    return $thing;
   }
 
   public function set_form_name($name){
@@ -70,58 +114,12 @@ class magic_form {
     return $this->render_mode;
   }
 
-  static public function remove_other_forms($exception_id = null) {
-    // Expire old magic forms
-    if(isset($_SESSION)){
-      if(isset($_SESSION['magic_forms'])){
-        foreach ($_SESSION['magic_forms'] as $form_id => $form_container) {
-          if($exception_id !== $form_id || $exception_id === null){
-            self::_dispose_form($form_id);
-          }
-        }
-      }
-    }
-  }
-
-  static private function _dispose_form($form_id){
-    $form_container = $_SESSION['magic_forms'][$form_id];
-    watchdog(
-      "magic_forms",
-      "Removing magic form #@form_id, created at @date",
-      array(
-           '@form_id' => $form_id,
-           '@date' => date("Y-m-d H:i:s", strtotime($form_container['created']))
-      ),
-      WATCHDOG_INFO
-    );
-    unset($_SESSION['magic_forms'][$form_id]);
-  }
-
   static public function cleanup_expired_forms() {
     // Expire old magic forms
-    if(isset($_SESSION)){
-      if(isset($_SESSION['magic_forms'])){
-        foreach ($_SESSION['magic_forms'] as $form_id => $form_container) {
-          if (strtotime($form_container['created']) < strtotime(self::inactivity_max_time . " ago")) {
-            self::_dispose_form($form_id);
-          }
-        }
-        if(count($_SESSION['magic_forms']) >= MAGIC_FORMS_MAX_ACTIVE_FORMS){
-          $forms_by_time = array();
-          foreach ($_SESSION['magic_forms'] as $form_id => $form_container) {
-            $forms_by_time[strtotime($form_container['created'])] = $form_id;
-          }
-
-          // Pop off the items to preserve.
-          for($i=1; $i < 5; $i++){
-            array_pop($forms_by_time);
-          }
-
-          foreach($forms_by_time as $form_id){
-            self::_dispose_form($form_id);
-          }
-        }
-      }
+    $expired_forms = magic_form::search()->where('created', date('Y-m-d H:i:s', strtotime(self::inactivity_max_time . ' ago')), '<=')->exec();
+    foreach($expired_forms as $expired_form){
+      /* @var $expired_form magic_form */
+      $expired_form->delete();
     }
   }
 
@@ -200,21 +198,25 @@ class magic_form {
   public function __toString() {
     $view = new StdClass();
     $view->form_rows = $this->form_elements;
-    foreach($view->form_rows as &$row){
-      /* @var $row magic_form_item */
-      $row->set_scope($this);
-      if(in_array($row->get_name(), $this->fields_to_omit)){
-         unlink($row);
+    if(count($view->form_rows) > 0){
+      foreach($view->form_rows as &$row){
+        /* @var $row magic_form_item */
+        $row->set_scope($this);
+        if(in_array($row->get_name(), $this->fields_to_omit)){
+           unlink($row);
+        }
       }
+      $view->action = $this->get_action();
+      $view->form_name = $this->get_form_name();
+      $view->form_id = $this->get_form_id();
+      $view->classes = $this->get_classes();
+      $view->autocomplete = $this->autocomplete;
+      $view->scope = $this;
+      $this->__save();
+      return magic_forms_template_view($this->get_render_mode() . "/" . "form.phtml", $view);
+    }else{
+      return "No form elements";
     }
-    $view->action = $this->get_action();
-    $view->form_name = $this->get_form_name();
-    $view->form_id = $this->get_form_id();
-    $view->classes = $this->get_classes();
-    $view->autocomplete = $this->autocomplete;
-    $view->scope = $this;
-    $this->__save();
-    return magic_forms_template_view($this->get_render_mode() . "/" . "form.phtml", $view);
   }
 
   public function get_action() {
@@ -275,13 +277,13 @@ class magic_form {
   }
 
   public static function process($magic_form_id) {
-    if (!isset($_SESSION['magic_forms'][$magic_form_id])) {
+    $magic_form = magic_form::search()->where('form_id', $magic_form_id)->execOne();
+    if ($magic_form instanceof magic_form) {
+      $magic_form->do_submit();
+    } else {
       drupal_set_message("Uhoh... The form expired after " . self::inactivity_max_time . "! Please try again.", "error");
       header("Location: {$_SERVER['HTTP_REFERER']}");
       exit;
-    } else {
-      $form = unserialize($_SESSION['magic_forms'][$magic_form_id]['form']);
-      $form->do_submit();
     }
   }
 

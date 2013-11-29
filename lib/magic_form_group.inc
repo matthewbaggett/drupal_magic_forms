@@ -2,9 +2,9 @@
 
 class magic_form_group extends magic_form_item
 {
-    private $fields;
-    private $group_name;
-    private $group_label;
+    public $fields;
+    public $group_name;
+    public $group_label;
 
     public function __construct($group_name = null, $group_label = null)
     {

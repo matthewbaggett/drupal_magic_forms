@@ -40,36 +40,10 @@ if(!defined('MAGIC_FORMS_SERIALISED_MAX_BYTES'))  define("MAGIC_FORMS_SERIALISED
 //function magic_forms_page_alter()
 function magic_forms_init()
 {
-   if (isset($_SESSION['magic_forms'])) {
-
-      // If we're in debug mode...
-      if(MAGIC_FORMS_DEBUG){
-
-        // Unserialise the serialised content for display
-        $forms_unserialised = array();
-        foreach($_SESSION['magic_forms'] as $i => $form){
-          $form_unserialised = $form;
-          $form_unserialised['form'] = unserialize($form_unserialised['form']);
-          $serialised_data = serialize($form_unserialised);
-          $forms_unserialised[$i . " " . strlen($serialised_data) . " bytes"] = $form_unserialised;
-        }
-
-        // Reserialise it for a memory total
-        $serialised_data = serialize($forms_unserialised);
-        drupal_set_message("Magic Forms Memory: " . strlen($serialised_data) . " bytes. (" . ((100/MAGIC_FORMS_SERIALISED_MAX_BYTES) * strlen($serialised_data)) . "% of MAGIC_FORMS_SERIALISED_MAX_BYTES)");
-
-        // If serialised data exceeds 1MB, somethings gone wrong.
-        if(strlen($serialised_data) >= MAGIC_FORMS_SERIALISED_MAX_BYTES){
-          drupal_set_message("Purging serialised data, exceeded " . MAGIC_FORMS_SERIALISED_MAX_BYTES . " bytes");
-        }
-        krumo($forms_unserialised);
-      }
-      if (isset($_REQUEST['magic_form_id'])) {
-          magic_form::remove_other_forms($_REQUEST['magic_form_id']);
-          magic_form::process($_REQUEST['magic_form_id']);
-      }
-      magic_form::cleanup_expired_forms();
-    }
+  if (isset($_REQUEST['magic_form_id'])) {
+      magic_form::process($_REQUEST['magic_form_id']);
+  }
+  magic_form::cleanup_expired_forms();
 }
 
 /**

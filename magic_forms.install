@@ -9,3 +9,90 @@ function magic_forms_update_7001() {
     ->condition('name', 'magic_forms', '=')
     ->execute();
 }
+
+function magic_forms_schema(){
+    $schema['magic_forms'] = array(
+      'description' => 'TODO: please describe this table!',
+      'fields' => array(
+        'magic_form_id' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'serial',
+          'not null' => TRUE,
+        ),
+        'form_id' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '24',
+          'not null' => TRUE,
+        ),
+        'created' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'datetime',
+          'not null' => TRUE,
+        ),
+        'uid' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'int',
+          'not null' => FALSE,
+        ),
+        'form_elements' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'text',
+          'not null' => FALSE,
+        ),
+        'submit_function' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'text',
+          'not null' => FALSE,
+        ),
+        'submit_destination' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'text',
+          'not null' => FALSE,
+        ),
+        'render_mode' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '4',
+          'not null' => FALSE,
+        ),
+        'action' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '255',
+          'not null' => FALSE,
+        ),
+        'classes' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'text',
+          'not null' => FALSE,
+        ),
+        'form_name' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'varchar',
+          'length' => '255',
+          'not null' => FALSE,
+        ),
+        'fields_to_omit' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'text',
+          'not null' => FALSE,
+        ),
+        'autocomplete' => array(
+          'description' => 'TODO: please describe this field!',
+          'type' => 'text',
+          'not null' => FALSE,
+        ),
+      ),
+      'primary key' => array('magic_form_id'),
+      'unique keys' => array(
+        'form_id' => array('form_id')
+      ),
+      'indexes' => array(
+        'render_mode' => array('render_mode', 'form_name'),
+      ),
+    );
+
+
+    return $schema;
+}
