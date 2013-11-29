@@ -186,8 +186,11 @@ class magic_form extends active_record{
 
     foreach($all_elements as &$element){
       if($element instanceof magic_form_group){
-        foreach($element->get_fields() as $field){
-          $output_elements[] = $field;
+        $element_sub_fields = $element->get_fields();
+        if(count($element_sub_fields) > 0){
+          foreach($element_sub_fields as $field){
+            $output_elements[] = $field;
+          }
         }
       }
     }
