@@ -205,6 +205,11 @@ class magic_form_field extends magic_form_item {
     return $this->disabled;
   }
 
+  public function clear_errors(){
+    $this->errors = array();
+    return $this;
+  }
+
   public function add_error($error) {
     $this->errors[] = $error;
     return $this;
