@@ -1,26 +1,26 @@
 <?php
 
 require_once("lib/magic_form.inc");
-require_once("lib/magic_form_item.inc");
-require_once("lib/magic_form_field.inc");
-require_once("lib/magic_form_field_button.inc");
-require_once("lib/magic_form_field_checkbox.inc");
-require_once("lib/magic_form_field_datatable.inc");
-require_once("lib/magic_form_field_file.inc");
-require_once("lib/magic_form_field_multi.inc");
-require_once("lib/magic_form_field_radio.inc");
-require_once("lib/magic_form_field_select.inc");
-require_once("lib/magic_form_field_submit.inc");
-require_once("lib/magic_form_field_text.inc");
-require_once("lib/magic_form_field_textarea.inc");
+require_once("fields/magic_form_item.inc");
+require_once("fields/magic_form_field.inc");
+require_once("fields/magic_form_field_button.inc");
+require_once("fields/magic_form_field_checkbox.inc");
+require_once("fields/magic_form_field_datatable.inc");
+require_once("fields/magic_form_field_file.inc");
+require_once("fields/magic_form_field_multi.inc");
+require_once("fields/magic_form_field_radio.inc");
+require_once("fields/magic_form_field_select.inc");
+require_once("fields/magic_form_field_submit.inc");
+require_once("fields/magic_form_field_text.inc");
+require_once("fields/magic_form_field_textarea.inc");
 
 // Depend on magic_form_field_text being loaded already
-require_once("lib/magic_form_field_date.inc");
-require_once("lib/magic_form_field_hidden.inc");
-require_once("lib/magic_form_field_number.inc");
+require_once("fields/magic_form_field_date.inc");
+require_once("fields/magic_form_field_hidden.inc");
+require_once("fields/magic_form_field_number.inc");
 
 // Groups support
-require_once("lib/magic_form_group.inc");
+require_once("fields/magic_form_group.inc");
 
 // Magic Clojure.
 require_once("lib/magic_serialisable_clojure.inc");
