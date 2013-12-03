@@ -287,9 +287,6 @@ class magic_form extends active_record {
     foreach ($this->get_fields() as $field) {
       /* @var $field magic_form_field */
       $field->clear_errors();
-    }
-    foreach ($this->get_fields() as $field) {
-      /* @var $field magic_form_field */
       $field->validate();
     }
     $this->save();
