@@ -5,6 +5,7 @@ class magic_form extends active_record{
   const MAGIC_FORM_RENDER_MODE_VIEW = 'view';
   const MAGIC_FORM_RENDER_MODE_EDIT = 'edit';
 
+  // TODO: make these protected.
   public $magic_form_id;
   public $form_id = null;
   public $created;
@@ -276,6 +277,10 @@ class magic_form extends active_record{
     $this->populate_with_request();
     if(!is_callable($this->submit_function)){
       throw new exception("No submit handler has been written for this form!");
+    }
+    foreach($this->get_fields() as $field){
+      /* @var $field magic_form_field */
+      $field->validate();
     }
     $this->submit_function->__invoke($this);
   }

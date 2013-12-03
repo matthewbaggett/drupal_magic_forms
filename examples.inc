@@ -31,7 +31,14 @@ function magic_form_examples(){
       magic_form_field_text::factory('some-field', 'Some Field', 'Some Default')
         ->add_validator(new magic_form_validator_is_valid_phonenumber())
         ->add_validator(new magic_form_validator_is_valid_email())
-    )*/;
+    )*/
+    ->add_field(magic_form_field_submit::factory('submit','Submit'));
+
+  $form->submit(function(magic_form $form){
+
+    drupal_set_message("Submit happened in form {$form->magic_form_id} / {$form->form_id}");
+
+  });
 
   return $form->__toString();
 }

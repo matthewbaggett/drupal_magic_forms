@@ -64,15 +64,24 @@ class magic_form_field extends magic_form_item {
   public function validate(){
     foreach($this->validators as $validator){
       $pass_or_fail = $validator->test($this->get_value());
+      $message_params = array(
+        ':field_name' => $this->get_name(),
+        ':validator_name' => get_class($validator)
+      );
       if($pass_or_fail !== true){
         if(method_exists($validator, 'user_friendly_failure_message')){
-          $error = $validator->user_friendly_failure_message();
+          $error = $validator->user_friendly_failure_message($message_params);
         }else{
-          $error = t('Test :validator_name failed', array(':validator_name' => get_class($validator)));
+          $error = t('Field: :field_name test :validator_name failed', $message_params);
         }
+        drupal_set_message($error, 'error');
         $this->add_error($error);
-        return false;
+      }else{
+        drupal_set_message(t('Test :validator_name passed', $message_params), 'status');
       }
+    }
+    if($this->has_errors()){
+      return false;
     }
     return true;
   }
