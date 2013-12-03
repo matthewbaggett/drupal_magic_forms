@@ -35,10 +35,12 @@ function magic_form_examples() {
     ->add_field(magic_form_field_submit::factory('submit', 'Submit'));
 
   $form->submit(function (magic_form $form) {
-
     drupal_set_message("Submit happened in form {$form->magic_form_id} / {$form->form_id}");
-
   });
 
+  // Check to see if an earlier, updated build of this form exists.
+  magic_form::check_for_updated_form($this);
+
+  // render the form.
   return $form->__toString();
 }
