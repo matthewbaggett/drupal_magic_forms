@@ -39,9 +39,9 @@ class magic_form_field_datatable extends magic_form_field {
   }
 
   public function get_headings() {
-    if(count($this->columns)){
+    if (count($this->columns)) {
       return $this->columns;
-    }else{
+    } else {
       return array_keys(end($this->rows));
     }
   }
@@ -52,7 +52,7 @@ class magic_form_field_datatable extends magic_form_field {
     return $this->render("form.datatable.phtml", $view);
   }
 
-  public function define_columns($columns){
+  public function define_columns($columns) {
     $this->columns = $columns;
     return $this;
   }

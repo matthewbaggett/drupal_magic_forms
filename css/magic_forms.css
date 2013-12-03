@@ -15,11 +15,14 @@ form.magic_form .form_group {
 form.magic_form .form_row {
 
 }
-form.magic_form .form_row.form_hidden{
+
+form.magic_form .form_row.form_hidden {
     display: none;
 }
-form.magic_form .form_row .widget{
-    float: left; display: block;
+
+form.magic_form .form_row .widget {
+    float: left;
+    display: block;
 }
 
 form.magic_form .form_group {
@@ -29,8 +32,9 @@ form.magic_form .form_group {
     width: 97.5%;
 }
 
-form.magic_form .form_group .group-inside{
-    float: left; display: block;
+form.magic_form .form_group .group-inside {
+    float: left;
+    display: block;
     width: 100%;
     overflow: hidden;
     margin-top: 7px;
@@ -64,11 +68,12 @@ form.magic_form .clear {
 
 form.magic_form input.changed,
 form.magic_form select.changed,
-form.magic_form textarea.changed{
+form.magic_form textarea.changed {
     /* border: 1px solid red; */
 }
+
 form.magic_form input.error,
 form.magic_form select.error,
-form.magic_form textarea.error{
+form.magic_form textarea.error {
     border: 1px solid red;
 }

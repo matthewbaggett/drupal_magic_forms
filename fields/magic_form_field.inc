@@ -40,7 +40,7 @@ class magic_form_field extends magic_form_item {
    * @param magic_form_validator $validator
    * @return $this
    */
-  public function add_validator(magic_form_validator $validator){
+  public function add_validator(magic_form_validator $validator) {
     $this->validators[] = $validator;
     return $this;
   }
@@ -49,8 +49,8 @@ class magic_form_field extends magic_form_item {
    * Add Validators as a group
    * @return $this
    */
-  public function add_validators(){
-    foreach(func_get_args() as $validator){
+  public function add_validators() {
+    foreach (func_get_args() as $validator) {
       $this->add_validator($validator);
     }
     return $this;
@@ -61,26 +61,26 @@ class magic_form_field extends magic_form_item {
    * @var $validator magic_form_validator
    * @return bool Whether or not the value is valid.
    */
-  public function validate(){
-    foreach($this->validators as $validator){
+  public function validate() {
+    foreach ($this->validators as $validator) {
       $pass_or_fail = $validator->test($this->get_value());
       $message_params = array(
         ':field_name' => $this->get_name(),
         ':validator_name' => get_class($validator)
       );
-      if($pass_or_fail !== true){
-        if(method_exists($validator, 'user_friendly_failure_message')){
+      if ($pass_or_fail !== true) {
+        if (method_exists($validator, 'user_friendly_failure_message')) {
           $error = $validator->user_friendly_failure_message($message_params);
-        }else{
+        } else {
           $error = t('Field: :field_name test :validator_name failed', $message_params);
         }
         drupal_set_message($error, 'error');
         $this->add_error($error);
-      }else{
+      } else {
         drupal_set_message(t('Test :validator_name passed', $message_params), 'status');
       }
     }
-    if($this->has_errors()){
+    if ($this->has_errors()) {
       return false;
     }
     return true;
@@ -90,7 +90,7 @@ class magic_form_field extends magic_form_item {
    * Lazyness function to make this field mandatory
    * @return $this
    */
-  public function make_mandatory(){
+  public function make_mandatory() {
     $this->set_mandatory(true);
     $this->add_validator(new magic_form_validator_is_not_null());
     return $this;
@@ -101,7 +101,7 @@ class magic_form_field extends magic_form_item {
    * @param bool $mandatory_state
    * @return $this
    */
-  public function set_mandatory($mandatory_state){
+  public function set_mandatory($mandatory_state) {
     $this->is_mandatory = $mandatory_state;
     return $this;
   }
@@ -110,7 +110,7 @@ class magic_form_field extends magic_form_item {
    * Get whether or not this field is mandatory or not
    * @return bool
    */
-  public function get_mandatory(){
+  public function get_mandatory() {
     return $this->is_mandatory;
   }
 
@@ -223,12 +223,12 @@ class magic_form_field extends magic_form_item {
     if ($this->has_errors()) {
       $this->add_class("error");
     }
-    if ($this->is_disabled()){
+    if ($this->is_disabled()) {
       $this->add_class('disabled');
-    }else{
+    } else {
       $this->add_class('enabled');
     }
-    if ($this->get_mandatory()){
+    if ($this->get_mandatory()) {
       $this->add_class('mandatory');
     }
     return implode(" ", $this->classes);

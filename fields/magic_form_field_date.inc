@@ -1,6 +1,6 @@
 <?php
 
-class magic_form_field_date extends magic_form_field_text{
+class magic_form_field_date extends magic_form_field_text {
 
   protected $_support_date = true;
   protected $_support_time = true;
@@ -20,7 +20,7 @@ class magic_form_field_date extends magic_form_field_text{
    * Sanitise the date given
    * @return string
    */
-  public function get_value(){
+  public function get_value() {
     return date(
       $this->get_format(),
       strtotime(parent::get_value())
@@ -31,12 +31,12 @@ class magic_form_field_date extends magic_form_field_text{
    * get the format for date() that this object should use.
    * @return string
    */
-  private function get_format(){
+  private function get_format() {
     $format_sections = array();
-    if($this->get_support_date()){
+    if ($this->get_support_date()) {
       $format_sections[] = 'Y-m-d';
     }
-    if($this->get_support_time()){
+    if ($this->get_support_time()) {
       $format_sections[] = 'H:i:s';
     }
     return implode(" ", $format_sections);
@@ -49,7 +49,7 @@ class magic_form_field_date extends magic_form_field_text{
    *
    * @return magic_form_field_date $this
    */
-  public function set_support_date($state){
+  public function set_support_date($state) {
     $this->_support_date = $state;
     return $this;
   }
@@ -59,7 +59,7 @@ class magic_form_field_date extends magic_form_field_text{
    *
    * @return bool
    */
-  public function get_support_date(){
+  public function get_support_date() {
     return $this->_support_date;
   }
 
@@ -70,7 +70,7 @@ class magic_form_field_date extends magic_form_field_text{
    *
    * @return magic_form_field_date $this
    */
-  public function set_support_time($state){
+  public function set_support_time($state) {
     $this->_support_time = $state;
     return $this;
   }
@@ -80,7 +80,7 @@ class magic_form_field_date extends magic_form_field_text{
    *
    * @return bool
    */
-  public function get_support_time(){
+  public function get_support_time() {
     return $this->_support_time;
   }
 

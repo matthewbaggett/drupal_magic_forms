@@ -1,5 +1,5 @@
 <?php
-class magic_form extends active_record{
+class magic_form extends active_record {
   protected $_table = "magic_forms";
 
   const MAGIC_FORM_RENDER_MODE_VIEW = 'view';
@@ -27,7 +27,7 @@ class magic_form extends active_record{
    * @param null $form_name Form name
    */
   public function __construct($form_name = null) {
-    if($this->form_id === null){
+    if ($this->form_id === null) {
       $this->form_id = uniqid('magic_form_');
     }
     $this->set_form_name($form_name);
@@ -40,7 +40,7 @@ class magic_form extends active_record{
    * @param null $form_name Form name
    * @return magic_form
    */
-  static public function factory($form_name = null){
+  static public function factory($form_name = null) {
     return new magic_form($form_name);
   }
 
@@ -49,89 +49,93 @@ class magic_form extends active_record{
     //$this->save(false);
   }
 
-  public function __save(){
+  public function __save() {
     return $this->save(true);
   }
 
-  public function __pre_save(){
+  public function __pre_save() {
     $this->__magic_form_serialise();
   }
 
-  public function __post_save(){
+  public function __post_save() {
     $this->__magic_form_deserialise();
   }
 
-  public function __post_construct(){
+  public function __post_construct() {
     $this->__magic_form_deserialise();
   }
 
   private function __magic_form_serialise() {
-    if (is_array($this->form_elements)      || is_object($this->form_elements))       $this->form_elements      = $this->__encode($this->form_elements);
-    if (is_array($this->submit_function)    || is_object($this->submit_function))     $this->submit_function    = $this->__encode($this->submit_function);
-    if (is_array($this->submit_destination) || is_object($this->submit_destination))  $this->submit_destination = $this->__encode($this->submit_destination);
-    if (is_array($this->classes)            || is_object($this->classes))             $this->classes            = $this->__encode($this->classes);
-    if (is_array($this->fields_to_omit)     || is_object($this->fields_to_omit))      $this->fields_to_omit     = $this->__encode($this->fields_to_omit);
-    if (is_array($this->autocomplete)       || is_object($this->autocomplete))        $this->autocomplete       = $this->__encode($this->autocomplete);
-  }
-  private function __magic_form_deserialise(){
-    if(is_string($this->form_elements))       $this->form_elements      = $this->__decode($this->form_elements);
-    if(is_string($this->submit_function))     $this->submit_function    = $this->__decode($this->submit_function);
-    if(is_string($this->submit_destination))  $this->submit_destination = $this->__decode($this->submit_destination);
-    if(is_string($this->classes))             $this->classes            = $this->__decode($this->classes);
-    if(is_string($this->fields_to_omit))      $this->fields_to_omit     = $this->__decode($this->fields_to_omit);
-    if(is_string($this->autocomplete))        $this->autocomplete       = $this->__decode($this->autocomplete);
+    if (is_array($this->form_elements) || is_object($this->form_elements)) $this->form_elements = $this->__encode($this->form_elements);
+    if (is_array($this->submit_function) || is_object($this->submit_function)) $this->submit_function = $this->__encode($this->submit_function);
+    if (is_array($this->submit_destination) || is_object($this->submit_destination)) $this->submit_destination = $this->__encode($this->submit_destination);
+    if (is_array($this->classes) || is_object($this->classes)) $this->classes = $this->__encode($this->classes);
+    if (is_array($this->fields_to_omit) || is_object($this->fields_to_omit)) $this->fields_to_omit = $this->__encode($this->fields_to_omit);
+    if (is_array($this->autocomplete) || is_object($this->autocomplete)) $this->autocomplete = $this->__encode($this->autocomplete);
   }
 
-  public function __encode($thing){
+  private function __magic_form_deserialise() {
+    if (is_string($this->form_elements)) $this->form_elements = $this->__decode($this->form_elements);
+    if (is_string($this->submit_function)) $this->submit_function = $this->__decode($this->submit_function);
+    if (is_string($this->submit_destination)) $this->submit_destination = $this->__decode($this->submit_destination);
+    if (is_string($this->classes)) $this->classes = $this->__decode($this->classes);
+    if (is_string($this->fields_to_omit)) $this->fields_to_omit = $this->__decode($this->fields_to_omit);
+    if (is_string($this->autocomplete)) $this->autocomplete = $this->__decode($this->autocomplete);
+  }
+
+  public function __encode($thing) {
     $serialised = serialize($thing);
     $encoded = base64_encode($serialised);
     return $encoded;
   }
 
-  public function __decode($encoded){
+  public function __decode($encoded) {
     $serialized = base64_decode($encoded);
     $thing = unserialize($serialized);
     return $thing;
   }
 
-  public function set_form_name($name){
+  public function set_form_name($name) {
     $name = str_replace(" ", "-", $name);
     $name = str_replace("_", "-", $name);
     $this->form_name = $name;
     return $this;
   }
 
-  public function get_form_name(){
+  public function get_form_name() {
     return $this->form_name;
   }
 
-  public function set_autocomplete_enable(){
+  public function set_autocomplete_enable() {
     return $this->set_autocomplete(true);
   }
-  public function set_autocomplete_disable(){
+
+  public function set_autocomplete_disable() {
     return $this->set_autocomplete(false);
   }
-  public function set_autocomplete($mode){
+
+  public function set_autocomplete($mode) {
     $this->autocomplete = $mode;
     return $this;
   }
-  public function get_autocomplete(){
+
+  public function get_autocomplete() {
     return $this->autocomplete;
   }
 
-  public function set_render_mode($render_mode){
+  public function set_render_mode($render_mode) {
     $this->render_mode = $render_mode;
     return $this;
   }
 
-  public function get_render_mode(){
+  public function get_render_mode() {
     return $this->render_mode;
   }
 
   static public function cleanup_expired_forms() {
     // Expire old magic forms
     $expired_forms = magic_form::search()->where('created', date('Y-m-d H:i:s', strtotime(self::inactivity_max_time . ' ago')), '<=')->exec();
-    foreach($expired_forms as $expired_form){
+    foreach ($expired_forms as $expired_form) {
       /* @var $expired_form magic_form */
       $expired_form->delete();
     }
@@ -143,21 +147,21 @@ class magic_form extends active_record{
     return $this;
   }
 
-  public function add_fields(){
-    foreach(func_get_args() as $argument){
+  public function add_fields() {
+    foreach (func_get_args() as $argument) {
       $argument->set_scope($this);
       $this->add_field($argument);
     }
     return $this;
   }
 
-  public function omit_field($name){
+  public function omit_field($name) {
     $this->fields_to_omit[] = $name;
     return $this;
   }
 
-  public function omit_fields(){
-    foreach(func_get_args() as $name){
+  public function omit_fields() {
+    foreach (func_get_args() as $name) {
       $this->omit_field($name);
     }
     return $this;
@@ -177,7 +181,7 @@ class magic_form extends active_record{
       }
       if (get_class($element) == 'magic_form_group') {
         $sub_fields = $element->get_fields();
-        if(count($sub_fields) > 0){
+        if (count($sub_fields) > 0) {
           foreach ($sub_fields as $sub_element_name => $sub_element) {
             if ($sub_element_name == $name) {
               return $sub_fields[$sub_element_name];
@@ -190,7 +194,7 @@ class magic_form extends active_record{
     return FALSE;
   }
 
-  public function get_fields(){
+  public function get_fields() {
 
     $all_elements = array();
     $all_elements = array_merge($all_elements, $this->form_elements);
@@ -198,11 +202,11 @@ class magic_form extends active_record{
 
     $output_elements = array_merge($output_elements, $all_elements);
 
-    foreach($all_elements as &$element){
-      if($element instanceof magic_form_group){
+    foreach ($all_elements as &$element) {
+      if ($element instanceof magic_form_group) {
         $element_sub_fields = $element->get_fields();
-        if(count($element_sub_fields) > 0){
-          foreach($element_sub_fields as $field){
+        if (count($element_sub_fields) > 0) {
+          foreach ($element_sub_fields as $field) {
             $output_elements[] = $field;
           }
         }
@@ -218,20 +222,20 @@ class magic_form extends active_record{
     $view->form_rows = $this->form_elements;
 
     // Check we have a callback or an action
-    if(!(is_callable($this->submit_function) || $this->action !== null)){
+    if (!(is_callable($this->submit_function) || $this->action !== null)) {
       drupal_set_message("DANGER WILL ROBINSON! No submit handler has been written for this form nor has an action has been set!", 'error');
     }
-    if(!count($view->form_rows) > 0){
+    if (!count($view->form_rows) > 0) {
       drupal_set_message("DANGER WILL ROBINSON! No form elements in this form!", 'error');
     }
 
-    if(count($view->form_rows) > 0){
+    if (count($view->form_rows) > 0) {
       // Iterate over rows
-      foreach($view->form_rows as &$row){
+      foreach ($view->form_rows as &$row) {
         /* @var $row magic_form_item */
         $row->set_scope($this);
-        if(in_array($row->get_name(), $this->fields_to_omit)){
-           unlink($row);
+        if (in_array($row->get_name(), $this->fields_to_omit)) {
+          unlink($row);
         }
       }
       $view->action = $this->get_action();
@@ -247,14 +251,14 @@ class magic_form extends active_record{
   }
 
   public function get_action() {
-    if($this->action){
+    if ($this->action) {
       return $this->action;
-    }else{
+    } else {
       return $_SERVER['REQUEST_URI'];
     }
   }
 
-  public function set_action($target){
+  public function set_action($target) {
     $this->action = $target;
     return $this;
   }
@@ -264,21 +268,21 @@ class magic_form extends active_record{
     return $this;
   }
 
-  public function set_submit_destination($submit_destination){
+  public function set_submit_destination($submit_destination) {
     $this->submit_destination = $submit_destination;
     return $this;
   }
 
-  public function get_submit_destination(){
+  public function get_submit_destination() {
     return $this->submit_destination;
   }
 
   public function do_submit() {
     $this->populate_with_request();
-    if(!is_callable($this->submit_function)){
+    if (!is_callable($this->submit_function)) {
       throw new exception("No submit handler has been written for this form!");
     }
-    foreach($this->get_fields() as $field){
+    foreach ($this->get_fields() as $field) {
       /* @var $field magic_form_field */
       $field->validate();
     }
@@ -321,38 +325,38 @@ class magic_form extends active_record{
     }
   }
 
-  public function add_error($message, $element = null){
+  public function add_error($message, $element = null) {
     drupal_set_message($message, 'error');
 
     $field = $this->get_field($element);
-    if($field instanceof magic_form_field){
+    if ($field instanceof magic_form_field) {
       $field->add_error($message);
     }
   }
 
-  public function add_default($value, $element = null){
+  public function add_default($value, $element = null) {
     $field = $this->get_field($element);
-    if($field instanceof magic_form_field){
+    if ($field instanceof magic_form_field) {
       $field->set_value($value);
     }
     return $this;
   }
 
-  public function set_defaults($defaults){
-    foreach($defaults as $element_name => $value){
+  public function set_defaults($defaults) {
+    foreach ($defaults as $element_name => $value) {
       $this->add_default($value, $element_name);
     }
     return $this;
   }
 
-  public function add_class($class){
+  public function add_class($class) {
     $this->classes[] = $class;
     return $this;
   }
 
-  public function get_classes(){
+  public function get_classes() {
     $classes = array();
-    if($this->get_form_name()){
+    if ($this->get_form_name()) {
       $classes[] = magic_forms_mangle_to_css_class($this->get_form_name());
     }
     $classes = array_merge($classes, $this->classes);
