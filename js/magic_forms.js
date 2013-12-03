@@ -147,6 +147,19 @@ function magic_form_field(type, name, label, value, default_value) {
         '  </div>' +
         '  <div class="clear"></div>' +
         '</div>';
+    }else if(this.type == 'checkbox'){
+        var is_checked = '';
+        if(this.value == 1){
+            is_checked = 'checked="checked"';
+        }
+        return '' +
+            '<div class="form_row form_checkbox field-' + this.name + '">' +
+            '  <label for="' + this.name + '">' + this.label + '</label>' +
+            '  <div class="widget">' +
+            '    <input type="checkbox" placeholder="' + this.placeholder + '" class="' + (this.disabled?'disabled':'enabled') + '" ' + is_checked + '" name="' + this.name + '" id="' + this.name + '" ' + (this.disabled?'readonly':'') + '>' +
+            '  </div>' +
+            '  <div class="clear"></div>' +
+            '</div>';
     }else if(this.type == 'textarea'){
       return '' +
         '<div class="form_row form_textarea field-' + this.name + '">' +
