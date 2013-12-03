@@ -39,7 +39,7 @@ function magic_form_examples() {
   });
 
   // Check to see if an earlier, updated build of this form exists.
-  magic_form::check_for_updated_form($this);
+  magic_form::check_for_updated_form($form);
 
   // render the form.
   return $form->__toString();
