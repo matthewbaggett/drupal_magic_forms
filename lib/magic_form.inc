@@ -212,9 +212,20 @@ class magic_form extends active_record{
   }
 
   public function __toString() {
+    // Create the view.
     $view = new StdClass();
     $view->form_rows = $this->form_elements;
+
+    // Check we have a callback or an action
+    if(!(is_callable($this->submit_function) || $this->action !== null)){
+      drupal_set_message("DANGER WILL ROBINSON! No submit handler has been written for this form nor has an action has been set!", 'error');
+    }
+    if(!count($view->form_rows) > 0){
+      drupal_set_message("DANGER WILL ROBINSON! No form elements in this form!", 'error');
+    }
+
     if(count($view->form_rows) > 0){
+      // Iterate over rows
       foreach($view->form_rows as &$row){
         /* @var $row magic_form_item */
         $row->set_scope($this);
@@ -230,9 +241,8 @@ class magic_form extends active_record{
       $view->scope = $this;
       $this->__save();
       return magic_forms_template_view($this->get_render_mode() . "/" . "form.phtml", $view);
-    }else{
-      return "No form elements";
     }
+    return false;
   }
 
   public function get_action() {
@@ -264,6 +274,9 @@ class magic_form extends active_record{
 
   public function do_submit() {
     $this->populate_with_request();
+    if(!is_callable($this->submit_function)){
+      throw new exception("No submit handler has been written for this form!");
+    }
     $this->submit_function->__invoke($this);
   }
 
