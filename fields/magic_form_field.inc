@@ -219,17 +219,17 @@ class magic_form_field extends magic_form_item {
     return $this;
   }
 
-  public function get_classes() {
+  public function get_classes($prefix = null) {
     if ($this->has_errors()) {
-      $this->add_class("error");
+      $this->add_class($prefix . "error");
     }
     if ($this->is_disabled()) {
-      $this->add_class('disabled');
+      $this->add_class($prefix . 'disabled');
     } else {
-      $this->add_class('enabled');
+      $this->add_class($prefix . 'enabled');
     }
     if ($this->get_mandatory()) {
-      $this->add_class('mandatory');
+      $this->add_class($prefix . 'mandatory');
     }
     return implode(" ", $this->classes);
   }
