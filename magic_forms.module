@@ -97,7 +97,7 @@ function magic_forms_mangle_to_css_class($text)
     return $text;
 }
 
-function magic_form_permission()
+function magic_forms_permission()
 {
   $perms = array(
     'Show Magic Forms Examples' => array(
@@ -107,7 +107,7 @@ function magic_form_permission()
   return $perms;
 }
 
-function magic_form_menu() {
+function magic_forms_menu() {
   $items['examples/magic-form'] = array(
     'page callback' => 'magic_form_examples',
     'access callback' => 'user_access',
