@@ -297,7 +297,7 @@ class magic_form extends active_record {
   }
 
   private function populate_with_request() {
-    foreach ($_REQUEST as $key => $value) {
+    foreach ($_POST as $key => $value) {
       switch ($key) {
         case 'magic_form_id':
           // Do nothing;
