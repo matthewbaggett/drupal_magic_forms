@@ -30,7 +30,9 @@ class magic_form extends active_record {
     if ($this->form_id === null) {
       $this->form_id = uniqid('magic_form_');
     }
-    $this->set_form_name($form_name);
+    if($form_name !== null){
+      $this->set_form_name($form_name);
+    }
     $this->created = date("Y-m-d H:i:s");
     $this->uid = user_active_record::current()->uid;
   }
@@ -361,5 +363,9 @@ class magic_form extends active_record {
     }
     $classes = array_merge($classes, $this->classes);
     return $classes;
+  }
+
+  public function check_for_existing_form(){
+
   }
 }
