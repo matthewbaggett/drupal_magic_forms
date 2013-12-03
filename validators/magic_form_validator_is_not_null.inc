@@ -4,5 +4,9 @@ class magic_form_validator_is_not_null extends magic_form_validator implements m
   public function test($data) {
     return trim($data) != null;
   }
+
+  public function user_friendly_failure_message($message_params) {
+    return t("Field must not be empty");
+  }
 }
 
