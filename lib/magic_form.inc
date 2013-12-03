@@ -303,6 +303,10 @@ class magic_form extends active_record {
           // Do nothing;
           break;
 
+        case 'q':
+          // Lol, drupal.
+          break;
+
         default:
           $item = $this->get_field($key);
 
