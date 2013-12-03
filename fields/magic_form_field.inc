@@ -214,6 +214,10 @@ class magic_form_field extends magic_form_item {
     return count($this->errors) > 0 ? true : false;
   }
 
+  public function get_errors(){
+    return $this->errors;
+  }
+
   public function add_class($class) {
     $this->classes[] = $class;
     return $this;

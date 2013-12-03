@@ -19,10 +19,39 @@ form.magic_form .form_row {
 form.magic_form .form_row.form_hidden {
     display: none;
 }
+form.magic_form .form_row.form_row_error {
+
+}
+form.magic_form .form_row.form_row_error label {
+    color: red;
+}
+form.magic_form .form_row.form_row_error .widget {
+    border: 2px solid red;
+}
+form.magic_form .form_row.form_row_error .widget input {
+
+}
 
 form.magic_form .form_row .widget {
     float: left;
     display: block;
+}
+form.magic_form .form_row .errors{
+    float: left;
+    display: block;
+    clear: left;
+}
+form.magic_form .form_row .errors ul{
+    float: left;
+    display: block;
+    clear: left;
+    margin: 0;
+    padding: 0;
+}
+form.magic_form .form_row .errors ul li{
+    float: left;
+    display: block;
+    clear: both;
 }
 
 form.magic_form .form_group {
