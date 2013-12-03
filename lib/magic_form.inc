@@ -21,6 +21,10 @@ class magic_form extends active_record{
 
   const inactivity_max_time = '24 hours';
 
+  /**
+   * Constructor
+   * @param null $form_name Form name
+   */
   public function __construct($form_name = null) {
     if($this->form_id === null){
       $this->form_id = uniqid('magic_form_');
@@ -28,6 +32,15 @@ class magic_form extends active_record{
     $this->set_form_name($form_name);
     $this->created = date("Y-m-d H:i:s");
     $this->uid = user_active_record::current()->uid;
+  }
+
+  /**
+   * Factory method
+   * @param null $form_name Form name
+   * @return magic_form
+   */
+  static public function factory($form_name = null){
+    return new magic_form($form_name);
   }
 
   public function __destruct() {

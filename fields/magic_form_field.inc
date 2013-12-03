@@ -5,8 +5,10 @@ class magic_form_field extends magic_form_item {
   protected $default_value = null;
   protected $value = null;
   protected $disabled = false;
+  protected $validators = array();
   protected $errors = array();
   protected $classes = array();
+  protected $is_mandatory = false;
 
   /**
    * @param null $name Internal Name for this field
@@ -31,6 +33,76 @@ class magic_form_field extends magic_form_item {
     $view = new StdClass();
     $view->field = $this;
     return $this->render("form.input.phtml", $view);
+  }
+
+  /**
+   * Add a Validator.
+   * @param magic_form_validator $validator
+   * @return $this
+   */
+  public function add_validator(magic_form_validator $validator){
+    $this->validators[] = $validator;
+    return $this;
+  }
+
+  /**
+   * Add Validators as a group
+   * @return $this
+   */
+  public function add_validators(){
+    foreach(func_get_args() as $validator){
+      $this->add_validator($validator);
+    }
+    return $this;
+  }
+
+  /**
+   * Decide if the value is valid.
+   * @var $validator magic_form_validator
+   * @return bool Whether or not the value is valid.
+   */
+  public function validate(){
+    foreach($this->validators as $validator){
+      $pass_or_fail = $validator->test($this->get_value());
+      if($pass_or_fail !== true){
+        if(method_exists($validator, 'user_friendly_failure_message')){
+          $error = $validator->user_friendly_failure_message();
+        }else{
+          $error = t('Test :validator_name failed', array(':validator_name' => get_class($validator)));
+        }
+        $this->add_error($error);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * Lazyness function to make this field mandatory
+   * @return $this
+   */
+  public function make_mandatory(){
+    $this->set_mandatory(true);
+    $this->add_validator(new magic_form_validator_is_not_null());
+    return $this;
+  }
+
+  /**
+   * Set whether or not this field is mandatory or not
+   * @param bool $mandatory_state
+   * @return $this
+   */
+  public function set_mandatory($mandatory_state){
+    $this->is_mandatory = $mandatory_state;
+    return $this;
+  }
+
+  /**
+   * Get whether or not this field is mandatory or not
+   * @return bool
+   */
+  public function get_mandatory(){
+    return $this->is_mandatory;
   }
 
   /**
@@ -146,6 +218,9 @@ class magic_form_field extends magic_form_item {
       $this->add_class('disabled');
     }else{
       $this->add_class('enabled');
+    }
+    if ($this->get_mandatory()){
+      $this->add_class('mandatory');
     }
     return implode(" ", $this->classes);
   }

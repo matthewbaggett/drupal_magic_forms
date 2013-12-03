@@ -31,8 +31,14 @@ require_once("lib/magic_form_support.inc");
 // Validators
 require_once("validators/magic_form_validator_interface.inc");
 require_once("validators/magic_form_validator.inc");
+require_once("validators/magic_form_validator_is_email.inc");
+require_once("validators/magic_form_validator_is_length_more_than.inc");
+require_once("validators/magic_form_validator_is_length_less_than.inc");
 require_once("validators/magic_form_validator_is_not_null.inc");
 require_once("validators/magic_form_validator_is_null.inc");
+require_once("validators/magic_form_validator_is_numeric_more_than.inc");
+require_once("validators/magic_form_validator_is_numeric_less_than.inc");
+require_once("validators/magic_form_validator_is_valid_phonenumber.inc");
 
 // Forms default settings
 if(!defined('MAGIC_FORMS_MAX_ACTIVE_FORMS'))      define("MAGIC_FORMS_MAX_ACTIVE_FORMS", 100);
@@ -91,3 +97,22 @@ function magic_forms_mangle_to_css_class($text)
     return $text;
 }
 
+function magic_form_permission()
+{
+  $perms = array(
+    'Show Magic Forms Examples' => array(
+      'title' => t("Show Magic Form Examples"),
+    )
+  );
+  return $perms;
+}
+
+function magic_form_menu() {
+  $items['examples/magic-form'] = array(
+    'page callback' => 'magic_form_examples',
+    'access callback' => 'user_access',
+    'access arguments' => array("Show Magic Form Examples"),
+    'file' => 'examples.inc',
+  );
+  return $items;
+};
