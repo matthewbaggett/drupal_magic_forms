@@ -4,6 +4,7 @@ class magic_form_group extends magic_form_item {
   public $fields;
   public $group_name;
   public $group_label;
+  protected $classes = array();
 
   public function __construct($group_name = null, $group_label = null) {
     $this->set_group_name($group_name);
@@ -27,6 +28,7 @@ class magic_form_group extends magic_form_item {
 
   public function set_group_name($group_name) {
     $this->group_name = $group_name;
+    $this->add_class(magic_forms_mangle_to_css_class($group_name));
     return $this;
   }
 
@@ -62,5 +64,16 @@ class magic_form_group extends magic_form_item {
       $this->add_field($argument);
     }
     return $this;
+  }
+
+  public function add_class($class) {
+    $this->classes[] = $class;
+    return $this;
+  }
+
+  public function __toJsonArray() {
+    $array = parent::__toJsonArray();
+    $array['name'] = $this->get_group_name();
+    return $array;
   }
 }

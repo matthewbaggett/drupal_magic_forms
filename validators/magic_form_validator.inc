@@ -26,5 +26,14 @@ class magic_form_validator {
     $data = trim($data);
     return $data;
   }
+
+  public function __toJsonArray() {
+    $array = array();
+    $array['type'] = str_replace('magic_form_validator_', '', get_called_class());
+    foreach (get_object_vars($this) as $variable => $value) {
+      $array[$variable] = $value;
+    }
+    return $array;
+  }
 }
 

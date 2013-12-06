@@ -18,8 +18,17 @@ class magic_form_item {
     $array = array();
     $array['type'] = str_replace('magic_form_field_', '', get_called_class());
     foreach (get_object_vars($this) as $variable => $value) {
+      if(is_array($value) && $variable == 'validators'){
+        foreach($value as &$validator){
+          $validator = $validator->__toJsonArray();
+        }
+      }
       $array[$variable] = $value;
     }
+    foreach($array['fields'] as $key => &$field){
+      $field = $field->__toJsonArray();
+    }
+    $array['html'] = $this->__toString();
     return $array;
   }
 

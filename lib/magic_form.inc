@@ -143,6 +143,13 @@ class magic_form extends active_record {
     }
   }
 
+  public function has_field($field_name){
+    if(isset($this->form_elements[$field_name])){
+      return true;
+    }
+    return false;
+  }
+
   public function add_field(magic_form_item $field) {
     $this->form_elements[$field->get_name()] = $field;
     $this->__save();
@@ -392,5 +399,29 @@ class magic_form extends active_record {
       $form = $match;
     }
     return $form;
+  }
+
+  public function __toJson(){
+    $response = new StdClass();
+    foreach($this as $name => $field){
+      $response->$name = $field;
+    }
+    foreach( $this->form_elements as $i => $field){
+      /* @var $field magic_form_field */
+      $response->fields[$i] = $field->__toJsonArray();
+    }
+    unset($response->form_elements);
+
+
+
+    //$response->html = $this->__toString();
+
+    if(isset($_GET['debug'])){
+      krumo($response);exit;
+    }
+    header("Content-type: json/application");
+    header("Content-type: text/plain");
+    echo magic_form_print_json(json_encode($response));
+    exit;
   }
 }

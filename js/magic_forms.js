@@ -231,9 +231,37 @@ function magic_form_field(type, name, label, value, default_value) {
   }
 
   this.rebind = function () {
+    var context = this;
     jQuery.each(this.events, function (event, callback) {
-      this._get_input_field().unbind(event).bind(event, callback);
+      context._get_input_field().unbind(event).bind(event, callback);
     });
+  }
+
+  this.check_exists = function(){
+    var matches = this._get_input_field();
+    if(matches.length > 0){
+      console.log("Checking that " + this.name + " exists. IT DOES");
+      return true;
+    }
+    console.log("Checking that " + this.name + " exists. NOPE!");
+    return false;
+  }
+
+  this.update = function(parent_element, html){
+    if(!this.check_exists()){
+      //console.log('Creating Field ' + this.name + '.');
+      console.log(parent_element, "INSERTED FIELD");
+      if(typeof(html) == 'undefined'){
+        console.log("USING GENERATED HTML");
+        html = this.html();
+      }else{
+        console.log("USING PASSED HTML");
+      }
+      //console.log(html);
+      parent_element.append(html);
+    }else{
+      //console.log('Field ' + this.name + ' already exists');
+    }
   }
 
 }
@@ -280,35 +308,57 @@ var magic_form = {
   form_group: function (name, label) {
     return new magic_form_group(name, label);
   },
-  parse_from_json: function (selector, json) {
-    jQuery.each(json, function (i, item) {
-      //console.log(item);
-      var field = new magic_form_field(item.type);
-      field.name = item.name;
-      field.label = item.label;
-      field.disabled = item.disabled;
-      field.value = item.value;
-      if (item.default_value != null) {
-        field.default_value = item.default_value;
-        //console.log("default_value on " + item.name + " is " + item.default_value);
-      } else {
-        //console.log("No default_value on " + item.name);
-      }
+  process_child_fields: function(field){
+    var context = this;
 
-      if (typeof(item.options) !== 'undefined') {
-        jQuery.each(item.options, function (k, v) {
+    // Calculate the parents selector
+    var parent_selector;
+
+    if(field.type == 'magic_form_group'){
+      parent_selector = ".form_group.field-" + field.classes.join('.field-');
+    } else if (!typeof(field.classes) == 'undefined'){
+      parent_selector = field.classes.join('.');
+    } else if (typeof(field.name) == 'string'){
+      parent_selector = 'input[name="' + field.name + '"], select[name="' + field.name + '"]';
+    }
+    var parent_element = jQuery(parent_selector);
+    jQuery.each(field.fields, function (i, element){
+      console.log("Process " + element.name);
+      console.log(element);
+      /* @var child_field magic_form_item */
+      var child_field = context.process_element_to_field(element);
+
+      child_field.update(parent_element, element.html);
+
+      // Handle child fields
+      if(element.fields != null){
+        context.process_child_fields(element);
+      }
+    });
+  },
+  process_element_to_field: function(element){
+    var field = new magic_form_field(element.type);
+    field.name = element.name;
+    field.label = element.label;
+    field.disabled = element.disabled;
+    field.value = element.value;
+    if (element.default_value != null) {
+      field.default_value = element.default_value;
+    }
+
+    if (typeof(element.options) !== 'undefined' && element.options !== null) {
+      if(element.options.length > 0){
+        jQuery.each(element.options, function (k, v) {
           field.add_option(k, v);
         });
       }
+    }
 
-      var html = field.html();
-
-      //console.log(html,"Adding");
-
-      selector.append(html);
-
-      field.set_value(item.value);
-    })
+    return field;
+  },
+  parse_from_json: function (form, json) {
+    this.process_child_fields(json);
   }
+
 
 }

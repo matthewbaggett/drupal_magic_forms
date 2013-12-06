@@ -1,5 +1,6 @@
 <?php
 
+require_once("lib/json.inc");
 require_once("lib/magic_form.inc");
 require_once("fields/magic_form_item.inc");
 require_once("fields/magic_form_field.inc");
