@@ -20,6 +20,8 @@ class magic_form extends active_record {
   public $fields_to_omit = array();
   public $autocomplete = false;
 
+  private $is_dirty = false;
+
   const inactivity_max_time = '24 hours';
 
   /**
@@ -47,12 +49,21 @@ class magic_form extends active_record {
   }
 
   public function __destruct() {
-    // TODO: Work out why this crashes Apache. :| Hard.
-    //$this->save(false);
+    //if($this->is_dirty == true){
+    //  $this->__save(false);
+    //}
   }
 
-  public function __save() {
-    return $this->save(true);
+  public function __save($automatic_reload = true) {
+    return $this->save($automatic_reload);
+  }
+
+  public function is_update(){
+    // Check for collisions, return true if there is one.
+    if(magic_form::search()->where('magic_form_id', $this->magic_form_id)->where('form_id', $this->form_id)->count() > 0){
+      return TRUE;
+    }
+    return parent::is_update();
   }
 
   public function __pre_save() {
@@ -152,7 +163,8 @@ class magic_form extends active_record {
 
   public function add_field(magic_form_item $field) {
     $this->form_elements[$field->get_name()] = $field;
-    $this->__save();
+    //$this->__save();
+    $this->is_dirty = true;
     return $this;
   }
 
@@ -226,6 +238,7 @@ class magic_form extends active_record {
   }
 
   public function __toString() {
+    $this->__save(false);
     // Create the view.
     $view = new StdClass();
     $view->form_rows = $this->form_elements;
