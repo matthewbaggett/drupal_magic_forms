@@ -305,9 +305,12 @@ class magic_form extends active_record {
       throw new exception("No submit handler has been written for this form!");
     }
     foreach ($this->get_fields() as $field) {
-      /* @var $field magic_form_field */
-      $field->clear_errors();
-      $field->validate();
+      // Only clear errors & re-validate magic_form_fields, magic_form_group has no validators or errors to speak of.
+      if($field instanceof magic_form_field){
+        /* @var $field magic_form_field */
+        $field->clear_errors();
+        $field->validate();
+      }
     }
     $this->save();
     $this->submit_function->__invoke($this);
