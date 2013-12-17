@@ -25,7 +25,8 @@ class magic_form_item {
       }
       $array[$variable] = $value;
     }
-    if(count($array['fields']) > 0){
+
+    if(isset($array['fields']) && count($array['fields']) > 0){
       foreach($array['fields'] as $key => &$field){
         $field = $field->__toJsonArray();
       }
