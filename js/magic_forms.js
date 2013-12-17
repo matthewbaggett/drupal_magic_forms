@@ -240,22 +240,22 @@ function magic_form_field(type, name, label, value, default_value) {
   this.check_exists = function(){
     var matches = this._get_input_field();
     if(matches.length > 0){
-      console.log("Checking that " + this.name + " exists. IT DOES");
+      //console.log("Checking that " + this.name + " exists. IT DOES");
       return true;
     }
-    console.log("Checking that " + this.name + " exists. NOPE!");
+    //console.log("Checking that " + this.name + " exists. NOPE!");
     return false;
   }
 
   this.update = function(parent_element, html){
     if(!this.check_exists()){
       //console.log('Creating Field ' + this.name + '.');
-      console.log(parent_element, "INSERTED FIELD");
+      //console.log(parent_element, "INSERTED FIELD");
       if(typeof(html) == 'undefined'){
-        console.log("USING GENERATED HTML");
+        //console.log("USING GENERATED HTML");
         html = this.html();
       }else{
-        console.log("USING PASSED HTML");
+        //console.log("USING PASSED HTML");
       }
       //console.log(html);
       parent_element.append(html);
@@ -323,8 +323,8 @@ var magic_form = {
     }
     var parent_element = jQuery(parent_selector);
     jQuery.each(field.fields, function (i, element){
-      console.log("Process " + element.name);
-      console.log(element);
+      //console.log("Process " + element.name);
+      //console.log(element);
       /* @var child_field magic_form_item */
       var child_field = context.process_element_to_field(element);
 
