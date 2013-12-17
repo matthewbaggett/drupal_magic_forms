@@ -55,3 +55,13 @@ Example with validators:
           ->add_validator(new magic_form_validator_is_valid_phonenumber())
           ->add_validator(new magic_form_validator_is_valid_email())
       );
+
+      $form->submit(function (magic_form $form) {
+          drupal_set_message("Submit happened in form {$form->magic_form_id} / {$form->form_id}");
+      });
+
+      // Check to see if an earlier, updated build of this form exists.
+      magic_form::check_for_updated_form($form);
+
+      // render the form.
+      return $form->__toString();
