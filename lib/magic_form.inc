@@ -429,10 +429,6 @@ class magic_form extends active_record {
     }
     unset($response->form_elements);
 
-
-
-    //$response->html = $this->__toString();
-
     if(isset($_GET['debug'])){
       krumo($response);exit;
     }
