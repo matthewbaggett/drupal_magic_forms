@@ -62,6 +62,10 @@ class magic_form_field extends magic_form_item {
    * @return bool Whether or not the value is valid.
    */
   public function validate() {
+    $is_ajax = false;
+    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+      $is_ajax = true;
+    }
     foreach ($this->validators as $validator) {
       $pass_or_fail = $validator->test($this->get_value());
       $message_params = array(
@@ -74,10 +78,14 @@ class magic_form_field extends magic_form_item {
         } else {
           $error = t('Field: :field_name test :validator_name failed', $message_params);
         }
-        drupal_set_message($error, 'error');
+        if(!$is_ajax){
+          drupal_set_message($error, 'error');
+        }
         $this->add_error($error);
       } else {
-        drupal_set_message(t('Test :validator_name passed', $message_params), 'status');
+        if(!$is_ajax){
+          drupal_set_message(t('Test :validator_name passed', $message_params), 'status');
+        }
       }
     }
     if ($this->has_errors()) {
