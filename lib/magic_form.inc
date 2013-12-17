@@ -287,6 +287,7 @@ class magic_form extends active_record {
 
   public function submit($submit_function) {
     $this->submit_function = new magic_serialisable_closure($submit_function);
+    $this->save();
     return $this;
   }
 
