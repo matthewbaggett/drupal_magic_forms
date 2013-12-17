@@ -92,7 +92,7 @@ function magic_forms_template_view($file, $view = null) {
  */
 function magic_forms_mangle_to_css_class($text) {
   $text = str_replace(" ", "-", $text);
-  $text = preg_replace("/[^a-zA-Z0-9-]+/", "", $text);
+  $text = preg_replace("/[^a-zA-Z0-9-_]+/", "", $text);
   $text = strtolower($text);
   return $text;
 }
