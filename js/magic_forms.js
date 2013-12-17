@@ -238,29 +238,23 @@ function magic_form_field(type, name, label, value, default_value) {
   }
 
   this.check_exists = function(){
-    var matches = this._get_input_field();
-    if(matches.length > 0){
-      //console.log("Checking that " + this.name + " exists. IT DOES");
-      return true;
-    }
-    //console.log("Checking that " + this.name + " exists. NOPE!");
-    return false;
+    console.log("Check exists search: " + this._get_mass_selector());
+    return this._get_input_field().length > 0;
   }
 
   this.update = function(parent_element, html){
-    if(!this.check_exists()){
-      //console.log('Creating Field ' + this.name + '.');
-      //console.log(parent_element, "INSERTED FIELD");
-      if(typeof(html) == 'undefined'){
-        //console.log("USING GENERATED HTML");
-        html = this.html();
-      }else{
-        //console.log("USING PASSED HTML");
-      }
-      //console.log(html);
-      parent_element.append(html);
+    if(typeof(html) == 'undefined'){
+      html = this.html();
+    }
+    if(this.check_exists()){
+      console.log('Updating Field ' + this.name + '.');
+      var field = this._get_input_field();
+      var value = field.val();
+      field.closest('.form_row').replaceWith(html);
+      this._get_input_field().val(value);
     }else{
-      //console.log('Field ' + this.name + ' already exists');
+      console.log('Creating Field ' + this.name + '.');
+      parent_element.append(html);
     }
   }
 
@@ -358,7 +352,12 @@ var magic_form = {
   },
   parse_from_json: function (form, json) {
     this.process_child_fields(json);
+  },
+  parse_magic_form_json: function(form, json_encoded_magic_form){
+    var context = this;
+    console.log(json_encoded_magic_form, "Parse magic_form from JSON");
+    jQuery.each(json_encoded_magic_form.fields, function(i, field){
+      context.process_child_fields(field);
+    });
   }
-
-
 }

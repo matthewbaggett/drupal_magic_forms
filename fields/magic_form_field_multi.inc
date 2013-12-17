@@ -17,12 +17,22 @@ class magic_form_field_multi extends magic_form_field {
   }
 
   /**
-   * Get assigned options#
+   * Get assigned options
    *
    * @return array of options
    */
   public function get_options() {
     return $this->options;
+  }
+
+  /**
+   * Set assigned options
+   * @param array $options options
+   * @return $this
+   */
+  public function set_options($options) {
+    $this->options = $options;
+    return $this;
   }
 
   /**
