@@ -1,14 +1,14 @@
 <div class="form_row form_select field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>">
 
   <?php require("form.label.phtml"); ?>
-  <div class="widget">
+  <div style="position: relative" class="widget">
     <select
       name="<?php echo $field->get_name(); ?>"
       id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
       class="<?php echo $field->get_classes(); ?>"
       default="<?php echo $field->get_value(); ?>"
       <?php if ($field->is_disabled()): ?>
-        readonly
+        readonly="readonly"
       <?php endif; ?>
       >
       <?php if ($field->null_value_allowed()): ?>
@@ -27,6 +27,10 @@
         <?php endforeach; ?>
       <?php endif; ?>
     </select>
+      <?php if ($field->is_disabled()): ?>
+        <div class="disabled-overlay"></div>
+      <?php endif; ?>
+
   </div>
   <?php require "form.errors.phtml"; ?>
   <div class="clear"></div>

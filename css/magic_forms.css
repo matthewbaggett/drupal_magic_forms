@@ -37,6 +37,14 @@ form.magic_form .form_row .widget {
     float: left;
     display: block;
 }
+form.magic_form .form_row .widget .disabled-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
 form.magic_form .form_row .errors{
     clear: left;
     color: #FF0000;
