@@ -253,11 +253,11 @@ class magic_form extends active_record {
 
     if (count($view->form_rows) > 0) {
       // Iterate over rows
-      foreach ($view->form_rows as &$row) {
+      foreach ($view->form_rows as $key => &$row) {
         /* @var $row magic_form_item */
         $row->set_scope($this);
         if (in_array($row->get_name(), $this->fields_to_omit)) {
-          unlink($row);
+          unset($view->form_rows[$key]);
         }
       }
       $view->action = $this->get_action();
