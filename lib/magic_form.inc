@@ -304,6 +304,11 @@ class magic_form extends active_record {
     return $this;
   }
 
+  /**
+   * This is how you set the callback on submit.
+   * @param $submit_function
+   * @return $this
+   */
   public function submit($submit_function) {
     $this->submit_function = new magic_serialisable_closure($submit_function);
     $this->save();
