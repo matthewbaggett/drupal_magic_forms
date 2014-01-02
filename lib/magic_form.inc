@@ -188,6 +188,25 @@ class magic_form extends active_record {
     return $this;
   }
 
+  public function replace_field($name, magic_form_field $field){
+    $this->form_elements[$name] = $field;
+    return $this;
+  }
+
+  public function relabel($array_of_labels_to_relabel){
+    foreach($array_of_labels_to_relabel as $original => $replacement){
+      foreach($this->form_elements as &$form_element){
+        /* @var $form_element magic_form_field */
+        if(method_exists($form_element, 'get_label') && method_exists($form_element, 'set_label')){
+          if($form_element->get_label() == $original){
+            $form_element->set_label($replacement);
+          }
+        }
+      }
+    }
+    return true;
+  }
+
   /**
    * Get a named field.
    *
