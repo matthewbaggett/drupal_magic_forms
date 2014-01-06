@@ -33,6 +33,9 @@ form.magic_form .form_row.form_row_error .widget input {
     background-color: #eeb9b9;
 }
 
+form.magic_form .form_row .inner {
+    /* No styling */
+}
 form.magic_form .form_row .widget {
     float: left;
     display: block;

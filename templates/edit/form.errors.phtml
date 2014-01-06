@@ -3,10 +3,10 @@
  * @var $field magic_form_field
  */
 ?>
-<?php if($field->has_errors()): ?>
+<?php if ($field->has_errors()): ?>
   <div class="errors">
     <ul>
-      <?php foreach($field->get_errors() as $error): ?>
+      <?php foreach ($field->get_errors() as $error): ?>
         <li><?php echo $error; ?></li>
       <?php endforeach; ?>
     </ul>

@@ -1,18 +1,21 @@
-<div class="form_row form_input field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>">
-  <?php require("form.label.phtml"); ?>
-  <div class="widget">
-    <input
-      id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
-      type="text"
-      name="<?php echo $field->get_name(); ?>"
-      value="<?php echo $field->get_value() ?>"
-      class="<?php echo $field->get_classes(); ?>"
-      placeholder="<?php echo $field->get_value(); ?>"
-      <?php if ($field->is_disabled()): ?>
-        readonly
-      <?php endif; ?>
-      />
+<div
+  class="form_row form_input field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>">
+  <div class="inner">
+    <?php require("form.label.phtml"); ?>
+    <div class="widget">
+      <input
+        id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
+        type="text"
+        name="<?php echo $field->get_name(); ?>"
+        value="<?php echo $field->get_value() ?>"
+        class="<?php echo $field->get_classes(); ?>"
+        placeholder="<?php echo $field->get_value(); ?>"
+        <?php if ($field->is_disabled()): ?>
+          readonly
+        <?php endif; ?>
+        />
+    </div>
+    <?php require "form.errors.phtml"; ?>
   </div>
-  <?php require "form.errors.phtml"; ?>
   <div class="clear"></div>
 </div>
