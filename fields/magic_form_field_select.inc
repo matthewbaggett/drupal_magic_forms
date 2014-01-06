@@ -3,6 +3,16 @@
 class magic_form_field_select extends magic_form_field_multi {
   protected $allow_null_value = false;
 
+  /**
+   * @param null $name Name
+   * @param null $label Label
+   * @param null $value Default Value
+   * @return magic_form_field_select
+   */
+  public static function factory($name = null, $label = null, $value = null) {
+    return parent::factory($name,$label,$value);
+  }
+
   public function __toString() {
     $view = new StdClass();
     $view->field = $this;
