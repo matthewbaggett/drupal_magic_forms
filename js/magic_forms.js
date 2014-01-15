@@ -250,7 +250,10 @@ function magic_form_field(type, name, label, value, default_value) {
       console.log('Updating Field ' + this.name + '.');
       var field = this._get_input_field();
       var value = field.val();
+      var options = jQuery('option', field);
       field.closest('.form_row').replaceWith(html);
+      jQuery('option', this._get_input_field()).remove();
+      this._get_input_field().append(options);
       this._get_input_field().val(value);
     }else{
       console.log('Creating Field ' + this.name + '.');
