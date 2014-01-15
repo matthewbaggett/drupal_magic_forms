@@ -10,3 +10,5 @@ class magic_form_validator_is_not_null extends magic_form_validator implements m
   }
 }
 
+
+
