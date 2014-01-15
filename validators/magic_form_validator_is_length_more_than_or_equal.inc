@@ -7,7 +7,7 @@ class magic_form_validator_is_length_more_than_or_equal extends magic_form_valid
   public function test($data) {
     $data = $this->sanitise($data);
     $this->data_length = strlen($data);
-    return $this->data_length >= $this->get_param(1);
+    return $this->data_length >= $this->get_param(0);
   }
 
   public function user_friendly_failure_message($message_params) {

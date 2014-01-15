@@ -5,7 +5,7 @@ class magic_form_validator_is_numeric_more_than extends magic_form_validator imp
   private $limit = 0;
 
   public function test($data) {
-    $this->limit = $this->get_param(1);
+    $this->limit = $this->get_param(0);
     if(!is_numeric($data)){
       return false;
     }

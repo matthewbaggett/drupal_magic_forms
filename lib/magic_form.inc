@@ -334,7 +334,9 @@ class magic_form extends active_record {
       if($field instanceof magic_form_field){
         /* @var $field magic_form_field */
         $field->clear_errors();
+        //echo "Validating {$field->get_name()} ";
         $field->validate();
+        //echo "- has " . count($field->get_errors()) . " errors \n";
       }
     }
     $this->save();

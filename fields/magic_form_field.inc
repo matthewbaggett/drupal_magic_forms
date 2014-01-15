@@ -66,7 +66,9 @@ class magic_form_field extends magic_form_item {
     if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
       $is_ajax = true;
     }
+    //echo "Has " . count($this->validators) . " validators ";
     foreach ($this->validators as $validator) {
+
       $pass_or_fail = $validator->test($this->get_value());
       $message_params = array(
         ':field_name' => $this->get_name(),
