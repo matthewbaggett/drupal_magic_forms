@@ -399,8 +399,10 @@ class magic_form extends active_record {
   public function has_errors(){
     foreach($this->form_elements as $field){
       /* @var $field magic_form_field */
-      if($field->has_errors()){
-        return true;
+      if($field instanceof magic_form_field){
+        if($field->has_errors()){
+          return true;
+        }
       }
     }
     return false;
