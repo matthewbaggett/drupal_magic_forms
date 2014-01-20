@@ -84,7 +84,7 @@ function magic_form_field(type, name, label, value, default_value) {
       value: option_value
     });
     jQuery('.form_row.field-' + this.name + ' select')
-      .append("<option value=\"" + option_key + "\">" + option_value + "</option>")
+      .append("<option value=\"" + option_key + "\">" + option_value + "</option>");
     var option_id = this.name + '_' + option_key;
     jQuery('.form_row.field-' + this.name + ' .radio_group')
       .append("<div class=\"radio_group_option\"><input name=\"" + this.name + "\" id=\"" + option_id + "\" type=\"radio\" value=\"" + option_key + "\"><label for=\"" + option_id + "\">" + option_value + "</label></div>");
@@ -243,18 +243,35 @@ function magic_form_field(type, name, label, value, default_value) {
   }
 
   this.update = function(parent_element, html){
+    var that = this;
     if(typeof(html) == 'undefined'){
-      html = this.html();
+      html = that.html();
     }
     if(this.check_exists()){
       console.log('Updating Field ' + this.name + '.');
-      var field = this._get_input_field();
+      var field = that._get_input_field();
       var value = field.val();
+
+      // Grab out existing options
       var options = jQuery('option', field);
+
+      // Replace entire select field
       field.closest('.form_row').replaceWith(html);
-      jQuery('option', this._get_input_field()).remove();
-      this._get_input_field().append(options);
-      this._get_input_field().val(value);
+
+      // Remove imported select field options.
+      jQuery('option', that._get_input_field()).remove();
+
+      // Iterate over each old option and prevent duplicates being added when we add them back into the form.
+      jQuery(options).each(function(i, option){
+        var duplicate_check_selector = "option:eq(" + option.value + ")";
+        var duplicates = jQuery(duplicate_check_selector, that._get_input_field());
+        if(!duplicates.length > 0){
+          that._get_input_field().append(option);
+        }
+      });
+
+      // Forcefully set the objects original value if it is an available option.
+      that._get_input_field().val(value);
     }else{
       console.log('Creating Field ' + this.name + '.');
       parent_element.append(html);
