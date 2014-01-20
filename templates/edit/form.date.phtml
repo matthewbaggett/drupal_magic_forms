@@ -1,0 +1,36 @@
+<?php /* @var $field magic_form_field_date */ ?>
+<div
+  class="form_row form_date field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>">
+  <div class="inner">
+    <?php require("form.label.phtml"); ?>
+    <div class="widget">
+      <input
+        id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
+        type="text"
+        name="<?php echo $field->get_name(); ?>"
+        value="<?php echo $field->get_value() ?>"
+        class="<?php echo $field->get_classes(); ?>"
+        placeholder="<?php echo $field->get_value(); ?>"
+        <?php if ($field->is_disabled()): ?>
+          readonly
+        <?php endif; ?>
+        />
+      <div class="calendar">
+        <?php for($year = date("Y") - 10; $year <= date("Y"); $year++ ): ?>
+          <?php for($month = 1; $month <= 12; $month++): ?>
+            <div class="month-container year-<?php echo $year; ?> month-<?php echo $month; ?> <?php echo ($month == date("m") && $year == date("Y"))?'current selected':''; ?>">
+              <div class="calendar-controller">
+                <div class="prev">&lt;</div>
+                <div class="month_name"><?php echo date("F", strtotime("1990-{$month}-01")); ?></div>
+                <div class="next">&gt;</div>
+              </div>
+              <?php echo $field->draw_calendar($month, $year); ?>
+            </div>
+          <?php endfor; ?>
+        <?php endfor; ?>
+      </div>
+    </div>
+    <?php require "form.errors.phtml"; ?>
+  </div>
+  <div class="clear"></div>
+</div>
