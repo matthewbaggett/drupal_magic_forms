@@ -122,7 +122,11 @@ class magic_form_field_date extends magic_form_field_text {
 
     /* keep going with days.... */
     for($list_day = 1; $list_day <= $days_in_month; $list_day++):
-      $calendar.= '<td class="calendar-day">';
+      $is_today = false;
+      if(date("Y-m-d", strtotime("{$year}-{$month}-{$list_day}")) == date("Y-m-d")){
+        $is_today = true;
+      }
+      $calendar.= '<td class="calendar-day '.($is_today?'calendar-day-today':'').'">';
       /* add in the day number */
       $calendar.= '<div class="day-number">'.$list_day.'</div>';
       $calendar.= '</td>';

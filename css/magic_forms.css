@@ -173,6 +173,10 @@ form.magic_form .form_row.form_date .widget div.calendar table thead tr td{
 form.magic_form .form_row.form_date .widget div.calendar table tbody tr td{
     background-color: #CCCCCC;
 }
+form.magic_form .form_row.form_date .widget div.calendar table tbody tr td.calendar-day-today{
+    font-weight: bold;
+    color: #333333;
+}
 form.magic_form .form_row.form_date .widget div.calendar table tr{
 
 }
