@@ -109,6 +109,76 @@ form.magic_form .radio_group .radio_group_option input {
     display: block;
 }
 
+form.magic_form .form_row.form_date{}
+form.magic_form .form_row.form_date .widget{
+    position: relative;
+    overflow: visible;
+
+}
+form.magic_form .form_row.form_date .widget input{
+
+}
+form.magic_form .form_row.form_date .widget div.calendar{
+    position: absolute;
+    top: 33px;
+    left: 0;
+    xwidth: 100%;
+    min-height: 30px;
+    background-color: #CCCCCC;
+    border: 1px solid white;
+    border-top: 0;
+    color: white;
+}
+form.magic_form .form_row.form_date .widget div.calendar .month-container{
+    display: none;
+}
+form.magic_form .form_row.form_date .widget div.calendar .month-container.selected{
+    display: block;
+}
+form.magic_form .form_row.form_date .widget div.calendar .month-container .calendar-controller{
+    background-color: #333333;
+    float: left; display: block;
+    width: 100%;
+    clear: both;
+    font-size: 21px;
+}
+form.magic_form .form_row.form_date .widget div.calendar .month-container .calendar-controller .month_name,
+form.magic_form .form_row.form_date .widget div.calendar .month-container .calendar-controller .prev,
+form.magic_form .form_row.form_date .widget div.calendar .month-container .calendar-controller .next{
+    text-align: center;
+    float: left; display: block;
+    width: 10%;
+    padding-bottom: 0;
+    padding-top: 5px;
+}
+form.magic_form .form_row.form_date .widget div.calendar .month-container .calendar-controller .month_name{
+    width: 80%;
+}
+form.magic_form .form_row.form_date .widget div.calendar .month-container .calendar-controller .prev{}
+form.magic_form .form_row.form_date .widget div.calendar .month-container .calendar-controller .next{}
+
+form.magic_form .form_row.form_date .widget div.calendar table{
+    margin: 0;
+    float: left; display: block;
+    clear: both;
+}
+form.magic_form .form_row.form_date .widget div.calendar table thead tr td,
+form.magic_form .form_row.form_date .widget div.calendar table tbody tr td{
+    color: white;
+    text-align: center;
+}
+form.magic_form .form_row.form_date .widget div.calendar table thead tr td{
+    background-color: #333333;
+}
+form.magic_form .form_row.form_date .widget div.calendar table tbody tr td{
+    background-color: #CCCCCC;
+}
+form.magic_form .form_row.form_date .widget div.calendar table tr{
+
+}
+form.magic_form .form_row.form_date .widget div.calendar table tr td{
+
+}
 form.magic_form .clear {
     clear: both;
 }
