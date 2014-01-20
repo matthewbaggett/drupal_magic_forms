@@ -392,6 +392,22 @@ class magic_form extends active_record {
     }
   }
 
+  /**
+   * Decide if this form has any errors.
+   * @return bool
+   */
+  public function has_errors(){
+    foreach($this->form_elements as $field){
+      /* @var $field magic_form_field */
+      if($field instanceof magic_form_field){
+        if($field->has_errors()){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   public function add_default($value, $element = null) {
     $field = $this->get_field($element);
     if ($field instanceof magic_form_field) {
