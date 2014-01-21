@@ -26,6 +26,25 @@ class magic_form_group extends magic_form_item {
     return $this->fields;
   }
 
+  public function remove_field($field_name){
+    if(isset($this->fields[$field_name])){
+      unset($this->fields[$field_name]);
+    }
+    foreach($this->fields as $form_element){
+      if($form_element instanceof magic_form_group){
+        $form_element->remove_field($field_name);
+      }
+    }
+    return $this;
+  }
+
+  public function remove_fields(){
+    foreach(func_get_args() as $argument){
+      $this->remove_field($argument);
+    }
+    return $this;
+  }
+
   public function set_group_name($group_name) {
     $this->group_name = $group_name;
     $this->add_class(magic_forms_mangle_to_css_class($group_name));

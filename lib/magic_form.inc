@@ -176,6 +176,25 @@ class magic_form extends active_record {
     return $this;
   }
 
+  public function remove_field($field_name){
+    if(isset($this->form_elements[$field_name])){
+      unset($this->form_elements[$field_name]);
+    }
+    foreach($this->form_elements as $form_element){
+      if($form_element instanceof magic_form_group){
+        $form_element->remove_field($field_name);
+      }
+    }
+    return $this;
+  }
+
+  public function remove_fields(){
+    foreach(func_get_args() as $argument){
+      $this->remove_field($argument);
+    }
+    return $this;
+  }
+
   public function omit_field($name) {
     $this->fields_to_omit[] = $name;
     return $this;
