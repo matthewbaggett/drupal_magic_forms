@@ -238,7 +238,7 @@ function magic_form_field(type, name, label, value, default_value) {
   }
 
   this.check_exists = function(){
-    console.log("Check exists search: " + this._get_mass_selector());
+    //console.log("Check exists search: " + this._get_mass_selector());
     return this._get_input_field().length > 0;
   }
 
@@ -248,7 +248,7 @@ function magic_form_field(type, name, label, value, default_value) {
       html = that.html();
     }
     if(this.check_exists()){
-      console.log('Updating Field ' + this.name + '.');
+      //console.log('Updating Field ' + this.name + '.');
       var field = that._get_input_field();
       var value = field.val();
 
@@ -273,7 +273,7 @@ function magic_form_field(type, name, label, value, default_value) {
       // Forcefully set the objects original value if it is an available option.
       that._get_input_field().val(value);
     }else{
-      console.log('Creating Field ' + this.name + '.');
+      //console.log('Creating Field ' + this.name + '.');
       parent_element.append(html);
     }
   }
