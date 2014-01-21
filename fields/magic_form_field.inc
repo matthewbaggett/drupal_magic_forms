@@ -27,6 +27,9 @@ class magic_form_field extends magic_form_item {
     $this->name = $name;
     $this->label = t($label);
     $this->value = $value;
+    if(method_exists($this, "__post_construct")){
+      $this->__post_construct();
+    }
   }
 
   public function __toString() {

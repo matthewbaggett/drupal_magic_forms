@@ -16,6 +16,12 @@ class magic_form_field_date extends magic_form_field_text {
     return parent::factory($name, $label, $value);
   }
 
+  public function __post_construct(){
+    if($this->value === null){
+      $this->value = date("Y-m-d");
+    }
+  }
+
   /**
    * Sanitise the date given
    * @return string
@@ -39,7 +45,7 @@ class magic_form_field_date extends magic_form_field_text {
     if ($this->get_support_time()) {
       $format_sections[] = 'H:i:s';
     }
-    return implode(" ", $format_sections);
+    return trim(implode(" ", $format_sections));
   }
 
   /**
@@ -92,7 +98,11 @@ class magic_form_field_date extends magic_form_field_text {
 
   /* draws a calendar */
 
-  public function draw_calendar($month,$year){
+  public function draw_calendar($month,$year, $initial_date = null){
+    if($initial_date === null){
+      $initial_date = date("Y-m-d");
+    }
+    $initial_date = strtotime($initial_date);
 
     /* draw table */
     $calendar = '<table cellpadding="0" cellspacing="0" class="calendar">';
@@ -122,7 +132,16 @@ class magic_form_field_date extends magic_form_field_text {
 
     /* keep going with days.... */
     for($list_day = 1; $list_day <= $days_in_month; $list_day++):
-      $calendar.= '<td class="calendar-day">';
+      $is_today = false;
+      $is_initial_date = false;
+      $date_formatted = date("Y-m-d", strtotime("{$year}-{$month}-{$list_day}"));
+      if($date_formatted == date("Y-m-d")){
+        $is_today = true;
+      }
+      if($date_formatted == date("Y-m-d", $initial_date)){
+        $is_initial_date = true;
+      }
+      $calendar.= '<td class="calendar-day '.($is_today?'calendar-day-today':'') . " " . ($is_initial_date?'selected':'').'" rel="' . $date_formatted . '">';
       /* add in the day number */
       $calendar.= '<div class="day-number">'.$list_day.'</div>';
       $calendar.= '</td>';

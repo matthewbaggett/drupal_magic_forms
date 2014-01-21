@@ -15,21 +15,42 @@
           readonly
         <?php endif; ?>
         />
+
       <div class="calendar">
-        <?php for($year = date("Y") - 10; $year <= date("Y"); $year++ ): ?>
-          <?php for($month = 1; $month <= 12; $month++): ?>
-            <div class="month-container year-<?php echo $year; ?> month-<?php echo $month; ?> <?php echo ($month == date("m") && $year == date("Y"))?'current selected':''; ?>">
-              <div class="calendar-controller">
-                <div class="prev">&lt;</div>
-                <div class="month_name"><?php echo date("F", strtotime("1990-{$month}-01")); ?></div>
-                <div class="next">&gt;</div>
-              </div>
-              <?php echo $field->draw_calendar($month, $year); ?>
-            </div>
-          <?php endfor; ?>
-        <?php endfor; ?>
+        <?php if($field->get_support_date()): ?>
+          <div class="date-select">
+            <?php for($year = date("Y", strtotime($field->get_value())) - 5; $year <= date("Y") + 5; $year++ ): ?>
+              <?php for($month = 1; $month <= 12; $month++): ?>
+                <div class="month-container year-<?php echo $year; ?> month-<?php echo $month; ?> <?php echo ($month == date("m", strtotime($field->get_value())) && $year == date("Y", strtotime($field->get_value())))?'current selected':''; ?>">
+                  <div class="calendar-controller">
+                    <div class="prev">&lt;</div>
+                    <div class="month_name"><?php echo date("F, Y", strtotime("{$year}-{$month}-01")); ?></div>
+                    <div class="next">&gt;</div>
+                  </div>
+                  <?php echo $field->draw_calendar($month, $year, $field->get_value()); ?>
+                </div>
+              <?php endfor; ?>
+            <?php endfor; ?>
+          </div>
+        <?php endif; ?>
+
+        <?php if($field->get_support_time()): ?>
+          <div class="time-select">
+            <dl>
+              <dt class="time"><?php echo t("Time"); ?>:</dt>
+              <dd class="time">00:00</dd>
+              <dt class="hour"><?php echo t("Hour"); ?>:</dt>
+              <dd class="hour"><input class="hour" type="range" name="hour" value="12" min="0" max="24"></dd>
+              <dt class="minute"><?php echo t("Minute"); ?>:</dt>
+              <dd class="minute"><input class="minute" type="range" name="minutes" value="0" min="0" max="60"></dd>
+            </dl>
+          </div>
+        <?php endif; ?>
       </div>
+
+
     </div>
+
     <?php require "form.errors.phtml"; ?>
   </div>
   <div class="clear"></div>

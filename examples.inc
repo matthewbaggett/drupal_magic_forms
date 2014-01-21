@@ -18,20 +18,15 @@ function magic_form_examples() {
           new magic_form_validator_is_length_less_than(100),
           new magic_form_validator_is_length_more_than(50)
         )
-    )/*->add_fields(
-      magic_form_field_text::factory('some-field', 'Some Field', 'Some Default')
-        ->add_validator(new magic_form_validator_is_valid_phonenumber())
-        ->add_validator(new magic_form_validator_is_valid_email()),
-      magic_form_field_text::factory('some-field', 'Some Field', 'Some Default')
-        ->add_validator(new magic_form_validator_is_valid_phonenumber())
-        ->add_validator(new magic_form_validator_is_valid_email()),
-      magic_form_field_text::factory('some-field', 'Some Field', 'Some Default')
-        ->add_validator(new magic_form_validator_is_valid_phonenumber())
-        ->add_validator(new magic_form_validator_is_valid_email()),
-      magic_form_field_text::factory('some-field', 'Some Field', 'Some Default')
-        ->add_validator(new magic_form_validator_is_valid_phonenumber())
-        ->add_validator(new magic_form_validator_is_valid_email())
-    )*/
+    )->add_fields(
+      magic_form_field_text::factory('phone', 'Phone', '0800 000000')
+        ->add_validator(new magic_form_validator_is_valid_phonenumber()),
+      magic_form_field_text::factory('email', 'Email', 'joe@example.com')
+        ->add_validator(new magic_form_validator_is_email())
+    )
+    ->add_field(magic_form_field_date::factory('date_time', 'Date & Time')->set_support_date(true)->set_support_time(true))
+    ->add_field(magic_form_field_date::factory('date', 'Date Only')->set_support_date(true)->set_support_time(false))
+    ->add_field(magic_form_field_date::factory('time', 'Time Only')->set_support_date(false)->set_support_time(true))
     ->add_field(magic_form_field_submit::factory('submit', 'Submit'));
 
   $form->submit(function (magic_form $form) {
