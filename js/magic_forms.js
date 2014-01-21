@@ -5,6 +5,10 @@ jQuery(document).ready(function () {
   });
 });
 
+String.prototype.paddingLeft = function (paddingValue) {
+  return String(paddingValue + this).slice(-paddingValue.length);
+};
+
 function magic_form_field(type, name, label, value, default_value) {
   if (typeof(value) == 'undefined') {
     value = '';
