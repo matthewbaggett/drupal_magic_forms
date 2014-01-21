@@ -3,6 +3,8 @@ description = More sensible forms for Drupal
 package = Forms
 core = 7.x
 stylesheets[all][] = css/magic_forms.css
+stylesheets[all][] = css/magic_forms.calendar.css
 scripts[] = js/magic_forms.js
+scripts[] = js/magic_forms.calendar.js
 
 dependencies[] = active_record

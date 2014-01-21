@@ -21,7 +21,7 @@
             <div class="month-container year-<?php echo $year; ?> month-<?php echo $month; ?> <?php echo ($month == date("m") && $year == date("Y"))?'current selected':''; ?>">
               <div class="calendar-controller">
                 <div class="prev">&lt;</div>
-                <div class="month_name"><?php echo date("F", strtotime("1990-{$month}-01")); ?></div>
+                <div class="month_name"><?php echo date("F, Y", strtotime("{$year}-{$month}-01")); ?></div>
                 <div class="next">&gt;</div>
               </div>
               <?php echo $field->draw_calendar($month, $year); ?>
