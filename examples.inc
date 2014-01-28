@@ -1,7 +1,34 @@
 <?php
 
 function magic_form_examples() {
-  $form = magic_form::factory('my-form')
+  // Create a new form
+  $form = magic_form::factory('my-form');
+
+  // Create a name field
+  $name = magic_form_field_text::factory('name', 'Name');
+  // Set a default
+  $name->set_default_value("Joe Blogs");
+  // Set av value
+  $name->set_value("Mary Sue");
+
+  // Create a Salutation
+  $salutation = magic_form_field_select::factory('salutation', 'Salutation');
+  // Add some options to it.
+  $salutation->add_options(array(
+    0 => 'Please Select',
+    1 => 'Mr',
+    2 => 'Mrs',
+    3 => 'Miss',
+    4 => 'Dr'
+  ));
+  // Add a validator. More than 0 prevents someone using "Please Select"
+  $salutation->add_validator(new magic_form_validator_is_numeric_more_than(0));
+
+  // Add them to the form
+  $form->add_fields($salutation,$name);
+
+  // Add a load of mixed fields and validators
+  $form
     ->add_field(
       magic_form_field_text::factory('phone-number', 'Phone Number')
         ->make_mandatory()

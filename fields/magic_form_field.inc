@@ -23,6 +23,12 @@ class magic_form_field extends magic_form_item {
     return $instance;
   }
 
+  /**
+   * Constructor
+   * @param null $name Field Computer Name
+   * @param null $label Field Human Name
+   * @param null $value Field default value
+   */
   public function __construct($name = null, $label = null, $value = null) {
     $this->name = $name;
     $this->label = t($label);
@@ -32,6 +38,11 @@ class magic_form_field extends magic_form_item {
     }
   }
 
+  /**
+   * Compute this fields HTML.
+   *
+   * @return string
+   */
   public function __toString() {
     $view = new StdClass();
     $view->field = $this;
@@ -204,43 +215,94 @@ class magic_form_field extends magic_form_item {
     return $this;
   }
 
+  /**
+   * Disable this field
+   *
+   * @return $this
+   */
   public function disable() {
     $this->disabled = true;
     return $this;
   }
 
+  /**
+   * Enable this field
+   *
+   * @return $this
+   */
   public function enable() {
     $this->disabled = false;
     return $this;
   }
 
+  /**
+   * Determine if this field is disabled
+   *
+   * @return bool
+   */
   public function is_disabled() {
     return $this->disabled;
   }
 
+  /**
+   * Unset all errors on this field
+   *
+   * @return $this
+   */
   public function clear_errors(){
     $this->errors = array();
     return $this;
   }
 
+  /**
+   * Add an error on this field
+   *
+   * @param $error
+   *
+   * @return $this
+   */
   public function add_error($error) {
     $this->errors[] = $error;
     return $this;
   }
 
+  /**
+   * Does this field have any errors?
+   *
+   * @return bool
+   */
   public function has_errors() {
     return count($this->errors) > 0 ? true : false;
   }
 
+  /**
+   * Get all errors on this field
+   *
+   * @return array
+   */
   public function get_errors(){
     return $this->errors;
   }
 
+  /**
+   * Add a class to this field
+   *
+   * @param $class
+   *
+   * @return $this
+   */
   public function add_class($class) {
     $this->classes[] = $class;
     return $this;
   }
 
+  /**
+   * Get classes on this field
+   *
+   * @param null $prefix
+   *
+   * @return string
+   */
   public function get_classes($prefix = null) {
     if ($this->has_errors()) {
       $this->add_class($prefix . "error");

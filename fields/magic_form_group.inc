@@ -16,16 +16,34 @@ class magic_form_group extends magic_form_item {
     }
   }
 
+  /**
+   * Add field to this group
+   *
+   * @param magic_form_item $field
+   *
+   * @return $this
+   */
   public function add_field(magic_form_item $field) {
     $field->set_scope($this->get_scope());
     $this->fields[$field->get_name()] = $field;
     return $this;
   }
 
+  /**
+   * Get fields attached to this group
+   * @return mixed
+   */
   public function get_fields() {
     return $this->fields;
   }
 
+  /**
+   * Remove named field
+   *
+   * @param $field_name
+   *
+   * @return $this
+   */
   public function remove_field($field_name){
     if(isset($this->fields[$field_name])){
       unset($this->fields[$field_name]);
@@ -38,6 +56,11 @@ class magic_form_group extends magic_form_item {
     return $this;
   }
 
+  /**
+   * Remove named fields
+   *
+   * @return $this
+   */
   public function remove_fields(){
     foreach(func_get_args() as $argument){
       $this->remove_field($argument);
@@ -45,12 +68,24 @@ class magic_form_group extends magic_form_item {
     return $this;
   }
 
+  /**
+   * Set this groups name
+   *
+   * @param $group_name
+   *
+   * @return $this
+   */
   public function set_group_name($group_name) {
     $this->group_name = $group_name;
     $this->add_class(magic_forms_mangle_to_css_class($group_name));
     return $this;
   }
 
+  /**
+   * Get this groups name
+   *
+   * @return mixed
+   */
   public function get_group_name() {
     return $this->group_name;
   }
