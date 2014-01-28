@@ -111,7 +111,7 @@ function magic_forms_menu() {
   $items['examples/magic-form'] = array(
     'page callback' => 'magic_form_examples',
     'access callback' => 'user_access',
-    'access arguments' => array("Show Magic Form Examples"),
+    'access arguments' => array("Show Magic Forms Examples"),
     'file' => 'examples.inc',
   );
   return $items;
