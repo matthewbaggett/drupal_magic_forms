@@ -16,7 +16,7 @@
         <?php endif; ?>
         />
 
-      <div class="calendar">
+      <div class="calendar" style="display: none;">
         <?php if($field->get_support_date()): ?>
           <div class="date-select">
             <?php for($year = date("Y", strtotime($field->get_value())) - 5; $year <= date("Y") + 5; $year++ ): ?>
