@@ -2,10 +2,15 @@
 
 class magic_form_field_multi extends magic_form_field {
   protected $options;
+  protected $labels = 'after';
+
 
   /**
-   * @param      $value The label of the option selected
-   * @param null $key The value of the option selected - Unique.
+   * Add an option to the options array
+   *
+   * @param string $value  The label of the option selected
+   * @param null   $key The value of the option selected - Unique.
+   * @return $this
    */
   public function add_option($value, $key = null) {
     if ($key) {
@@ -79,5 +84,37 @@ class magic_form_field_multi extends magic_form_field {
       $this->remove_option($key);
     }
     return $this;
+  }
+
+  /**
+   * Set labels to go before input
+   *
+   * @return $this
+   */
+  public function set_labels_before() {
+    $this->labels = 'before';
+    return $this;
+  }
+
+  /**
+   * Set labels to go after input
+   *
+   * @return $this
+   */
+  public function set_labels_after() {
+    $this->labels = 'after';
+    return $this;
+  }
+
+  /**
+   * Is the label going after?
+   *
+   * @return bool
+   */
+  public function is_label_after() {
+    if ($this->labels == 'after') {
+      return TRUE;
+    }
+    return FALSE;
   }
 }

@@ -53,10 +53,28 @@ function magic_form_examples() {
     )
     ->add_field(magic_form_field_date::factory('date_time', 'Date & Time')->set_support_date(true)->set_support_time(true))
     ->add_field(magic_form_field_date::factory('date', 'Date Only')->set_support_date(true)->set_support_time(false))
-    ->add_field(magic_form_field_date::factory('time', 'Time Only')->set_support_date(false)->set_support_time(true))
-    ->add_field(magic_form_field_submit::factory('submit', 'Submit'));
+    ->add_field(magic_form_field_date::factory('time', 'Time Only')->set_support_date(false)->set_support_time(true));
 
+  // Add a Series of checkboxes for non-mutually-exclusive options.
+  $options = new magic_form_field_checkbox_multi('room-options', 'Room Options');
+  $options->add_options(array(
+    'aircon' => 'Air Conditioning',
+    'nosmoke' => 'Non Smoking',
+    'seaview' => 'Sea View',
+    'annoying' => 'No Annoying Neighbours',
+    'disabled' => 'Disabled access',
+    'ground' => 'Ground floor',
+    'top' => 'Top floor',
+  ));
+  $form->add_field($options);
+
+  // Add Submit button to form
+  $form->add_field(magic_form_field_submit::factory('submit', 'Submit'));
+
+  // This is our submit handler.
   $form->submit(function (magic_form $form) {
+    require_once(drupal_get_path("module", "devel") . "/krumo/class.krumo.php");
+    krumo($form->get_fields());
     drupal_set_message("Submit happened in form {$form->magic_form_id} / {$form->form_id}");
   });
 

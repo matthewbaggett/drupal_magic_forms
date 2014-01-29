@@ -109,6 +109,38 @@ form.magic_form .radio_group .radio_group_option input {
     display: block;
 }
 
+form.magic_form .checkbox_group{
+    float: left;
+    display: block;
+    width: 100%;
+}
+form.magic_form .checkbox_group .checkbox_group_option{
+    float: left;
+    display: block;
+    width: 16.666%;
+}
+form.magic_form .checkbox_group .checkbox_group_option label{
+    float: left;
+    display: block;
+    width: auto;
+    min-width: inherit;
+}
+form.magic_form .checkbox_group .checkbox_group_option .widget{
+    border: 0 none;
+    display: block;
+    float: left;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    width: auto;
+}
+form.magic_form .checkbox_group .checkbox_group_option .widget input{
+    float: left;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
 form.magic_form .form_row.form_date{}
 form.magic_form .form_row.form_date .widget{
     position: relative;

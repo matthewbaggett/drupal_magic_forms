@@ -1,14 +1,20 @@
 <?php
 
+// Base libs
 require_once("lib/json.inc");
 require_once("lib/magic_form.inc");
+
+// Field Primitives
 require_once("fields/magic_form_item.inc");
 require_once("fields/magic_form_field.inc");
+require_once("fields/magic_form_field_multi.inc");
+
+// Field Components
 require_once("fields/magic_form_field_button.inc");
 require_once("fields/magic_form_field_checkbox.inc");
+require_once("fields/magic_form_field_checkbox_multi.inc");
 require_once("fields/magic_form_field_datatable.inc");
 require_once("fields/magic_form_field_file.inc");
-require_once("fields/magic_form_field_multi.inc");
 require_once("fields/magic_form_field_radio.inc");
 require_once("fields/magic_form_field_select.inc");
 require_once("fields/magic_form_field_submit.inc");
