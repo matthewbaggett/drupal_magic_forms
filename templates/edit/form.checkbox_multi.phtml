@@ -19,7 +19,7 @@
                 type="checkbox"
                 name="<?php echo $field->get_name(); ?>[]"
                 value="<?php echo $key; ?>"
-                <?php if (in_array($key,$field->previously_assigned_pods)): ?>
+                <?php if (in_array($key,$field->selected)): ?>
                   checked="checked"
                 <?php endif; ?>
                 />
