@@ -385,6 +385,7 @@ class magic_form extends active_record {
           $this->form_elements[$key] = $item;
       }
     }
+    $this->save();
   }
 
   public function get_form_id() {
@@ -457,13 +458,16 @@ class magic_form extends active_record {
   }
 
   public function check_for_existing_form(){
-    if(isset($_POST['magic_form_id'])){
-      $match = self::search()
-        ->where('form_name', $this->form_name)
+    if(isset($_REQUEST['magic_form_id'])){
+      $query = self::search();
+      if($this->form_name){
+        $query->where('form_name', $this->form_name);
+      }
+      $query
         ->where('uid', user_active_record::current()->uid)
         ->where('created', date("Y-m-d H:i:s", strtotime('1 hour ago')), '>=')
-        ->where('form_id', $_POST['magic_form_id'])
-        ->execOne();
+        ->where('form_id', $_REQUEST['magic_form_id']);
+      $match = $query->execOne();
       if($match instanceof magic_form){
         return $match;
       }
