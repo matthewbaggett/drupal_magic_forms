@@ -98,10 +98,6 @@ class magic_form_field extends magic_form_item {
           drupal_set_message($error, 'error');
         }
         $this->add_error($error);
-      } else {
-        if(!$is_ajax){
-          drupal_set_message(t('Test :validator_name passed', $message_params), 'status');
-        }
       }
     }
     if ($this->has_errors()) {
