@@ -19,6 +19,8 @@ Bonus features:
  * Data Tables.
  * Labels
 
+![Magic](http://img03.mar.cx/_images/FR831629)
+
 Validators
 =========
 
