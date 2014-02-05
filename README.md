@@ -1,4 +1,6 @@
-Objective Forms
+![Magic](http://i.imgur.com/TAFZ19O.jpg)
+
+Magic Form Objects
 ==================
 
 A slightly less hateful implementation of form handling for Drupal.
@@ -18,8 +20,6 @@ Support many form field types:
 Bonus features:
  * Data Tables.
  * Labels
-
-![Magic](http://img03.mar.cx/_images/FR831629)
 
 Validators
 =========
