@@ -74,7 +74,7 @@ class magic_serialisable_closure {
     $replace_chars = array(' ', '$', '&amp;');
     foreach ($vars as $var) {
       foreach($replace_chars as $replace_char){
-        $var = str_replace($replace_char, "", $var);
+        $var = trim($var, $replace_char);
       }
 
       $used_vars[$var] = $static_vars[$var];
