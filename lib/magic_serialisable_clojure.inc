@@ -71,8 +71,12 @@ class magic_serialisable_closure {
 
     // Only keep the variables that appeared in both sets
     $used_vars = array();
+    $replace_chars = array(' ', '$', '&amp;');
     foreach ($vars as $var) {
-      $var = trim($var, ' $&amp;');
+      foreach($replace_chars as $replace_char){
+        $var = str_replace($replace_char, "", $var);
+      }
+
       $used_vars[$var] = $static_vars[$var];
     }
 
