@@ -66,6 +66,7 @@ function magic_form_examples() {
     'ground' => 'Ground floor',
     'top' => 'Top floor',
   ));
+  $options->set_value(array("disabled", "top"));
   $form->add_field($options);
 
   // Add Submit button to form
