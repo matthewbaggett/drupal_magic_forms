@@ -20,7 +20,7 @@ form.magic_form .form_row.form_hidden {
     display: none;
 }
 form.magic_form .form_row.form_row_error {
-
+    background: none;
 }
 form.magic_form .form_row.form_row_error label {
     color: red;

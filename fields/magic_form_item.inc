@@ -1,6 +1,7 @@
 <?php
 class magic_form_item {
   protected $_scope;
+  protected $weight = null;
 
   public function set_scope($scope) {
     $this->_scope = $scope;
@@ -12,6 +13,15 @@ class magic_form_item {
    */
   public function get_scope() {
     return $this->_scope;
+  }
+
+  public function set_weight($weight){
+    $this->weight = $weight;
+    return $weight;
+  }
+
+  public function get_weight(){
+    return $this->weight;
   }
 
   public function __toJsonArray() {

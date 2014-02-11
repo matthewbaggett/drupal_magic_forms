@@ -311,6 +311,8 @@ class magic_form_field extends magic_form_item {
     if ($this->get_mandatory()) {
       $this->add_class($prefix . 'mandatory');
     }
+    $this->add_class('weight_' . str_replace(".", "_", $this->get_weight()));
     return implode(" ", $this->classes);
   }
+
 }

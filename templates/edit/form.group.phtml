@@ -1,5 +1,5 @@
 <?php /* @var $field magic_form_group */ ?>
-<div class="form_group field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>">
+<div class="form_group field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> weight_<?php echo $field->get_weight(); ?>">
   <?php if (strlen($field->get_group_label()) > 0): ?>
     <h3><?php echo $field->get_group_label(); ?></h3>
   <?php endif; ?>

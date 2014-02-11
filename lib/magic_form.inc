@@ -163,7 +163,18 @@ class magic_form extends active_record {
 
   public function add_field(magic_form_item $field) {
     $this->form_elements[$field->get_name()] = $field;
-    //$this->__save();
+
+    // Find heaviest item.
+    $heaviest = null;
+    if(count($this->form_elements) > 0){
+      foreach($this->form_elements as $other_field){
+        /* @var $other_field magic_form_item */
+        $heaviest = $other_field->get_weight()> $heaviest || $heaviest === null ? $other_field->get_weight() : $heaviest;
+      }
+    }
+
+    $field->set_weight($heaviest + 1);
+
     $this->is_dirty = true;
     return $this;
   }
@@ -275,11 +286,17 @@ class magic_form extends active_record {
     return $output_elements;
   }
 
+  private function _weight_sort( magic_form_item $a, magic_form_item $b ) {
+      return $a->get_weight() == $b->get_weight() ? 0 : ( $a->get_weight() > $b->get_weight() ) ? 1 : -1;
+  }
+
   public function __toString() {
     $this->__save(false);
     // Create the view.
     $view = new StdClass();
     $view->form_rows = $this->form_elements;
+
+    usort($view->form_rows, array($this, '_weight_sort'));
 
     // Check we have a callback or an action
     if (!(is_callable($this->submit_function) || $this->action !== null)) {

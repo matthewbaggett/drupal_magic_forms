@@ -7,13 +7,13 @@ class magic_form_group extends magic_form_item {
   protected $classes = array();
 
   public function __construct($group_name = null, $group_label = null) {
-    $this->set_group_name($group_name);
-    $this->set_group_label($group_label);
+  $this->set_group_name($group_name);
+  $this->set_group_label($group_label);
 
-    // Support legacy behaviour
-    if ($group_label === null && $group_name !== null) {
-      $this->set_group_label($group_name);
-    }
+  // Support legacy behaviour
+  if ($group_label === null && $group_name !== null) {
+  $this->set_group_label($group_name);
+  }
   }
 
   /**
@@ -25,7 +25,19 @@ class magic_form_group extends magic_form_item {
    */
   public function add_field(magic_form_item $field) {
     $field->set_scope($this->get_scope());
-    $this->fields[$field->get_name()] = $field;
+
+    // Find heaviest item.
+    $heaviest = null;
+    if(count($this->fields) > 0){
+      foreach($this->fields as $other_field){
+        /* @var $other_field magic_form_item */
+        $heaviest = $other_field->get_weight()> $heaviest || $heaviest === null ? $other_field->get_weight() : $heaviest;
+      }
+    }
+
+    $field->set_weight($heaviest + 1);
+
+    $this->fields[$field->get_weight() . "-" . $field->get_name()] = $field;
     return $this;
   }
 
@@ -34,6 +46,7 @@ class magic_form_group extends magic_form_item {
    * @return mixed
    */
   public function get_fields() {
+    usort($this->fields, array($this, '_weight_sort'));
     return $this->fields;
   }
 
@@ -66,6 +79,10 @@ class magic_form_group extends magic_form_item {
       $this->remove_field($argument);
     }
     return $this;
+  }
+
+  private function _weight_sort( magic_form_item $a, magic_form_item $b ) {
+    return $a->get_weight() == $b->get_weight() ? 0 : ( $a->get_weight() > $b->get_weight() ) ? -1 : 1;
   }
 
   /**

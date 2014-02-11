@@ -4,6 +4,8 @@ function magic_form_examples() {
   // Create a new form
   $form = magic_form::factory('my-form');
 
+  $personal_details = magic_form_group::factory('Personal Details');
+
   // Create a name field
   $name = magic_form_field_text::factory('name', 'Name');
   // Set a default
@@ -25,10 +27,13 @@ function magic_form_examples() {
   $salutation->add_validator(new magic_form_validator_is_numeric_more_than(0));
 
   // Add them to the form
-  $form->add_fields($salutation,$name);
+  $personal_details->add_fields($name, $salutation);
 
-  // Add a load of mixed fields and validators
-  $form
+  // Add the personal details group to the form
+  $form->add_field($personal_details);
+
+  // Add things retroactively to the personal details group.
+  $personal_details
     ->add_field(
       magic_form_field_text::factory('phone-number', 'Phone Number')
         ->make_mandatory()
@@ -39,7 +44,16 @@ function magic_form_examples() {
         ->make_mandatory()
         ->set_default_value('matthew@fouroneone.us')
         ->add_validator(new magic_form_validator_is_email())
-    )->add_field(
+    );
+
+  //Put email above phone number
+  $name_weight = $form->get_field('name')->get_weight();
+  $salutation_weight = $form->get_field('salutation')->get_weight();
+  $form->get_field('name')->set_weight($salutation_weight);
+  $form->get_field('salutation')->set_weight($name_weight);
+
+  // Add items direct to the form
+  $form->add_field(
       magic_form_field_textarea::factory('ramble', 'Comment', 'Must be > 50 char, < 100 char')
         ->add_validators(
           new magic_form_validator_is_length_less_than(100),
