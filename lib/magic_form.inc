@@ -390,6 +390,10 @@ class magic_form extends active_record {
           // Lol, drupal.
           break;
 
+        case strpos("ignore", $key) !== false:
+          // ignore fields prefixed with 'ignore'
+          break;
+
         default:
           $item = $this->get_field($key);
 
