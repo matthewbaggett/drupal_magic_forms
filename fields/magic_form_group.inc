@@ -46,7 +46,9 @@ class magic_form_group extends magic_form_item {
    * @return mixed
    */
   public function get_fields() {
-    usort($this->fields, array($this, '_weight_sort'));
+    if(count($this->fields) > 0){
+      usort($this->fields, array($this, '_weight_sort'));
+    }
     return $this->fields;
   }
 
