@@ -52,6 +52,21 @@ class magic_form_group extends magic_form_item {
     return $this->fields;
   }
 
+  public function seek_field($name){
+    foreach($this->fields as $element){
+      if($element->get_name() == $name){
+        return $element;
+      }
+      if($element instanceof magic_form_group){
+        $found = $element->seek_field($name);
+        if($found instanceof magic_form_item){
+          return $found;
+        }
+      }
+    }
+    return false;
+  }
+
   /**
    * Remove named field
    *

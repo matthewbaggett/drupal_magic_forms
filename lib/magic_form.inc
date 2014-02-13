@@ -245,8 +245,8 @@ class magic_form extends active_record {
    * @return magic_form_field
    */
   public function get_field($name) {
-    foreach ($this->form_elements as $element_name => $element) {
-      if ($element_name == $name) {
+    foreach ($this->form_elements as  $element) {
+      if ($element->get_name() == $name) {
         return $this->form_elements[$name];
       }
       if (get_class($element) == 'magic_form_group') {
@@ -262,6 +262,21 @@ class magic_form extends active_record {
     }
     watchdog("Remedy Ticket form: Cannot find field: {$name}", "warning");
     return FALSE;
+  }
+
+  public function seek_field($name){
+    foreach($this->form_elements as $element){
+      if($element->get_name() == $name){
+        return $element;
+      }
+      if($element instanceof magic_form_group){
+        $found = $element->seek_field($name);
+        if($found instanceof magic_form_item){
+          return $found;
+        }
+      }
+    }
+    return false;
   }
 
   public function get_fields() {
