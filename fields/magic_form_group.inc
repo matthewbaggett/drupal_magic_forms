@@ -84,7 +84,7 @@ class magic_form_group extends magic_form_item {
   }
 
   private function _weight_sort( magic_form_item $a, magic_form_item $b ) {
-    return $a->get_weight() == $b->get_weight() ? 0 : ( $a->get_weight() > $b->get_weight() ) ? -1 : 1;
+    return $a->get_weight() == $b->get_weight() ? 0 : ( $a->get_weight() > $b->get_weight() ) ? 1 : -1;
   }
 
   /**
