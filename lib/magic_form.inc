@@ -410,7 +410,7 @@ class magic_form extends active_record {
           break;
 
         default:
-          $item = $this->get_field($key);
+          $item = $this->seek_field($key);
 
           if (!$item instanceof magic_form_field) {
             $item = new magic_form_field();
