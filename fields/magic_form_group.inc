@@ -7,13 +7,13 @@ class magic_form_group extends magic_form_item {
   protected $classes = array();
 
   public function __construct($group_name = null, $group_label = null) {
-  $this->set_group_name($group_name);
-  $this->set_group_label($group_label);
+    $this->set_group_name($group_name);
+    $this->set_group_label($group_label);
 
-  // Support legacy behaviour
-  if ($group_label === null && $group_name !== null) {
-  $this->set_group_label($group_name);
-  }
+    // Support legacy behaviour
+    if ($group_label === null && $group_name !== null) {
+    $this->set_group_label($group_name);
+    }
   }
 
   /**
