@@ -28,6 +28,7 @@ function magic_forms_schema() {
       'created' => array(
         'description' => 'TODO: please describe this field!',
         'type' => 'datetime',
+        'mysql_type' => 'datetime',
         'not null' => TRUE,
       ),
       'uid' => array(
