@@ -162,20 +162,8 @@ class magic_form extends active_record {
   }
 
   public function add_field(magic_form_item $field) {
+    $field->apply_weight($this->form_elements);
     $this->form_elements[$field->get_name()] = $field;
-
-    // Find heaviest item.
-    $heaviest = null;
-    if(count($this->form_elements) > 0){
-      foreach($this->form_elements as $other_field){
-        /* @var $other_field magic_form_item */
-        $heaviest = $other_field->get_weight()> $heaviest || $heaviest === null ? $other_field->get_weight() : $heaviest;
-      }
-    }
-
-    $field->set_weight($heaviest + 1);
-
-    $this->is_dirty = true;
     return $this;
   }
 
@@ -188,10 +176,13 @@ class magic_form extends active_record {
   }
 
   public function remove_field($field_name){
-    if(isset($this->form_elements[$field_name])){
-      unset($this->form_elements[$field_name]);
-    }
-    foreach($this->form_elements as $form_element){
+
+    foreach($this->form_elements as $k => $form_element){
+      if($form_element instanceof magic_form_field){
+        if($form_element->get_name() == $field_name){
+          unset($this->form_elements[$k]);
+        }
+      }
       if($form_element instanceof magic_form_group){
         $form_element->remove_field($field_name);
       }
@@ -242,9 +233,11 @@ class magic_form extends active_record {
    *
    * @param $name
    *
-   * @return magic_form_field
+   * @return magic_form_field|magic_form_group
    */
   public function get_field($name) {
+    //echo "Searching form for {$name}<br />";
+    //krumo($this->form_elements);
     foreach ($this->form_elements as  $element) {
       if ($element->get_name() == $name) {
         return $this->form_elements[$name];
@@ -252,15 +245,17 @@ class magic_form extends active_record {
       if (get_class($element) == 'magic_form_group') {
         $sub_fields = $element->get_fields();
         if (count($sub_fields) > 0) {
-          foreach ($sub_fields as $sub_element_name => $sub_element) {
-            if ($sub_element_name == $name) {
-              return $sub_fields[$sub_element_name];
+          //echo "Introspecting children\n";
+          foreach ($sub_fields as $k => $sub_element) {
+            //echo "Is it { $sub_element->get_name()} == {$name}?<br />";
+            if ($sub_element->get_name() == $name) {
+              return $sub_element;
             }
           }
         }
       }
     }
-    watchdog("Remedy Ticket form: Cannot find field: {$name}", "warning");
+    watchdog("magic-form", "Cannot find field: {$name}", "warning");
     return FALSE;
   }
 
@@ -524,7 +519,11 @@ class magic_form extends active_record {
     foreach($this as $name => $field){
       $response->$name = $field;
     }
-    foreach( $this->form_elements as $i => $field){
+    foreach($this->form_elements as $i => $field){
+      /* @var $field magic_form_field */
+      $field->apply_weight($this->form_elements);
+    }
+    foreach($this->form_elements as $i => $field){
       /* @var $field magic_form_field */
       $response->fields[$i] = $field->__toJsonArray();
     }

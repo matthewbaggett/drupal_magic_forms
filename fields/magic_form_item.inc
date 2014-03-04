@@ -17,11 +17,39 @@ class magic_form_item {
 
   public function set_weight($weight){
     $this->weight = $weight;
-    return $weight;
+    return $this;
   }
 
   public function get_weight(){
     return $this->weight;
+  }
+
+  public function apply_weight($form_elements){
+    watchdog("magic-forms","apply_weight called on {$this->get_name()}", array(), WATCHDOG_WARNING);
+    if($this instanceof magic_form_group){
+      if(count($this->fields) > 0){
+        foreach($this->fields as $field){
+          /* @var $field magic_form_item */
+          $field->apply_weight($this->fields);
+        }
+      }
+    }
+    if($this->get_weight() == null){
+      // Find heaviest item.
+      $heaviest = null;
+      if(count($form_elements) > 0){
+        foreach($form_elements as $other_field){
+          /* @var $other_field magic_form_item */
+          $heaviest = $other_field->get_weight() > $heaviest || $heaviest === null ? $other_field->get_weight() : $heaviest;
+        }
+      }
+
+      $this->set_weight($heaviest + 1);
+      watchdog("magic-forms","Field weight calc: {$this->get_name()} Heaviest: {$heaviest}, Set weight: {$this->get_weight()}", array(), WATCHDOG_WARNING);
+
+      $this->is_dirty = true;
+    }
+    return $this;
   }
 
   public function __toJsonArray() {
