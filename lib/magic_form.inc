@@ -533,7 +533,6 @@ class magic_form extends active_record {
       krumo($response);exit;
     }
     header("Content-type: json/application");
-    header("Content-type: text/plain");
     echo magic_form_print_json(json_encode($response));
     exit;
   }
