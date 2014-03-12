@@ -6,4 +6,12 @@ class magic_form_field_checkbox_multi extends magic_form_field_multi {
     $view->field = $this;
     return $this->render("form.checkbox_multi.phtml", $view);
   }
+
+  public function get_value(){
+    if(parent::get_value() === null){
+      return array();
+    }else{
+      return parent::get_value();
+    }
+  }
 }
