@@ -9,7 +9,7 @@
     <?php if ($field->get_value()): ?>
       checked="checked"
     <?php endif; ?>
-    class="<?php echo $field->get_classes(); ?>"
+    class="form-control <?php echo $field->get_classes(); ?>"
     placeholder="<?php echo $field->get_value(); ?>"
     <?php if ($field->is_disabled()): ?>
       readonly
