@@ -1,34 +1,34 @@
 <div
   class="form-group form_select field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>">
-    <?php require("form.label.phtml"); ?>
-      <select
-        name="<?php echo $field->get_name(); ?>"
-        id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
-        class="<?php echo $field->get_classes(); ?>"
-        default="<?php echo $field->get_value(); ?>"
-        <?php if ($field->is_disabled()): ?>
-          readonly="readonly"
-        <?php endif; ?>
-        >
-        <?php if ($field->null_value_allowed()): ?>
-          <option value=""> ---</option>
-        <?php endif; ?>
-        <?php if (count($field->get_options()) > 0): ?>
-          <?php foreach ($field->get_options() as $key => $option_label): ?>
-            <option
-              value="<?php echo $key; ?>"
-              <?php if ($key == $field->get_value()): ?>
-                selected="selected"
-              <?php endif; ?>
-              >
-              <?php echo $option_label; ?>
-            </option>
-          <?php endforeach; ?>
-        <?php endif; ?>
-      </select>
-      <?php if ($field->is_disabled()): ?>
-        <div class="disabled-overlay"></div>
-      <?php endif; ?>
+  <?php require("form.label.phtml"); ?>
+  <select
+    name="<?php echo $field->get_name(); ?>"
+    id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
+    class="<?php echo $field->get_classes(); ?>"
+    default="<?php echo $field->get_value(); ?>"
+    <?php if ($field->is_disabled()): ?>
+      readonly="readonly"
+    <?php endif; ?>
+    >
+    <?php if ($field->null_value_allowed()): ?>
+      <option value=""> ---</option>
+    <?php endif; ?>
+    <?php if (count($field->get_options()) > 0): ?>
+      <?php foreach ($field->get_options() as $key => $option_label): ?>
+        <option
+          value="<?php echo $key; ?>"
+          <?php if ($key == $field->get_value()): ?>
+            selected="selected"
+          <?php endif; ?>
+          >
+          <?php echo $option_label; ?>
+        </option>
+      <?php endforeach; ?>
+    <?php endif; ?>
+  </select>
+  <?php if ($field->is_disabled()): ?>
+    <div class="disabled-overlay"></div>
+  <?php endif; ?>
 
-    <?php require "form.errors.phtml"; ?>
+  <?php require "form.errors.phtml"; ?>
 </div>

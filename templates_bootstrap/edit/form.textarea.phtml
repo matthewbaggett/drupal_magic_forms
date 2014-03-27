@@ -1,14 +1,14 @@
 <div
   class="form-group form_textarea field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>">
-    <?php require("form.label.phtml"); ?>
-      <textarea
-        id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
-        type="text"
-        name="<?php echo $field->get_name(); ?>"
-        class="<?php echo $field->get_classes(); ?>"
-        <?php if ($field->is_disabled()): ?>
-          readonly
-        <?php endif; ?>
-        ><?php echo $field->get_value() ?></textarea>
-    <?php require "form.errors.phtml"; ?>
+  <?php require("form.label.phtml"); ?>
+  <textarea
+    id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
+    type="text"
+    name="<?php echo $field->get_name(); ?>"
+    class="<?php echo $field->get_classes(); ?>"
+    <?php if ($field->is_disabled()): ?>
+      readonly
+    <?php endif; ?>
+    ><?php echo $field->get_value() ?></textarea>
+  <?php require "form.errors.phtml"; ?>
 </div>
