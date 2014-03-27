@@ -1,0 +1,41 @@
+<div
+  class="form-group form_radio field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>">
+  <div class="inner">
+    <?php require("form.label.phtml"); ?>
+    <?php if (count($field->get_options()) > 0): ?>
+      <div class="radio_group">
+        <?php foreach ($field->get_options() as $key => $option_label): ?>
+          <div class="radio_group_option">
+            <?php if (!$field->is_label_after()): ?>
+              <label
+                for="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label); ?>"
+                >
+                <?php echo $option_label; ?>
+              </label>
+            <?php endif; ?>
+            <div class="widget">
+              <input
+                id="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label); ?>"
+                type="radio"
+                name="<?php echo $field->get_name(); ?>"
+                value="<?php echo $key; ?>"
+                <?php if ($key == $field->get_value()): ?>
+                  checked="checked"
+                <?php endif; ?>
+                />
+            </div>
+            <?php if ($field->is_label_after()): ?>
+              <label
+                for="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label); ?>"
+                >
+                <?php echo $option_label; ?>
+              </label>
+            <?php endif; ?>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
+    <?php require "form.errors.phtml"; ?>
+  </div>
+  <div class="clear"></div>
+</div>

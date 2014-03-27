@@ -77,7 +77,7 @@ function magic_forms_init() {
  * @return string
  */
 function magic_forms_template_view($file, $view = null) {
-  $file = DRUPAL_ROOT . "/" . drupal_get_path('module', 'magic_forms') . '/templates/' . $file;
+  $file = DRUPAL_ROOT . "/" . drupal_get_path('module', 'magic_forms') . '/templates_bootstrap/' . $file;
   if (!file_exists($file)) {
     return "Cannot find {$file}";
   }
