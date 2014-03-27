@@ -301,40 +301,44 @@ class magic_form extends active_record {
   }
 
   public function __toString() {
-    $this->__save(false);
-    // Create the view.
-    $view = new StdClass();
-    $view->form_rows = $this->form_elements;
+    try{
+      $this->__save(false);
+      // Create the view.
+      $view = new StdClass();
+      $view->form_rows = $this->form_elements;
 
-    usort($view->form_rows, array($this, '_weight_sort'));
+      usort($view->form_rows, array($this, '_weight_sort'));
 
-    // Check we have a callback or an action
-    if (!(is_callable($this->submit_function) || $this->action !== null)) {
-      drupal_set_message("DANGER WILL ROBINSON! No submit handler has been written for this form nor has an action has been set!", 'error');
-    }
-    if (!count($view->form_rows) > 0) {
-      drupal_set_message("DANGER WILL ROBINSON! No form elements in this form!", 'error');
-    }
-
-    if (count($view->form_rows) > 0) {
-      // Iterate over rows
-      foreach ($view->form_rows as $key => &$row) {
-        /* @var $row magic_form_item */
-        $row->set_scope($this);
-        if (in_array($row->get_name(), $this->fields_to_omit)) {
-          unset($view->form_rows[$key]);
-        }
+      // Check we have a callback or an action
+      if (!(is_callable($this->submit_function) || $this->action !== null)) {
+        drupal_set_message("DANGER WILL ROBINSON! No submit handler has been written for this form nor has an action has been set!", 'error');
       }
-      $view->action = $this->get_action();
-      $view->form_name = $this->get_form_name();
-      $view->form_id = $this->get_form_id();
-      $view->classes = $this->get_classes();
-      $view->autocomplete = $this->autocomplete;
-      $view->scope = $this;
-      $this->__save();
-      return magic_forms_template_view($this->get_render_mode() . "/" . "form.phtml", $view);
+      if (!count($view->form_rows) > 0) {
+        drupal_set_message("DANGER WILL ROBINSON! No form elements in this form!", 'error');
+      }
+
+      if (count($view->form_rows) > 0) {
+        // Iterate over rows
+        foreach ($view->form_rows as $key => &$row) {
+          /* @var $row magic_form_item */
+          $row->set_scope($this);
+          if (in_array($row->get_name(), $this->fields_to_omit)) {
+            unset($view->form_rows[$key]);
+          }
+        }
+        $view->action = $this->get_action();
+        $view->form_name = $this->get_form_name();
+        $view->form_id = $this->get_form_id();
+        $view->classes = $this->get_classes();
+        $view->autocomplete = $this->autocomplete;
+        $view->scope = $this;
+        $this->__save();
+        return magic_forms_template_view($this->get_render_mode() . "/" . "form.phtml", $view);
+      }
+      return false;
+    }catch(Exception $e){
+      return "Exception: {$e->getMessage()}";
     }
-    return false;
   }
 
   public function get_action() {
