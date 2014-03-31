@@ -46,6 +46,10 @@ function magic_form_examples() {
         ->add_validator(new magic_form_validator_is_email())
     );
 
+  $personal_details->add_field(magic_form_field_text::factory('ip_address','IP Address')
+    ->add_validator(new magic_form_validator_is_valid_ip_address()));
+
+
   //Put email above phone number
   $name_weight = $form->get_field('name')->get_weight();
   $salutation_weight = $form->get_field('salutation')->get_weight();

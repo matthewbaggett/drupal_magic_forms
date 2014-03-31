@@ -49,6 +49,7 @@ require_once("validators/magic_form_validator_is_null.inc");
 require_once("validators/magic_form_validator_is_numeric_more_than.inc");
 require_once("validators/magic_form_validator_is_numeric_less_than.inc");
 require_once("validators/magic_form_validator_is_valid_phonenumber.inc");
+require_once("validators/magic_form_validator_is_valid_ip_address.inc");
 
 // Forms default settings
 if (!defined('MAGIC_FORMS_MAX_ACTIVE_FORMS')) define("MAGIC_FORMS_MAX_ACTIVE_FORMS", 100);
