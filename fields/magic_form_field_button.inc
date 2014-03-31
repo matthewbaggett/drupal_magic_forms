@@ -2,6 +2,13 @@
 
 class magic_form_field_button extends magic_form_field {
 
+  /**
+   * @param null $name
+   * @param null $label
+   * @param null $value
+   *
+   * @return magic_form_field_button
+   */
   public static function factory($name = null, $label = null, $value = null) {
     $class = get_called_class();
     if ($label === null) {

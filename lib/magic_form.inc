@@ -162,20 +162,8 @@ class magic_form extends active_record {
   }
 
   public function add_field(magic_form_item $field) {
+    $field->apply_weight($this->form_elements);
     $this->form_elements[$field->get_name()] = $field;
-
-    // Find heaviest item.
-    $heaviest = null;
-    if(count($this->form_elements) > 0){
-      foreach($this->form_elements as $other_field){
-        /* @var $other_field magic_form_item */
-        $heaviest = $other_field->get_weight()> $heaviest || $heaviest === null ? $other_field->get_weight() : $heaviest;
-      }
-    }
-
-    $field->set_weight($heaviest + 1);
-
-    $this->is_dirty = true;
     return $this;
   }
 
@@ -188,10 +176,13 @@ class magic_form extends active_record {
   }
 
   public function remove_field($field_name){
-    if(isset($this->form_elements[$field_name])){
-      unset($this->form_elements[$field_name]);
-    }
-    foreach($this->form_elements as $form_element){
+
+    foreach($this->form_elements as $k => $form_element){
+      if($form_element instanceof magic_form_field){
+        if($form_element->get_name() == $field_name){
+          unset($this->form_elements[$k]);
+        }
+      }
       if($form_element instanceof magic_form_group){
         $form_element->remove_field($field_name);
       }
@@ -242,9 +233,11 @@ class magic_form extends active_record {
    *
    * @param $name
    *
-   * @return magic_form_field
+   * @return magic_form_field|magic_form_group
    */
   public function get_field($name) {
+    //echo "Searching form for {$name}<br />";
+    //krumo($this->form_elements);
     foreach ($this->form_elements as  $element) {
       if ($element->get_name() == $name) {
         return $this->form_elements[$name];
@@ -252,15 +245,17 @@ class magic_form extends active_record {
       if (get_class($element) == 'magic_form_group') {
         $sub_fields = $element->get_fields();
         if (count($sub_fields) > 0) {
-          foreach ($sub_fields as $sub_element_name => $sub_element) {
-            if ($sub_element_name == $name) {
-              return $sub_fields[$sub_element_name];
+          //echo "Introspecting children\n";
+          foreach ($sub_fields as $k => $sub_element) {
+            //echo "Is it { $sub_element->get_name()} == {$name}?<br />";
+            if ($sub_element->get_name() == $name) {
+              return $sub_element;
             }
           }
         }
       }
     }
-    watchdog("Remedy Ticket form: Cannot find field: {$name}", "warning");
+    watchdog("magic-form", "Cannot find field: {$name}", "warning");
     return FALSE;
   }
 
@@ -306,40 +301,44 @@ class magic_form extends active_record {
   }
 
   public function __toString() {
-    $this->__save(false);
-    // Create the view.
-    $view = new StdClass();
-    $view->form_rows = $this->form_elements;
+    try{
+      $this->__save(false);
+      // Create the view.
+      $view = new StdClass();
+      $view->form_rows = $this->form_elements;
 
-    usort($view->form_rows, array($this, '_weight_sort'));
+      usort($view->form_rows, array($this, '_weight_sort'));
 
-    // Check we have a callback or an action
-    if (!(is_callable($this->submit_function) || $this->action !== null)) {
-      drupal_set_message("DANGER WILL ROBINSON! No submit handler has been written for this form nor has an action has been set!", 'error');
-    }
-    if (!count($view->form_rows) > 0) {
-      drupal_set_message("DANGER WILL ROBINSON! No form elements in this form!", 'error');
-    }
-
-    if (count($view->form_rows) > 0) {
-      // Iterate over rows
-      foreach ($view->form_rows as $key => &$row) {
-        /* @var $row magic_form_item */
-        $row->set_scope($this);
-        if (in_array($row->get_name(), $this->fields_to_omit)) {
-          unset($view->form_rows[$key]);
-        }
+      // Check we have a callback or an action
+      if (!(is_callable($this->submit_function) || $this->action !== null)) {
+        drupal_set_message("DANGER WILL ROBINSON! No submit handler has been written for this form nor has an action has been set!", 'error');
       }
-      $view->action = $this->get_action();
-      $view->form_name = $this->get_form_name();
-      $view->form_id = $this->get_form_id();
-      $view->classes = $this->get_classes();
-      $view->autocomplete = $this->autocomplete;
-      $view->scope = $this;
-      $this->__save();
-      return magic_forms_template_view($this->get_render_mode() . "/" . "form.phtml", $view);
+      if (!count($view->form_rows) > 0) {
+        drupal_set_message("DANGER WILL ROBINSON! No form elements in this form!", 'error');
+      }
+
+      if (count($view->form_rows) > 0) {
+        // Iterate over rows
+        foreach ($view->form_rows as $key => &$row) {
+          /* @var $row magic_form_item */
+          $row->set_scope($this);
+          if (in_array($row->get_name(), $this->fields_to_omit)) {
+            unset($view->form_rows[$key]);
+          }
+        }
+        $view->action = $this->get_action();
+        $view->form_name = $this->get_form_name();
+        $view->form_id = $this->get_form_id();
+        $view->classes = $this->get_classes();
+        $view->autocomplete = $this->autocomplete;
+        $view->scope = $this;
+        $this->__save();
+        return magic_forms_template_view($this->get_render_mode() . "/" . "form.phtml", $view);
+      }
+      return false;
+    }catch(Exception $e){
+      return "Exception: {$e->getMessage()}";
     }
-    return false;
   }
 
   public function get_action() {
@@ -524,7 +523,11 @@ class magic_form extends active_record {
     foreach($this as $name => $field){
       $response->$name = $field;
     }
-    foreach( $this->form_elements as $i => $field){
+    foreach($this->form_elements as $i => $field){
+      /* @var $field magic_form_field */
+      $field->apply_weight($this->form_elements);
+    }
+    foreach($this->form_elements as $i => $field){
       /* @var $field magic_form_field */
       $response->fields[$i] = $field->__toJsonArray();
     }
@@ -533,8 +536,7 @@ class magic_form extends active_record {
     if(isset($_GET['debug'])){
       krumo($response);exit;
     }
-    header("Content-type: json/application");
-    header("Content-type: text/plain");
+    header("Content-type: application/json");
     echo magic_form_print_json(json_encode($response));
     exit;
   }

@@ -75,10 +75,12 @@ class magic_form_group extends magic_form_item {
    * @return $this
    */
   public function remove_field($field_name){
-    if(isset($this->fields[$field_name])){
-      unset($this->fields[$field_name]);
-    }
-    foreach($this->fields as $form_element){
+    foreach($this->fields as $k => $form_element){
+      if($form_element instanceof magic_form_field){
+        if($form_element->get_name() == $field_name){
+          unset($this->fields[$k]);
+        }
+      }
       if($form_element instanceof magic_form_group){
         $form_element->remove_field($field_name);
       }

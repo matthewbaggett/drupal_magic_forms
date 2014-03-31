@@ -1,0 +1,13 @@
+<?php /* @var $field magic_form_group */ ?>
+<div
+  class="form-group field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> weight_<?php echo $field->get_weight(); ?>">
+  <?php if (strlen($field->get_group_label()) > 0): ?>
+    <h3><?php echo $field->get_group_label(); ?></h3>
+  <?php endif; ?>
+
+  <?php if (count($field->get_fields()) > 0): ?>
+    <?php foreach ($field->get_fields() as $field): ?>
+      <?php echo $field; ?>
+    <?php endforeach; ?>
+  <?php endif; ?>
+</div>
