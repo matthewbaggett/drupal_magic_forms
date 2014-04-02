@@ -46,7 +46,7 @@ class magic_form_field extends magic_form_item {
   public function __toString() {
     $view = new StdClass();
     $view->field = $this;
-    return $this->render("form.input.phtml", $view);
+    return $this->render("form.input.phtml", $view, $this->get_scope()->get_templates_directory());
   }
 
   /**

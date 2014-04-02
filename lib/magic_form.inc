@@ -13,6 +13,7 @@ class magic_form extends active_record {
   public $form_elements;
   public $submit_function;
   public $submit_destination = null;
+  private $templates_directory = 'templates';
   public $render_mode = self::MAGIC_FORM_RENDER_MODE_EDIT;
   public $action = null;
   public $classes = array();
@@ -333,7 +334,7 @@ class magic_form extends active_record {
         $view->autocomplete = $this->autocomplete;
         $view->scope = $this;
         $this->__save();
-        return magic_forms_template_view($this->get_render_mode() . "/" . "form.phtml", $view);
+        return magic_forms_template_view($this->get_render_mode() . "/" . "form.phtml", $view, $this->get_templates_directory());
       }
       return false;
     }catch(Exception $e){
@@ -476,6 +477,15 @@ class magic_form extends active_record {
       $this->add_default($value, $element_name);
     }
     return $this;
+  }
+
+  public function set_templates_directory($templates_directory){
+    $this->templates_directory = $templates_directory;
+    return $this;
+  }
+
+  public function get_templates_directory(){
+    return $this->templates_directory;
   }
 
   public function add_class($class) {

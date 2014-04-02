@@ -4,7 +4,7 @@ class magic_form_field_file extends magic_form_field {
   public function __toString() {
     $view = new StdClass();
     $view->field = $this;
-    return $this->render("form.file.phtml", $view);
+    return $this->render("form.file.phtml", $view, $this->get_scope()->get_templates_directory());
   }
 
   public function get_data() {

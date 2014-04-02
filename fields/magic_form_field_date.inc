@@ -93,7 +93,7 @@ class magic_form_field_date extends magic_form_field_text {
   public function __toString() {
     $view = new StdClass();
     $view->field = $this;
-    return $this->render("form.date.phtml", $view);
+    return $this->render("form.date.phtml", $view, $this->get_scope()->get_templates_directory());
   }
 
   /* draws a calendar */
