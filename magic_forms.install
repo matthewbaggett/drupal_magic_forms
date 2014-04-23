@@ -10,6 +10,23 @@ function magic_forms_update_7001() {
     ->execute();
 }
 
+/**
+ * Change TEXT fields to LONGTEXT
+ */
+function magic_forms_update_7002() {
+  $textarea_spec = array(
+    'type' => 'text',
+    'size' => 'big',
+    'not null' => FALSE,
+  );
+  db_change_field('magic_forms', 'form_elements', 'form_elements', $textarea_spec);
+  db_change_field('magic_forms', 'submit_function', 'submit_function', $textarea_spec);
+  db_change_field('magic_forms', 'submit_destination', 'submit_destination', $textarea_spec);
+  db_change_field('magic_forms', 'classes', 'classes', $textarea_spec);
+  db_change_field('magic_forms', 'fields_to_omit', 'fields_to_omit', $textarea_spec);
+  db_change_field('magic_forms', 'autocomplete', 'autocomplete', $textarea_spec);
+}
+
 function magic_forms_schema() {
   $schema['magic_forms'] = array(
     'description' => 'TODO: please describe this table!',
