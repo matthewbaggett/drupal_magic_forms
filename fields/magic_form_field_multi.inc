@@ -49,13 +49,12 @@ class magic_form_field_multi extends magic_form_field {
    */
   public function add_options($array_of_options) {
     foreach ($array_of_options as $key => $value) {
-      if (class_exists('active_record')) {
-        if ($value instanceof active_record) {
+      if (class_exists('active_record') || class_exists('data_object')) {
+        if ($value instanceof active_record || $value instanceof data_object) {
           $this->add_option($value->get_label(), $value->get_id());
           continue;
         }
       }
-      $this->add_option($value, $key);
     }
     return $this;
   }
