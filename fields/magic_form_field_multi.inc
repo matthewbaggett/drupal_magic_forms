@@ -54,9 +54,8 @@ class magic_form_field_multi extends magic_form_field {
           $this->add_option($value->get_label(), $value->get_id());
           continue;
         }
-      }elseif(!is_object($value)){
-        $this->add_option($value, $key);
       }
+      $this->add_option($value, $key);
     }
     return $this;
   }
