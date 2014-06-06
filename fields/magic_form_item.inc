@@ -25,7 +25,6 @@ class magic_form_item {
   }
 
   public function apply_weight($form_elements){
-    watchdog("magic-forms","apply_weight called on {$this->get_name()}", array(), WATCHDOG_WARNING);
     if($this instanceof magic_form_group){
       if(count($this->fields) > 0){
         foreach($this->fields as $field){
@@ -45,7 +44,6 @@ class magic_form_item {
       }
 
       $this->set_weight($heaviest + 1);
-      watchdog("magic-forms","Field weight calc: {$this->get_name()} Heaviest: {$heaviest}, Set weight: {$this->get_weight()}", array(), WATCHDOG_WARNING);
 
       $this->is_dirty = true;
     }
