@@ -5,7 +5,8 @@
     id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
     type="text"
     name="<?php echo $field->get_name(); ?>"
-    class="<?php echo $field->get_classes(); ?>"
+    class="form-control <?php echo $field->get_classes(); ?>"
+    rows="10"
     <?php if ($field->is_disabled()): ?>
       readonly
     <?php endif; ?>
