@@ -220,7 +220,7 @@ class magic_form extends active_record {
       foreach($this->form_elements as &$form_element){
         /* @var $form_element magic_form_field */
         if(method_exists($form_element, 'get_label') && method_exists($form_element, 'set_label')){
-          if($form_element->get_label() == $original){
+          if($form_element->get_name() == $original){
             $form_element->set_label($replacement);
           }
         }
