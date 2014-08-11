@@ -241,7 +241,7 @@ class magic_form extends active_record {
     //krumo($this->form_elements);
     foreach ($this->form_elements as  $element) {
       if ($element->get_name() == $name) {
-        return isset($this->form_elements[$name])?$this->form_elements[$name]:false;
+        return $element;
       }
       if (get_class($element) == 'magic_form_group') {
         $sub_fields = $element->get_fields();
