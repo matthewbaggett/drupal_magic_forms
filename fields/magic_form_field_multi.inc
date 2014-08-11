@@ -86,6 +86,19 @@ class magic_form_field_multi extends magic_form_field {
     return $this;
   }
 
+  public function sort_options(){
+    $options = array();
+    foreach($this->get_options() as $key => $value){
+      $options[$value] = ['key' => $key, 'value' => $value];
+    }
+    ksort($options);
+    $sorted_options = array();
+    foreach($options as $option){
+      $sorted_options[$option['key']] = $option['value'];
+    }
+    $this->set_options($sorted_options);
+  }
+
   /**
    * Set labels to go before input
    *
