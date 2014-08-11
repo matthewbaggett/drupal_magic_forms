@@ -70,6 +70,9 @@ function magic_form_examples() {
     ->add_field(magic_form_field_date::factory('date', 'Date Only')->set_support_date(true)->set_support_time(false))
     ->add_field(magic_form_field_date::factory('time', 'Time Only')->set_support_date(false)->set_support_time(true));
 
+  magic_form_field_date::factory('date_time', 'Date & Time')->set_default_value(date("Y-m-d H:i:s"));
+
+
   // Add a Series of checkboxes for non-mutually-exclusive options.
   $options = new magic_form_field_checkbox_multi('room-options', 'Room Options');
   $options->add_options(array(
