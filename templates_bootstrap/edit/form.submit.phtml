@@ -1,15 +1,17 @@
 <div
   class="form-group form_submit field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>">
 
-  <input
+  <button
     type="submit"
     id="<?php echo $field->get_name(); ?>"
     name="<?php echo $field->get_name(); ?>"
-    value="<?php echo $field->get_label() ?>"
-    class="<?php echo $field->get_classes(); ?> btn btn-primary"
+    class="<?php echo $field->get_classes(); ?> btn btn-primary btn-lg pull-right"
     <?php if ($field->is_disabled()): ?>
       disabled="disabled"
     <?php endif; ?>
-    />
+    >
+    <span class="glyphicon glyphicon-save"></span>
+    <?php echo $field->get_label() ?>
+  </button>
   <?php require "form.errors.phtml"; ?>
 </div>
