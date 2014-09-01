@@ -256,7 +256,7 @@ class magic_form extends active_record {
         }
       }
     }
-    watchdog("magic-form", "Cannot find field: {$name}", "warning");
+    watchdog("magic-form", "Cannot find field: :name", array(':name' => $name), "warning");
     return FALSE;
   }
 
