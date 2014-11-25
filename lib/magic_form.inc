@@ -211,6 +211,9 @@ class magic_form extends active_record {
   }
 
   public function replace_field($name, magic_form_field $field){
+    if(!isset($this->form_elements[$name])){
+      drupal_set_message("Cannot replace field {$name}, does not exist in form.", "warning");
+    }
     $this->form_elements[$name] = $field;
     return $this;
   }
