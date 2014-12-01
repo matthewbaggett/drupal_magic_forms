@@ -4,6 +4,8 @@ function magic_form_examples() {
   // Create a new form
   $form = magic_form::factory('my-form');
 
+  $form->set_templates_directory('templates_bootstrap');
+
   $personal_details = magic_form_group::factory('Personal Details');
 
   // Create a name field
@@ -72,6 +74,8 @@ function magic_form_examples() {
 
   magic_form_field_date::factory('date_time', 'Date & Time')->set_default_value(date("Y-m-d H:i:s"));
 
+  $checkbox = new magic_form_field_checkbox('checkbox', 'I like checkboxes');
+  $form->add_field($checkbox);
 
   // Add a Series of checkboxes for non-mutually-exclusive options.
   $options = new magic_form_field_checkbox_multi('room-options', 'Room Options');

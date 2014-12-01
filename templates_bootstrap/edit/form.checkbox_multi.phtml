@@ -4,15 +4,9 @@
   <?php if (count($field->get_options()) > 0): ?>
     <div class="checkbox_group">
       <?php foreach ($field->get_options() as $key => $option_label): ?>
-        <div class="checkbox_group_option">
-          <?php if (!$field->is_label_after()): ?>
-            <label
-              for="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label); ?>"
-              >
-              <?php echo $option_label; ?>
-            </label>
-          <?php endif; ?>
-          <div class="widget">
+        <div class="checkbox checkbox_group_option">
+
+          <label for="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label); ?>">
             <input
               id="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label); ?>"
               type="checkbox"
@@ -23,14 +17,10 @@
                 checked="checked"
               <?php endif; ?>
               />
-          </div>
-          <?php if ($field->is_label_after()): ?>
-            <label
-              for="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label); ?>"
-              >
+
               <?php echo $option_label; ?>
-            </label>
-          <?php endif; ?>
+          </label>
+
         </div>
       <?php endforeach; ?>
     </div>

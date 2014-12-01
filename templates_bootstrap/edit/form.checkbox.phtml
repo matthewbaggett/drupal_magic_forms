@@ -1,20 +1,24 @@
 <div
   class="form-group form_checkbox field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>">
 
-  <?php require("form.label.phtml"); ?>
-  <input
-    id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
-    type="checkbox"
-    name="<?php echo $field->get_name(); ?>"
-    <?php if ($field->get_value()): ?>
-      checked="checked"
-    <?php endif; ?>
-    class="form-control <?php echo $field->get_classes(); ?>"
-    placeholder="<?php echo $field->get_value(); ?>"
-    <?php if ($field->is_disabled()): ?>
-      readonly
-    <?php endif; ?>
-    />
+  <div class="checkbox">
+    <label>
+      <input
+        id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
+        type="checkbox"
+        name="<?php echo $field->get_name(); ?>"
+        <?php if ($field->get_value()): ?>
+          checked="checked"
+        <?php endif; ?>
+        class="form-control <?php echo $field->get_classes(); ?>"
+        placeholder="<?php echo $field->get_value(); ?>"
+        <?php if ($field->is_disabled()): ?>
+          readonly
+        <?php endif; ?>
+        />
+      <?php echo $field->get_label(); ?>
+    </label>
+  </div>
   <?php require "form.errors.phtml"; ?>
 
 </div>
