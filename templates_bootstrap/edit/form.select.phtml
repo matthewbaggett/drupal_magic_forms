@@ -17,6 +17,7 @@
       <?php foreach ($field->get_options() as $key => $option_label): ?>
         <option
           value="<?php echo $key; ?>"
+          name="<?php echo magic_forms_mangle_to_css_class($option_label); ?>"
           <?php if ($key == $field->get_value()): ?>
             selected="selected"
           <?php endif; ?>
