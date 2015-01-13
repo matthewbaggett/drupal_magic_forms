@@ -87,8 +87,10 @@ function magic_form_field(type, name, label, value, default_value) {
       key: option_key,
       value: option_value
     });
+    var option_class = option_value.replace(/\W-/g, '').replace(" ","-").toLowerCase();
+
     jQuery('.form_row.field-' + this.name + ' select')
-      .append("<option value=\"" + option_key + "\">" + option_value + "</option>");
+      .append("<option value=\"" + option_key + "\" name=\"" + option_class + "\">" + option_value + "</option>");
     var option_id = this.name + '_' + option_key;
     jQuery('.form_row.field-' + this.name + ' .radio_group')
       .append("<div class=\"radio_group_option\"><input name=\"" + this.name + "\" id=\"" + option_id + "\" type=\"radio\" value=\"" + option_key + "\"><label for=\"" + option_id + "\">" + option_value + "</label></div>");
@@ -211,8 +213,10 @@ function magic_form_field(type, name, label, value, default_value) {
   this.html_select_options = function () {
     var option;
     var option_html = '';
+
     while (option = this.options.shift()) {
-      option_html += "<option value=\"" + option.key + "\">" + option.value + "</option>";
+      option.class = option.value.replace(/\W-/g, '').replace(" ","-").toLowerCase();
+      option_html += "<option value=\"" + option.key + "\" name=\"" + option.class + "\">" + option.value + "</option>";
     }
     return option_html;
   };
