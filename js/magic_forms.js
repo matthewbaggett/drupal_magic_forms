@@ -87,7 +87,7 @@ function magic_form_field(type, name, label, value, default_value) {
       key: option_key,
       value: option_value
     });
-    var option_class = option_value.replace(/\W-/g, '').replace(" ","-").toLowerCase();
+    var option_class = option_value.replace(/\W-/g, '').replace(" ","-").replace("_","").toLowerCase();
 
     jQuery('.form_row.field-' + this.name + ' select')
       .append("<option value=\"" + option_key + "\" name=\"" + option_class + "\">" + option_value + "</option>");
@@ -215,7 +215,7 @@ function magic_form_field(type, name, label, value, default_value) {
     var option_html = '';
 
     while (option = this.options.shift()) {
-      option.class = option.value.replace(/\W-/g, '').replace(" ","-").toLowerCase();
+      option.class = option.value.replace(/\W-/g, '').replace(" ","-").replace("_","").toLowerCase();
       option_html += "<option value=\"" + option.key + "\" name=\"" + option.class + "\">" + option.value + "</option>";
     }
     return option_html;
