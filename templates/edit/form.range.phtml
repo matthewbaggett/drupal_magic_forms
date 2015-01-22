@@ -13,7 +13,7 @@
           data-slider-value="<?php echo $field->get_value() ?>"
           data-slider-orientation="horizontal"
           data-slider-selection="after"
-          data-slider-tooltip="show"
+          data-slider-tooltip="<?php echo ($field->get_option('show_tooltip') ? 'show':'hide'); ?>"
           <?php if ($field->is_disabled()): ?>
             readonly
           <?php endif; ?>
@@ -40,12 +40,7 @@
       jQuery( "#<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options div").css('width',(widthoptions/<?php echo $c; ?>));
     });
   </script>
-  <!--<input
-    id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_showvalue"
-    value=""
-    <?php if ($field->is_disabled()): ?>
-      readonly
-    <?php endif; ?>
-    />-->
+
+
   <?php require "form.errors.phtml"; ?>
 </div>
