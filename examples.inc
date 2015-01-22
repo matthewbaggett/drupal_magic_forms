@@ -100,10 +100,9 @@ function magic_form_examples() {
   $distance->set_min(100);
   $distance->set_max(1000);
   $distance->set_step(100);
-  $distance->set_options(array('show_tooltip' => 1,
-                            'show_increments' => 0,
-                            'show_minmax' => 0));
-
+  $distance->set_options(array('show_tooltip' => false,
+                            'show_increments' => true,
+                            'show_minmax' => false));
   $form->add_field($distance);
 
 
