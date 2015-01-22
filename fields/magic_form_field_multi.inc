@@ -45,7 +45,7 @@ class magic_form_field_multi extends magic_form_field {
    *
    * @param $array_of_options
    *
-   * @return magic_form_field_multi
+   * @return magic_form_field_switch
    */
   public function add_options($array_of_options) {
     foreach ($array_of_options as $key => $value) {

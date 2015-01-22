@@ -4,7 +4,7 @@
   <select
     name="<?php echo $field->get_name(); ?>"
     id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
-    class="form-control <?php echo $field->get_classes(); ?>"
+    class="form-control <?php echo $field->get_classes(); ?> <?php if (!$field->get_label()) { echo 'hasnolabel'; } ?>"
     default="<?php echo $field->get_value(); ?>"
     <?php if ($field->is_disabled()): ?>
       readonly="readonly"

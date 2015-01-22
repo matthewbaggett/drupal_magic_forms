@@ -1,0 +1,51 @@
+<div
+  class="form-group form_input field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>  <?php if (!$field->get_label()) { echo 'hasnolabel'; } ?>">
+  <?php require("form.label.phtml"); ?>
+
+  <div class="range_group">
+  <input
+          type="text" id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
+          class="span2"
+          value="<?php echo $field->get_value() ?>"
+          data-slider-min="<?php echo $field->get_min(); ?>"
+          data-slider-max="<?php echo $field->get_max(); ?>"
+          data-slider-step="<?php echo $field->get_step(); ?>"
+          data-slider-value="<?php echo $field->get_value() ?>"
+          data-slider-orientation="horizontal"
+          data-slider-selection="after"
+          data-slider-tooltip="show"
+          <?php if ($field->is_disabled()): ?>
+            readonly
+          <?php endif; ?>
+   />
+  <div id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options" class="slider_options">
+    <?php
+    $c = 0;
+    for ($x = $field->get_min(); $x <= $field->get_max(); $x = $x + $field->get_min()) {
+      echo '<div class="option_'.$x.'">'.$x.'</div>';
+      $c++;
+    }
+    ?>
+  </div>
+  </div>
+
+  <script>
+    jQuery(function() {
+     jQuery('#<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').slider();
+      /*PRODUCE STYLING*/
+      var width = jQuery('.field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').width() * 0.79;
+      var widthoptions = (jQuery('.field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').width() * 0.79) + 70;
+      jQuery( ".field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> .slider-horizontal").css('width',width);
+      jQuery( "#<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options").css('width',widthoptions);
+      jQuery( "#<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options div").css('width',(widthoptions/<?php echo $c; ?>));
+    });
+  </script>
+  <!--<input
+    id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_showvalue"
+    value=""
+    <?php if ($field->is_disabled()): ?>
+      readonly
+    <?php endif; ?>
+    />-->
+  <?php require "form.errors.phtml"; ?>
+</div>

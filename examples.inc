@@ -49,6 +49,10 @@ function magic_form_examples() {
     );
 
 
+
+
+
+
   //Put email above phone number
   $name_weight = $form->get_field('name')->get_weight();
   $salutation_weight = $form->get_field('salutation')->get_weight();
@@ -75,8 +79,8 @@ function magic_form_examples() {
   magic_form_field_date::factory('date_time', 'Date & Time')->set_default_value(date("Y-m-d H:i:s"));
 
   $checkbox = new magic_form_field_checkbox('checkbox', 'I like checkboxes');
-  $form->add_field($checkbox);
 
+  $form->add_field($checkbox);
   // Add a Series of checkboxes for non-mutually-exclusive options.
   $options = new magic_form_field_checkbox_multi('room-options', 'Room Options');
   $options->add_options(array(
@@ -90,6 +94,21 @@ function magic_form_examples() {
   ));
   $options->set_value(array("disabled", "top"));
   $form->add_field($options);
+
+  // Add Range field
+  $distance = magic_form_field_range::factory('distance', 'Distance');
+  $distance->set_min(100);
+  $distance->set_max(1000);
+  $distance->set_step(100);
+  $form->add_field($distance);
+
+
+  // Add Switch field
+  $switch = new magic_form_field_switch('switch', 'SWITCH');
+  $form->add_field($switch);
+
+
+
 
   // Add Submit button to form
   $form->add_field(magic_form_field_submit::factory('submit', 'Submit'));
