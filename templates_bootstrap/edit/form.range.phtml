@@ -13,11 +13,13 @@
           data-slider-value="<?php echo $field->get_value() ?>"
           data-slider-orientation="horizontal"
           data-slider-selection="after"
-          data-slider-tooltip="show"
+          data-slider-tooltip="<?php echo ($field->get_option('show_tooltip') ? 'show' : 'hide'); ?>"
           <?php if ($field->is_disabled()): ?>
             readonly
           <?php endif; ?>
    />
+
+    <?php if ($field->get_option('show_increments')) { ?>
   <div id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options" class="slider_options">
     <?php
     $c = 0;
@@ -27,6 +29,9 @@
     }
     ?>
   </div>
+    <?php } ?>
+
+
   </div>
 
   <script>
@@ -36,8 +41,10 @@
       var width = jQuery('.field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').width() * 0.79;
       var widthoptions = (jQuery('.field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').width() * 0.79) + 70;
       jQuery( ".field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> .slider-horizontal").css('width',width);
+      <?php if ($field->get_option('show_increments')) { ?>
       jQuery( "#<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options").css('width',widthoptions);
       jQuery( "#<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options div").css('width',(widthoptions/<?php echo $c; ?>));
+      <?php } ?>
     });
   </script>
   <!--<input

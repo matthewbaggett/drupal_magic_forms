@@ -4,6 +4,12 @@ class magic_form_field_range extends magic_form_field {
   private $min;
   private $max;
   private $step;
+  private $options;
+  private $option;
+  /*private $show_tooltip;
+  private $show_increments;
+  private $show_min;
+  private $show_max;*/
 
   /**
    * @param null $name Internal Name for this field
@@ -18,6 +24,14 @@ class magic_form_field_range extends magic_form_field {
 
   public function __post_construct(){
 
+  }
+
+  public function set_options($options){
+    return $this->options = $options;
+  }
+
+  public function get_option($option){
+    return $this->options[$option];
   }
 
   public function set_min($min){

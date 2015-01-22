@@ -100,7 +100,13 @@ function magic_form_examples() {
   $distance->set_min(100);
   $distance->set_max(1000);
   $distance->set_step(100);
+  $distance->set_options( array('show_tooltip' => 0,
+                            'show_increments' => 0,
+                            'show_showminmax' => 1));
+
   $form->add_field($distance);
+
+
 
 
   // Add Switch field
