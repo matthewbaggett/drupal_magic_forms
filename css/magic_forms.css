@@ -166,3 +166,5 @@ form.magic_form select.error,
 form.magic_form textarea.error {
     border: 1px solid red;
 }
+
+form.magic_bootstrap_form .form-group .label label { color:#000000; }
