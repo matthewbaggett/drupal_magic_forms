@@ -115,6 +115,25 @@ function magic_form_examples() {
 
 
 
+
+  $multiswitch = new magic_form_field_switch_multi('room-options2', 'Room Options 2');
+  $multiswitch->add_options(array(
+    'FW' => 'FW',
+    'FWIPS' => 'FW+IPS',
+    'NGFW' => 'NGFW',
+    'NGTP' => 'NGTP'
+  ));
+  $multiswitch->set_value("NGFW");
+  $form->add_field($multiswitch);
+
+
+
+
+
+
+
+
+
   // Add Submit button to form
   $form->add_field(magic_form_field_submit::factory('submit', 'Submit'));
 
