@@ -78,6 +78,6 @@ class magic_form_item {
     } else {
       $render_mode = $scope->get_render_mode();
     }
-    return magic_forms_template_view($render_mode . "/" . $template, $view, $this->get_scope() instanceof magic_form ? $this->get_scope()->get_templates_directory(): 'templates');
+    return magic_forms_template_view($render_mode . "/" . $template, $view, $this->get_scope() instanceof magic_form ? $this->get_scope()->get_templates_directory(): 'templates_bootstrap');
   }
 }
