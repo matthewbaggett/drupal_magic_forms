@@ -107,12 +107,9 @@ function magic_form_examples() {
 
 
 
-
   // Add Switch field
   $switch = new magic_form_field_switch('switch', 'SWITCH');
   $form->add_field($switch);
-
-
 
 
 
@@ -125,12 +122,6 @@ function magic_form_examples() {
   ));
   $multiswitch->set_value("NGFW");
   $form->add_field($multiswitch);
-
-
-
-
-
-
 
 
 
