@@ -97,7 +97,7 @@
   background: transparent none;
 }
 
-.slider_options { margin-left:-40px; margin-top:10px;}
+.slider_options { /*margin-left:-40px;*/ margin-left:-20px; margin-top:10px;}
 .slider_options div { display:inline-block; text-align:center; color:#747474 }
 .slider_options div:last-child { margin-left: -1px; }
 

@@ -47,7 +47,8 @@
      jQuery('#<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').slider();
       /*PRODUCE STYLING*/
       var width = jQuery('.field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').width() * 0.79;
-      var widthoptions = (jQuery('.field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').width() * 0.79)<?php echo ($field->get_option('show_minmax') ? ' + 20' : ' + 70'); ?>;
+      var widthoptions = (jQuery('.field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').width() * 0.79) + 30;
+      <!--var widthoptions = (jQuery('.field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').width() * 0.79)<?php echo ($field->get_option('show_minmax') ? ' + 20' : ' + 70'); ?>;-->
       jQuery( ".field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> .slider-horizontal").css('width',width);
       <?php if ($field->get_option('show_increments')) { ?>
       jQuery( "#<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options").css('width',widthoptions);
