@@ -125,6 +125,15 @@ function magic_form_examples() {
 
 
 
+  // Add SpinEdit field
+  $quantity = magic_form_field_spinedit::factory('quantity', 'Quantity');
+  $quantity->set_min(-10);
+  $quantity->set_max(10);
+  $quantity->set_step(1);
+  $form->add_field($quantity);
+
+
+
   // Add Submit button to form
   $form->add_field(magic_form_field_submit::factory('submit', 'Submit'));
 

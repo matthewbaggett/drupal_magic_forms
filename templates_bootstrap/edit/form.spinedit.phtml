@@ -1,0 +1,29 @@
+<div
+  class="form-group form_input field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>  <?php if (!$field->get_label()) { echo 'hasnolabel'; } ?>">
+  <?php require("form.label.phtml"); ?>
+
+  <div class="spinedit">
+
+    <input
+      id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
+      type="text"
+      class="aSpinEdit"
+      <?php if ($field->is_disabled()): ?>
+        readonly
+      <?php endif; ?>
+     />
+    <script>
+      jQuery(function() {
+        jQuery('#<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').spinedit({
+          minimum: <?php echo $field->get_min(); ?>,
+          maximum: <?php echo $field->get_max(); ?>,
+          step: <?php echo $field->get_step(); ?>
+        });
+      });
+    </script>
+
+
+  </div>
+
+  <?php require "form.errors.phtml"; ?>
+</div>

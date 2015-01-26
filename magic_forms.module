@@ -18,6 +18,7 @@ require_once("fields/magic_form_field_file.inc");
 require_once("fields/magic_form_field_radio.inc");
 require_once("fields/magic_form_field_range.inc");
 require_once("fields/magic_form_field_select.inc");
+require_once("fields/magic_form_field_spinedit.inc");
 require_once("fields/magic_form_field_submit.inc");
 require_once("fields/magic_form_field_switch.inc");
 require_once("fields/magic_form_field_switch_multi.inc");

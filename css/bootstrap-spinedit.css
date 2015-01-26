@@ -1,0 +1,10 @@
+div.spinedit { display: inline-block; position: relative; }
+input[type="text"].spinedit { width: 35px; }
+div.spinedit .spinedit-up,
+div.spinedit .spinedit-down { position: relative; cursor: pointer; width: 12px; left: 6px; }
+div.spinedit .spinedit-up { top: -5px; -ms-transform: rotate(-90deg);  -webkit-transform: rotate(-90deg); transform: rotate(-90deg); }
+div.spinedit .spinedit-down { top: 6px; left: -4px; -ms-transform: rotate(90deg);  -webkit-transform: rotate(90deg); transform: rotate(90deg);}
+.form-search div.spinedit, .form-inline div.spinedit, .form-horizontal div.spinedit { top: 5px; }
+
+
+div.spinedit input[type="text"]  { border:1px solid #000000 !important; height:32px; min-width:60px; padding-left:12px; padding-right:12px; }

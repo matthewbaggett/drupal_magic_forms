@@ -5,10 +5,12 @@ core = 7.x
 stylesheets[all][] = css/magic_forms.css
 stylesheets[all][] = css/magic_forms.calendar.css
 stylesheets[all][] = css/slider.css
+stylesheets[all][] = css/bootstrap-spinedit.css
 stylesheets[all][] = css/bootstrap-switch.css
 scripts[] = js/magic_forms.js
 scripts[] = js/magic_forms.calendar.js
 scripts[] = js/bootstrap-slider.js
+scripts[] = js/bootstrap-spinedit.js
 scripts[] = js/bootstrap-switch.js
 
 dependencies[] = active_record
