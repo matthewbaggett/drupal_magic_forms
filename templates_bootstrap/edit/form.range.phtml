@@ -32,8 +32,8 @@
   </div>
     <?php } elseif ($field->get_option('show_minmax')) {?>
       <div id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_minmax" class="slider_options slider_minmax">
-        <div class="min"><?php echo $field->get_min(); ?></div>
-        <div class="max"><?php echo $field->get_max(); ?></div>
+        <div class="min"><?php echo $field->get_min(); ?><?php echo ''.($field->get_unit() ? $field->get_unit() : '').''; ?></div>
+        <div class="max"><?php echo $field->get_max(); ?><?php echo ''.($field->get_unit() ? $field->get_unit() : '').''; ?></div>
       </div>
 
     <?php } ?>
