@@ -4,6 +4,7 @@ class magic_form_field_range extends magic_form_field {
   private $min;
   private $max;
   private $step;
+  private $unit;
   private $options;
   private $option;
   /*private $show_tooltip;
@@ -58,6 +59,14 @@ class magic_form_field_range extends magic_form_field {
 
   public function get_step(){
     return $this->step;
+  }
+
+  public function set_unit($unit){
+    return $this->unit = $unit;
+  }
+
+  public function get_unit(){
+    return $this->unit;
   }
 
 

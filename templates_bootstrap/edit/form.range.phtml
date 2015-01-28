@@ -10,6 +10,7 @@
           data-slider-min="<?php echo $field->get_min(); ?>"
           data-slider-max="<?php echo $field->get_max(); ?>"
           data-slider-step="<?php echo $field->get_step(); ?>"
+          data-slider-unit="<?php echo $field->get_unit(); ?>"
           data-slider-value="<?php echo $field->get_value() ?>"
           data-slider-orientation="horizontal"
           data-slider-selection="after"
@@ -24,7 +25,7 @@
     <?php
     $c = 0;
     for ($x = $field->get_min(); $x <= $field->get_max(); $x = $x + $field->get_min()) {
-      echo '<div class="option_'.$x.'">'.$x.'</div>';
+      echo '<div class="option_'.$x.'">'.$x.''.($field->get_unit() ? $field->get_unit() : '').'</div>';
       $c++;
     }
     ?>

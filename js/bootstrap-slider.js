@@ -69,6 +69,7 @@
 		this.min = this.element.data('slider-min')||options.min;
 		this.max = this.element.data('slider-max')||options.max;
 		this.step = this.element.data('slider-step')||options.step;
+		this.unit = this.element.data('slider-unit')||options.unit;
 		this.value = this.element.data('slider-value')||options.value;
 		if (this.value[1]) {
 			this.range = true;
@@ -184,9 +185,16 @@
 				);
 				this.tooltip[0].style[this.stylePos] = this.size * (this.percentage[0] + (this.percentage[1] - this.percentage[0])/2)/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) +'px';
 			} else {
-				this.tooltipInner.text(
-					this.formater(this.value[0])
-				);
+
+                if (this.unit) {
+                    this.tooltipInner.text(this.formater(this.value[0]+this.unit));
+                } else {
+                    this.tooltipInner.text(this.formater(this.value[0]));
+                }
+
+
+
+
 				this.tooltip[0].style[this.stylePos] = this.size * this.percentage[0]/100 - (this.orientation === 'vertical' ? this.tooltip.outerHeight()/2 : this.tooltip.outerWidth()/2) - 5 +'px';
 			}
 		},
