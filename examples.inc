@@ -106,6 +106,23 @@ function magic_form_examples() {
                             'show_minmax' => false));
   $form->add_field($distance);
 
+
+
+
+  // Add Range field
+  $distance2 = magic_form_field_range::factory('distance2', 'Distance2');
+  $distance2->set_min(100);
+  $distance2->set_max(1000);
+  $distance2->set_step(100);
+  $distance2->set_unit('GB');
+  $distance2->set_options(array('show_tooltip' => true,
+    'show_increments' => true,
+    'show_minmax' => false));
+  $form->add_field($distance2);
+
+
+
+
   // Add Switch field
   $switch = new magic_form_field_switch('switch', 'SWITCH');
   $form->add_field($switch);
