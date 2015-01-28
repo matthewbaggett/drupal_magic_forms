@@ -5,8 +5,9 @@
   <div class="range_group">
   <input
           type="text" id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
-          class="span2"
+          class="span2 field-range-slider"
           value="<?php echo $field->get_value() ?>"
+          data-slider-id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
           data-slider-min="<?php echo $field->get_min(); ?>"
           data-slider-max="<?php echo $field->get_max(); ?>"
           data-slider-step="<?php echo $field->get_step(); ?>"
@@ -21,44 +22,24 @@
    />
 
     <?php if ($field->get_option('show_increments')) { ?>
-  <div id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options" class="slider_options">
+  <div id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options" class="slider_<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options slider_options">
     <?php
-    $c = 0;
     for ($x = $field->get_min(); $x <= $field->get_max(); $x = $x + $field->get_min()) {
       echo '<div class="option_'.$x.'">'.$x.''.($field->get_unit() ? $field->get_unit() : '').'</div>';
-      $c++;
     }
     ?>
   </div>
     <?php } elseif ($field->get_option('show_minmax')) {?>
-      <div id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_minmax" class="slider_options slider_minmax">
+      <div class="slider_<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_minmax slider_options slider_minmax">
         <div class="min"><?php echo $field->get_min(); ?><?php echo ''.($field->get_unit() ? $field->get_unit() : '').''; ?></div>
         <div class="max"><?php echo $field->get_max(); ?><?php echo ''.($field->get_unit() ? $field->get_unit() : '').''; ?></div>
       </div>
 
     <?php } ?>
-
-
-
-
   </div>
-
   <script>
     jQuery(function() {
-     jQuery('#<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').slider();
-      /*PRODUCE STYLING*/
-      var width = jQuery('.field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').width() * 0.79;
-      var widthoptions = (jQuery('.field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').width() * 0.79) + 30;
-      <!--var widthoptions = (jQuery('.field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>').width() * 0.79)<?php echo ($field->get_option('show_minmax') ? ' + 20' : ' + 70'); ?>;-->
-      jQuery( ".field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> .slider-horizontal").css('width',width);
-      <?php if ($field->get_option('show_increments')) { ?>
-      jQuery( "#<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options").css('width',widthoptions);
-      jQuery( "#<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options div").css('width',(widthoptions/<?php echo $c; ?>));
-      <?php } elseif ($field->get_option('show_minmax')) { ?>
-      jQuery( "#distance_minmax").css('width',widthoptions);
-      jQuery( "#distance_minmax div").css('width',(widthoptions/2));
-
-      <?php } ?>
+      loadSlider();
     });
   </script>
   <?php require "form.errors.phtml"; ?>

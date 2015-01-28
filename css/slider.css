@@ -28,7 +28,7 @@
   bottom: 0;
 }
 .slider.slider-horizontal .slider-handle {
-  margin-left: -10px;
+  /*margin-left: -10px;*/
   margin-top: -5px;
 }
 .slider.slider-horizontal .slider-handle.triangle {
@@ -97,11 +97,11 @@
   background: transparent none;
 }
 
-.slider_options { /*margin-left:-40px;*/ margin-left:-20px; margin-top:10px;}
+.slider_options { /*margin-left:-40px; margin-left:-20px;*/ margin-top:10px;}
 .slider_options div { display:inline-block; text-align:center; color:#747474 }
 .slider_options div:last-child { margin-left: -1px; }
 
-.slider_minmax { margin-left:-15px; }
+.slider_minmax { /*margin-left:-15px;*/ }
 .slider_options .min { text-align:left;}
 .slider_options .max { text-align:right; float:right; }
 

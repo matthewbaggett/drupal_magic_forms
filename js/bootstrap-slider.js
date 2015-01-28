@@ -145,6 +145,15 @@
 		} else {
 			this.tooltip.addClass('hide');
 		}
+
+        var count = jQuery("#"+this.id+"_options > div").size();
+        var width = jQuery('.field-'+this.id).width() * 0.79;
+        var widthoptions = (jQuery('.field-'+this.id).width() * 0.79);
+        jQuery( ".field-"+this.id+" .slider-horizontal").css('width',width);
+        jQuery( ".slider_"+this.id+"_options").css('width',widthoptions);
+        jQuery( ".slider_"+this.id+"_options div").css('width',(widthoptions/count));
+        jQuery( ".slider_"+this.id+"_minmax").css('width',width);
+        jQuery( ".slider_"+this.id+"_minmax div").css('width','50%');
 	};
 
 	Slider.prototype = {
@@ -394,3 +403,8 @@
 	$.fn.slider.Constructor = Slider;
 
 }( window.jQuery );
+
+
+function loadSlider() {
+        jQuery('.field-range-slider').slider();
+}
