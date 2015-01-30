@@ -9,8 +9,8 @@
         <label class="multiswitch_group_option btn btn-primary <?php if ($key == $field->get_value()): ?>active" <?php endif; ?>">
           <input type="radio"
                  name="<?php echo $field->get_name(); ?>"
-                 id="<?php echo magic_forms_mangle_to_css_class($field->get_name() . " " . $option_label); ?>""
                  autocomplete="off"
+                 value="<?php echo $field->get_value(); ?>"
                 <?php if ($key == $field->get_value()): ?>
                 checked="checked"
                 <?php endif; ?>
