@@ -107,3 +107,17 @@
 
 
 .range_group { width:79px; display:inline-block;}
+
+
+.form_row_disabled + .form-range {
+
+}
+.form_row_disabled.form-range .slider-handle {
+    background:#CCCCCC;
+}
+.form_row_disabled.form-range .slider-track {
+    background:#85aebc;
+    cursor:default;
+
+}
+

@@ -110,7 +110,7 @@ function magic_form_examples() {
 
 
   // Add Range field
-  $distance2 = magic_form_field_range::factory('distance2', 'Distance2');
+  $distance2 = magic_form_field_range::factory('distance2', 'Distance2 Disabled');
   $distance2->set_min(100);
   $distance2->set_max(1000);
   $distance2->set_step(100);
@@ -118,14 +118,24 @@ function magic_form_examples() {
   $distance2->set_options(array('show_tooltip' => true,
     'show_increments' => true,
     'show_minmax' => false));
+  $distance2->disable();
   $form->add_field($distance2);
 
 
 
 
   // Add Switch field
-  $switch = new magic_form_field_switch('switch', 'SWITCH');
+  $switch = new magic_form_field_switch('switch', 'Switch');
   $form->add_field($switch);
+
+
+  // Add Switch field
+  $switch = new magic_form_field_switch('switchdisabled', 'Switch Disabled');
+  $switch->disable();
+  $form->add_field($switch);
+
+
+
 
 
 
@@ -137,7 +147,24 @@ function magic_form_examples() {
     'NGTP' => 'NGTP'
   ));
   $multiswitch->set_value("NGFW");
+  $multiswitch->set_value("NGFW");
   $form->add_field($multiswitch);
+
+
+
+  $multiswitch = new magic_form_field_switch_multi('room-options2disabled', 'Room Options 2 Disabled');
+  $multiswitch->add_options(array(
+    'FW' => 'FW',
+    'FWIPS' => 'FW+IPS',
+    'NGFW' => 'NGFW',
+    'NGTP' => 'NGTP'
+  ));
+  $multiswitch->set_value("NGFW");
+  $multiswitch->set_value("NGFW");
+  $multiswitch->disable();
+  $form->add_field($multiswitch);
+
+
 
 
 

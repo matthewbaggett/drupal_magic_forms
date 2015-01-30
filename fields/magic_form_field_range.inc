@@ -69,9 +69,6 @@ class magic_form_field_range extends magic_form_field {
     return $this->unit;
   }
 
-
-
-
   public function __toString() {
     $view = new StdClass();
     $view->field = $this;

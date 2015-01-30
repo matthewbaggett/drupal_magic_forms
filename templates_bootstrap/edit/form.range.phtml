@@ -1,5 +1,5 @@
 <div
-  class="form-group form_input field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>  <?php if (!$field->get_label()) { echo 'hasnolabel'; } ?>">
+  class="form-group form_input form-range field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>  <?php if (!$field->get_label()) { echo 'hasnolabel'; } ?>">
   <?php require("form.label.phtml"); ?>
 
   <div class="range_group">
@@ -17,6 +17,7 @@
           data-slider-selection="after"
           data-slider-tooltip="<?php echo ($field->get_option('show_tooltip') ? 'show' : 'hide'); ?>"
           <?php if ($field->is_disabled()): ?>
+            data-slider-disabled="disabled"
             readonly
           <?php endif; ?>
    />

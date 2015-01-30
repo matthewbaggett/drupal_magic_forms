@@ -71,6 +71,7 @@
 		this.step = this.element.data('slider-step')||options.step;
 		this.unit = this.element.data('slider-unit')||options.unit;
 		this.value = this.element.data('slider-value')||options.value;
+		this.disabled = this.element.data('slider-disabled')||options.disabled;
 		if (this.value[1]) {
 			this.range = true;
 		}
@@ -126,16 +127,21 @@
 
 		this.layout();
 
-		if (this.touchCapable) {
-			// Touch: Bind touch events:
-			this.picker.on({
-				touchstart: $.proxy(this.mousedown, this)
-			});
-		} else {
-			this.picker.on({
-				mousedown: $.proxy(this.mousedown, this)
-			});
-		}
+        if (!this.disabled) {
+            if (this.touchCapable) {
+                // Touch: Bind touch events:
+                this.picker.on({
+                    touchstart: $.proxy(this.mousedown, this)
+                });
+            } else {
+                this.picker.on({
+                    mousedown: $.proxy(this.mousedown, this)
+                });
+            }
+        }
+
+
+
 
 		if (tooltip === 'show') {
 			this.picker.on({

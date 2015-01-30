@@ -389,3 +389,7 @@ var magic_form = {
     });
   }
 }
+
+jQuery(function() {
+    jQuery('.btn-disabled').prop('disabled', true);
+});
