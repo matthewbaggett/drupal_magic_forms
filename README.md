@@ -14,6 +14,10 @@ Support many form field types:
  * Radios
  * Select
  * Textarea
+ * Date
+ * Ranges (thanks Jason!)
+ * Multiple selection Radios
+ * Switches (Jason again)
 
 Bonus features:
  * Data Tables.
