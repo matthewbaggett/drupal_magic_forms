@@ -1,7 +1,7 @@
 Magic Form Objects
 ==================
 
-A slightly less hateful implementation of form handling for Drupal.
+A slightly less hateful implementation of form handling for Drupal 7.
 
 Because we all know drupal forms blow.
 
