@@ -1,5 +1,3 @@
-![Magic](http://i.imgur.com/TAFZ19O.jpg)
-
 Magic Form Objects
 ==================
 
