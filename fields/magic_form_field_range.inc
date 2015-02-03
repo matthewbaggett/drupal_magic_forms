@@ -54,7 +54,8 @@ class magic_form_field_range extends magic_form_field {
 
 
   public function set_step($step){
-    return $this->step = $step;
+    $this->step = $step;
+    return $this;
   }
 
   public function get_step(){
@@ -62,7 +63,8 @@ class magic_form_field_range extends magic_form_field {
   }
 
   public function set_unit($unit){
-    return $this->unit = $unit;
+    $this->unit = $unit;
+    return $this;
   }
 
   public function get_unit(){
