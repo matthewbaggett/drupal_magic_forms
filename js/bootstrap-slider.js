@@ -127,18 +127,22 @@
 
 		this.layout();
 
-        if (!this.disabled) {
-            if (this.touchCapable) {
-                // Touch: Bind touch events:
-                this.picker.on({
-                    touchstart: $.proxy(this.mousedown, this)
-                });
-            } else {
-                this.picker.on({
-                    mousedown: $.proxy(this.mousedown, this)
-                });
-            }
-        }
+
+
+
+
+       if (!this.disabled) {
+           if (this.touchCapable) {
+               // Touch: Bind touch events:
+               this.picker.on({
+                   touchstart: $.proxy(this.mousedown, this)
+               });
+           } else {
+               this.picker.on({
+                   mousedown: $.proxy(this.mousedown, this)
+               });
+           }
+       }
 
 
 
@@ -153,13 +157,26 @@
 		}
 
         var count = jQuery("#"+this.id+"_options > div").size();
-        var width = jQuery('.field-'+this.id).width() * 0.79;
+        /*var width = jQuery('.field-'+this.id).width() * 0.79;
         var widthoptions = (jQuery('.field-'+this.id).width() * 0.79);
         jQuery( ".field-"+this.id+" .slider-horizontal").css('width',width);
         jQuery( ".slider_"+this.id+"_options").css('width',widthoptions);
         jQuery( ".slider_"+this.id+"_options div").css('width',(widthoptions/count));
         jQuery( ".slider_"+this.id+"_minmax").css('width',width);
+        jQuery( ".slider_"+this.id+"_minmax div").css('width','50%');*/
+
+
+
+        var width = jQuery('.field-'+this.id+' .slider-track').width();
+        var widthoptions = (jQuery('.field-'+this.id+' .slider-track').width());
+        /*jQuery( ".field-"+this.id+" .slider-horizontal").css('width',width);*/
+
+        jQuery( ".slider_"+this.id+"_options").css('width',widthoptions);
+        jQuery( ".slider_"+this.id+"_options div").css('width',(widthoptions/count));
+        jQuery( ".slider_"+this.id+"_minmax").css('width',width);
         jQuery( ".slider_"+this.id+"_minmax div").css('width','50%');
+
+
 	};
 
 	Slider.prototype = {
@@ -410,7 +427,20 @@
 
 }( window.jQuery );
 
+jQuery.fn.slider.Constructor.prototype.enable = function () {
+    if (this.touchCapable) {
+        // Touch: Bind touch events:
+        this.picker.on({
+            touchstart: jQuery.proxy(this.mousedown, this)
+        });
+    } else {
+        this.picker.on({
+            mousedown: jQuery.proxy(this.mousedown, this)
+        });
+        jQuery('.field-'+this.id).removeClass('form_row_disabled');
+    }
+}
 
 function loadSlider() {
-        jQuery('.field-range-slider').slider();
+    jQuery('.field-range-slider').slider();
 }
