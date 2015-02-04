@@ -1,6 +1,6 @@
 <div
   class="form-group form_input field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>  <?php if (!$field->get_label()) { echo 'hasnolabel'; } ?>">
-  <?php require("form.label.phtml"); ?>
+  <?php require("form.label_nofor.phtml"); ?>
 
   <input
     id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
