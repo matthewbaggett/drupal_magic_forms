@@ -35,11 +35,7 @@ var __slice = [].slice,
                 userSelect: "none",
                 boxSizing: "border-box"
             }).insertBefore(this.input);
-            if (this.settings.tooltip) {
-                this.tooltip = $("<div/>").addClass("tooltip");
-                this.slider.append(this.tooltip);
-                this.displayValue(Number(this.input.val()));
-            }
+
             if (this.input.attr("id")) {
                 this.slider.attr("id", this.input.attr("id") + "-slider");
             }
@@ -51,7 +47,16 @@ var __slice = [].slice,
                     width: "0"
                 });
             }
+
+
             this.dragger = this.createDivElement("dragger");
+            if (this.settings.tooltip) {
+                this.tooltip = $("<div/>").addClass("tooltip");
+                this.dragger.append(this.tooltip);
+                this.displayValue(Number(this.input.val()));
+            }
+
+
             this.slider.css({
                 minHeight: this.dragger.outerHeight(),
                 marginLeft: this.dragger.outerWidth() / 2,
@@ -315,6 +320,7 @@ var __slice = [].slice,
                 trigger: trigger,
                 el: this.slider
             };
+            //alert(value);
             this.displayValue(value);
             return this.input.val(value).trigger($.Event("change", eventData)).trigger("slider:changed", eventData);
         };
@@ -383,51 +389,48 @@ var __slice = [].slice,
 
 jQuery(function() {
     jQuery("[data-slider]")
-    .each(function () {
-        var input = jQuery(this);
-        var range = '';
-        if (input.data("slider-range")) {
-            /*jQuery("<span>").addClass("output")
-                .insertAfter(input);
-            range = input.data("slider-range").split(",");
-            jQuery("<span>").addClass("range-min")
-                .html(range[0])
-                .insertBefore(input);
-            jQuery("<span>").addClass("range-max")
-                .html(range[1])
-                .insertAfter(input);*/
+        .each(function () {
+            var input = jQuery(this);
+            var range = '';
+            if (input.data("slider-range")) {
+                /*jQuery("<span>").addClass("output")
+                 .insertAfter(input);
+                 range = input.data("slider-range").split(",");
+                 jQuery("<span>").addClass("range-min")
+                 .html(range[0])
+                 .insertBefore(input);
+                 jQuery("<span>").addClass("range-max")
+                 .html(range[1])
+                 .insertAfter(input);*/
 
-            jQuery("<span>").addClass("output")
-                .insertAfter(input);
-            range = input.data("slider-range").split(",");
+                range = input.data("slider-range").split(",");
 
-           /* jQuery("<span>").addClass("range-min")
-                .html(range[0])
-                .insertBefore(input);
-            jQuery("<span>").addClass("range-max")
-                .html(range[1])
-                .insertAfter(input);*/
+                /* jQuery("<span>").addClass("range-min")
+                 .html(range[0])
+                 .insertBefore(input);
+                 jQuery("<span>").addClass("range-max")
+                 .html(range[1])
+                 .insertAfter(input);*/
 
-            var minmax = '<div class="min">'+range[0]+'</div> <div class="max">'+range[1]+'</div>';
+                var minmax = '<div class="min">'+range[0]+'</div> <div class="max">'+range[1]+'</div>';
 
-            jQuery('<div class="slide_options slide_minmax">').html(minmax).insertAfter(input);
+                jQuery('<div class="slide_options slide_minmax">').html(minmax).insertAfter(input);
 
 
 
 
 
 
-        } else {
-            jQuery("<span>").addClass("output")
-                .insertAfter(input);
-        }
+            } else {
 
-    })
-    .bind("slider:ready slider:changed", function (event, data) {
-        jQuery(this).nextAll(".output:first")
-            .html(data.value.toFixed(0));
-    }) .bind("slider:changed", function (event, data) {
-        jQuery(this).attr('value', data.value.toFixed(0));
-    });
+            }
+
+        })
+        .bind("slider:ready slider:changed", function (event, data) {
+            jQuery(this).nextAll(".output:first")
+                .html(data.value.toFixed(0));
+        }) .bind("slider:changed", function (event, data) {
+            jQuery(this).attr('value', data.value.toFixed(0));
+        });
 
 });

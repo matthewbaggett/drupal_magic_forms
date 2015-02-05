@@ -4,7 +4,7 @@
 
 .slider > .dragger {
     background: #000000;
-    margin-top:-12px !important;
+    margin-top:-5px !important;
     width:10px;
     height:24px;
 }
@@ -17,6 +17,7 @@
 .slider > .track, .slider > .highlight-track {
     height: 14px;
     background-color: #eeeeee;
+    margin-top:0px !important;
 }
 
 .slider > .highlight-track {
@@ -77,7 +78,7 @@
 
 
 
-[class^=slider] { display: inline-block; margin-bottom: 5px; }
+[class^=slider] { display: inline-block; margin-bottom: 5px; margin-top:10px; }
 .range-min, .range-max, .output {
     color: #888;
     font-size: 14px;
@@ -91,10 +92,24 @@
 .range-min { float:left; }
 
 
-.slide_options { display:block; }
-.slide_options div { display:inline-block; text-align:center; color:#747474 }
+.slide_options {
+    text-align: justify;
+    width: 320px;
+}
+.slide_options div {
+    display:inline-block;
+    color:#747474;
+}
+.slide_options:after {
+    content: '';
+    width: 100%; /* Ensures there are at least 2 lines of text, so justification works */
+    display: inline-block;
+}
 
-.slide_minmax { /*margin-left:-15px;*/ }
+
+
+
+.slide_minmax { /*margin-left:-15px;*/ width:300px; }
 .slide_options .min { text-align:left;}
 .slide_options .max { text-align:right; float:right; }
 
@@ -102,6 +117,40 @@
 
 
 
+
+.dragger .tooltip {
+    color:#FFFFFF;
+    background:#01a9e0;
+    margin-top: -24px;
+    margin-left:-14px;
+    opacity: 1;
+    padding: 1px 4px;
+    min-width:40px;
+    text-align:center;
+}
+
+
+
+.dragger > .tooltip::before {
+    background-color: #01a9e0;
+    content: '';
+    display: block;
+    height: 7px;
+    left: 16px;
+    position: absolute;
+    top: 14px;
+    width: 7px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+
+
+/*
 
 .slider .tooltip {
     background-color: #72A307;
@@ -127,4 +176,17 @@
     -o-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+}*/
+
+
+.slider > .scale {
+    width: 100%;
+    color: #888;
+    font-size: small;
+}
+.slider > .scale > .min-scale {
+    float: left;
+}
+.slider > .scale > .max-scale {
+    float: right;
 }

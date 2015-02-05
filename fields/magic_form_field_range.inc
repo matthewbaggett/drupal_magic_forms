@@ -65,18 +65,14 @@ class magic_form_field_range extends magic_form_field {
     return $this->step;
   }
 
-
   public function set_increments($increments){
     asort($increments);
     $this->increments = $increments;
     return $this;
   }
   public function get_increments(){
-    return $this->increments;
+    return (isset($this->increments) ? $this->increments : false);
   }
-
-
-
   public function set_unit($unit){
     $this->unit = $unit;
     return $this;
