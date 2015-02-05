@@ -1,6 +1,7 @@
 <?php
 
 function magic_form_examples() {
+  drupal_set_title("Magic Form Examples");
   // Create a new form
   $form = magic_form::factory('my-form');
 
@@ -119,9 +120,9 @@ function magic_form_examples() {
 
 
   $incredistance = magic_form_field_range::factory('distanceincrements', 'Distance Increments');
-  $incredistance->set_increments(array(1,3,5,7,9))
+  $incredistance->set_increments(array(1,3,5,7,9,200))
                   ->set_unit('GB')
-                  ->set_options(array('show_tooltip' => true,'show_increments' => false,'show_minmax' => true));
+                  ->set_options(array('show_tooltip' => true, 'show_increments' => true,'show_minmax' => false));
   $form->add_field($incredistance);
 
 
