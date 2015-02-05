@@ -387,39 +387,18 @@ var __slice = [].slice,
 
 
 
-jQuery(function() {
+function refreshSliders() {
     jQuery("[data-slider]")
         .each(function () {
             var input = jQuery(this);
             var range = '';
             if (input.data("slider-range")) {
-                /*jQuery("<span>").addClass("output")
-                 .insertAfter(input);
-                 range = input.data("slider-range").split(",");
-                 jQuery("<span>").addClass("range-min")
-                 .html(range[0])
-                 .insertBefore(input);
-                 jQuery("<span>").addClass("range-max")
-                 .html(range[1])
-                 .insertAfter(input);*/
 
                 range = input.data("slider-range").split(",");
-
-                /* jQuery("<span>").addClass("range-min")
-                 .html(range[0])
-                 .insertBefore(input);
-                 jQuery("<span>").addClass("range-max")
-                 .html(range[1])
-                 .insertAfter(input);*/
 
                 var minmax = '<div class="min">'+range[0]+'</div> <div class="max">'+range[1]+'</div>';
 
                 jQuery('<div class="slide_options slide_minmax">').html(minmax).insertAfter(input);
-
-
-
-
-
 
             } else {
 
@@ -432,5 +411,9 @@ jQuery(function() {
         }) .bind("slider:changed", function (event, data) {
             jQuery(this).attr('value', data.value.toFixed(0));
         });
+}
 
+
+jQuery(function() {
+   refreshSliders();
 });

@@ -6,7 +6,7 @@
 
 
     <input
-      type="text" id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
+      type="text" id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_<?php echo uniqid(); ?>"
       class="span2 field-range-slider field-slider-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>-input"
       value="<?php echo $field->get_value() ?>"
       data-slider="true"
