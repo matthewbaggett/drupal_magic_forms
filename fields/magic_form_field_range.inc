@@ -28,7 +28,8 @@ class magic_form_field_range extends magic_form_field {
   }
 
   public function set_options($options){
-    return $this->options = $options;
+   $this->options = $options;
+   return $this;
   }
 
   public function get_option($option){
@@ -36,7 +37,8 @@ class magic_form_field_range extends magic_form_field {
   }
 
   public function set_min($min){
-    return $this->min = $min;
+    $this->min = $min;
+    return $this;
   }
 
   public function get_min(){
@@ -45,7 +47,8 @@ class magic_form_field_range extends magic_form_field {
 
 
   public function set_max($max){
-    return $this->max = $max;
+    $this->max = $max;
+    return $this;
   }
 
   public function get_max(){
@@ -61,6 +64,18 @@ class magic_form_field_range extends magic_form_field {
   public function get_step(){
     return $this->step;
   }
+
+
+  public function set_increments($increments){
+    asort($increments);
+    $this->increments = $increments;
+    return $this;
+  }
+  public function get_increments(){
+    return $this->increments;
+  }
+
+
 
   public function set_unit($unit){
     $this->unit = $unit;
