@@ -352,77 +352,56 @@ var __slice = [].slice,
         }
     });
     return $(function() {
-        return $("[data-slider]").each(function() {
-            var $el, allowedValues, settings, x;
-            $el = $(this);
-            settings = {};
-            allowedValues = $el.data("slider-values");
-            if (allowedValues) {
-                settings.allowedValues = (function() {
-                    var _i, _len, _ref, _results;
-                    _ref = allowedValues.split(",");
-                    _results = [];
-                    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-                        x = _ref[_i];
-                        _results.push(parseFloat(x));
-                    }
-                    return _results;
-                })();
-            }
-            if ($el.data("slider-range")) {
-                settings.range = $el.data("slider-range").split(",");
-            }
-            if ($el.data("slider-step")) {
-                settings.step = $el.data("slider-step");
-            }
-            if ($el.data("slider-tooltip")) {
-                settings.tooltip = $el.data("slider-tooltip");
-            }
-            if ($el.data("slider-disabled")) {
-                settings.disabled = $el.data("slider-disabled");
-            }
-            settings.snap = $el.data("slider-snap");
-            settings.equalSteps = $el.data("slider-equal-steps");
-            if ($el.data("slider-theme")) {
-                settings.theme = $el.data("slider-theme");
-            }
-            if ($el.attr("data-slider-highlight")) {
-                settings.highlight = $el.data("slider-highlight");
-            }
-            return $el.simpleSlider(settings);
-        });
+
     });
 })(this.jQuery || this.Zepto, this);
 
 
 
-function refreshSliders() {
-    jQuery("[data-slider]")
-        .each(function () {
-            var input = jQuery(this);
-            var range = '';
-            if (input.data("slider-range")) {
+function refreshSliders()  {
+(function($) {
 
-                range = input.data("slider-range").split(",");
-
-                var minmax = '<div class="min">'+range[0]+'</div> <div class="max">'+range[1]+'</div>';
-
-                jQuery('<div class="slide_options slide_minmax">').html(minmax).insertAfter(input);
-
-            } else {
-
-            }
-
-        })
-        .bind("slider:ready slider:changed", function (event, data) {
-            jQuery(this).nextAll(".output:first")
-                .html(data.value.toFixed(0));
-        }) .bind("slider:changed", function (event, data) {
-            jQuery(this).attr('value', data.value.toFixed(0));
-        });
+    return $("[data-slider]").each(function() {
+        var $el, allowedValues, settings, x;
+        $el = $(this);
+        settings = {};
+        allowedValues = $el.data("slider-values");
+        if (allowedValues) {
+            settings.allowedValues = (function() {
+                var _i, _len, _ref, _results;
+                _ref = allowedValues.split(",");
+                _results = [];
+                for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                    x = _ref[_i];
+                    _results.push(parseFloat(x));
+                }
+                return _results;
+            })();
+        }
+        if ($el.data("slider-range")) {
+            settings.range = $el.data("slider-range").split(",");
+        }
+        if ($el.data("slider-step")) {
+            settings.step = $el.data("slider-step");
+        }
+        if ($el.data("slider-tooltip")) {
+            settings.tooltip = $el.data("slider-tooltip");
+        }
+        if ($el.data("slider-disabled")) {
+            settings.disabled = $el.data("slider-disabled");
+        }
+        settings.snap = $el.data("slider-snap");
+        settings.equalSteps = $el.data("slider-equal-steps");
+        if ($el.data("slider-theme")) {
+            settings.theme = $el.data("slider-theme");
+        }
+        if ($el.attr("data-slider-highlight")) {
+            settings.highlight = $el.data("slider-highlight");
+        }
+        return $el.simpleSlider(settings);
+    });
+    })(jQuery);
 }
-
-
 jQuery(function() {
    refreshSliders();
 });

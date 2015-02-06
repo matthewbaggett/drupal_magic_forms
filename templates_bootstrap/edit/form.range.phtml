@@ -46,6 +46,10 @@
     }
     ?>
   </div>
+  <?php } else if ($field->get_option('show_minmax')) {  ?>
+    <div class="slide_options slide_minmax">
+    <div class="min"><?php echo $field->get_min(); ?></div> <div class="max"><?php echo $field->get_max(); ?></div>
+    </div>
   <?php } ?>
   </div>
   <?php require "form.errors.phtml"; ?>
