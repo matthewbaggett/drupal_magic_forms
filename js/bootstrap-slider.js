@@ -364,6 +364,7 @@ function refreshSliders()  {
     return $("[data-slider]").each(function() {
         var $el, allowedValues, settings, x;
         $el = $(this);
+        $el.removeAttr("data-slider");
         settings = {};
         allowedValues = $el.data("slider-values");
         if (allowedValues) {

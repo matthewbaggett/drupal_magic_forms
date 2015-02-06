@@ -168,11 +168,14 @@
     cursor:default !important;
 }
 .form_row_disabled.form-range .track {
-    background:#85aebc;
+    background:#eeeeee;
     cursor:default !important;
 }
 .form_row_disabled.form-range .highlight-track {
-    background:#85aebc;
+    background:#eeeeee;
     cursor:default !important;
 }
 
+.form_row_disabled.form-range .tooltip {
+    display:none;
+}
