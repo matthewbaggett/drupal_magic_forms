@@ -107,7 +107,7 @@ function magic_form_examples() {
     ->set_options(array('show_tooltip' => true,'show_increments' => false,'show_minmax' => true));
   $form->add_field($distance);
 
-  /*
+
   $distance2 = magic_form_field_range::factory('distance2', 'Distance Disabled');
   $distance2->set_min(2)
     ->set_max(256)
@@ -116,7 +116,6 @@ function magic_form_examples() {
     ->set_options(array('show_tooltip' => true,'show_increments' => false,'show_minmax' => true))
     ->disable();
   $form->add_field($distance2);
-*/
 
 
   $incredistance = magic_form_field_range::factory('distanceincrements', 'Distance Increments');
@@ -124,10 +123,6 @@ function magic_form_examples() {
                   ->set_unit('GB')
                   ->set_options(array('show_tooltip' => true, 'show_increments' => true,'show_minmax' => false));
   $form->add_field($incredistance);
-
-
-
-
 
 
 
