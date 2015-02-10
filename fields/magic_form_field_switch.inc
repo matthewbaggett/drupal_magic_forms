@@ -12,9 +12,9 @@ class magic_form_field_switch extends magic_form_field {
    * @return magic_form_field
    */
   public function set_value($value) {
-    if($value == "on"){
+    if($value == "on" || $value == 1 ){
       $this->value = true;
-    }elseif($value == "off"){
+    }elseif($value == "off" || $value == 0 ){
       $this->value = false;
     }else{
       $this->value = $value;
