@@ -146,6 +146,8 @@ var __slice = [].slice,
             if (this.tooltip) {
                 this.tooltip.text(value);
             }
+            if (value == 0) { this.tooltip.hide(); } else { this.tooltip.show();}
+
             return this.input.val(value);
         };
         SimpleSlider.prototype.setRatio = function(ratio) {

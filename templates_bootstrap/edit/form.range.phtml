@@ -4,7 +4,6 @@
 
   <div class="range_group">
 
-
     <input
       type="text" id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_<?php echo uniqid(); ?>"
       class="span2 field-range-slider field-slider-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>-input"
@@ -30,10 +29,18 @@
 
 
    <div class="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_value"></div>
+    <?php if ($field->get_option('show_minmax')) {  ?>
+    <div class="slide_options slide_minmax">
+      <?php if (!$field->get_min() && !$field->get_max()) { $incrementminmax = array(); $incrementminmax = $field->get_increments(); ?>
+
+        <div class="min"><?php echo reset($incrementminmax); ?><?php echo ($field->get_unit() ? $field->get_unit() : ''); ?></div> <div class="max"><?php echo end($incrementminmax); ?><?php echo ($field->get_unit() ? $field->get_unit() : ''); ?></div>
+      <?php } else { ?>
+        <div class="min"><?php echo $field->get_min(); ?><?php echo ($field->get_unit() ? $field->get_unit() : ''); ?></div> <div class="max"><?php echo $field->get_max(); ?><?php echo ($field->get_unit() ? $field->get_unit() : ''); ?></div>
+      <?php } ?>
+    </div>
 
 
-
-  <?php if ($field->get_option('show_increments')) { ?>
+  <?php } else if ($field->get_option('show_increments')) { ?>
   <div id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options" class="slide_<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_options slide_options">
     <?php
     if ($field->get_increments()) {
@@ -46,10 +53,6 @@
     }
     ?>
   </div>
-  <?php } else if ($field->get_option('show_minmax')) {  ?>
-    <div class="slide_options slide_minmax">
-    <div class="min"><?php echo $field->get_min(); ?></div> <div class="max"><?php echo $field->get_max(); ?></div>
-    </div>
   <?php } ?>
   </div>
   <?php require "form.errors.phtml"; ?>
