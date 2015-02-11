@@ -144,7 +144,11 @@ var __slice = [].slice,
                 value = value.toFixed(precision);
             }
             if (this.tooltip) {
-                this.tooltip.text(value);
+                if (this.settings.unit) {
+                    this.tooltip.text(value+this.settings.unit);
+                } else {
+                    this.tooltip.text(value);
+                }
             }
             if (value == 0) { this.tooltip.hide(); } else { this.tooltip.show();}
 
@@ -392,6 +396,9 @@ function refreshSliders()  {
         }
         if ($el.data("slider-disabled")) {
             settings.disabled = $el.data("slider-disabled");
+        }
+        if ($el.data("slider-unit")) {
+            settings.unit = $el.data("slider-unit");
         }
         settings.snap = $el.data("slider-snap");
         settings.equalSteps = $el.data("slider-equal-steps");
