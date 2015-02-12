@@ -11,6 +11,7 @@
     <?php if ($field->is_disabled()): ?>
       readonly
     <?php endif; ?>
+    <?php echo $field->get_attributes(); ?>
     />
   <?php require "form.errors.phtml"; ?>
 </div>

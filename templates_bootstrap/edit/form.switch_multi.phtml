@@ -15,6 +15,7 @@
             <?php if ($field->is_disabled()): ?>
               disabled
             <?php endif; ?>
+            <?php echo $field->get_attributes(); ?>
             > <?php echo $option_label; ?>
         </label>
       <?php endforeach; ?>

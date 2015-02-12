@@ -10,6 +10,7 @@
     <?php if ($field->is_disabled()): ?>
       readonly
     <?php endif; ?>
+    <?php echo $field->get_attributes(); ?>
     ><?php echo $field->get_value() ?></textarea>
   <?php require "form.errors.phtml"; ?>
 </div>

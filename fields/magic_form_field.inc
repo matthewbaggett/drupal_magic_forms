@@ -315,4 +315,17 @@ class magic_form_field extends magic_form_item {
     return implode(" ", $this->classes);
   }
 
+  public function set_attributes($attributes){
+    $this->attributes = $attributes;
+    return $this;
+  }
+  public function get_attributes(){
+    $returnattribute = '';
+    if (isset($this->attributes)) {
+      foreach ($this->attributes as $k => $v) {
+        $returnattribute = $returnattribute . ' ' . $k . '="' . $v . '" ';
+      }
+      return $returnattribute;
+    } else { return false; }
+  }
 }

@@ -16,6 +16,7 @@
               <?php if (in_array($key, $field->get_value())): ?>
                 checked="checked"
               <?php endif; ?>
+              <?php echo $field->get_attributes(); ?>
               />
 
               <?php echo $option_label; ?>

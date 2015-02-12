@@ -128,6 +128,7 @@ function magic_form_examples() {
 
   // Add Switch field
   $switch = new magic_form_field_switch('switch', 'Switch');
+  $switch->set_attributes(array("partID"=>"12", "asdasdsad" => "34"));
   $form->add_field($switch);
 
 

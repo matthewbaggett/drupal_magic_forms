@@ -9,6 +9,7 @@
     <?php if ($field->is_disabled()): ?>
       readonly="readonly"
     <?php endif; ?>
+    <?php echo $field->get_attributes(); ?>
     >
     <?php if ($field->null_value_allowed()): ?>
       <option value=""> ---</option>

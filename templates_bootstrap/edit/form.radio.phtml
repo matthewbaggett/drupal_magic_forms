@@ -22,6 +22,7 @@
                 <?php if ($key == $field->get_value()): ?>
                   checked="checked"
                 <?php endif; ?>
+                <?php echo $field->get_attributes(); ?>
                 />
             </div>
             <?php if ($field->is_label_after()): ?>
