@@ -27,7 +27,9 @@ class magic_form_field_spinedit extends magic_form_field {
   }
 
   public function set_options($options){
-    return $this->options = $options;
+    $this->options = $options;
+    return $this;
+
   }
 
   public function get_option($option){
@@ -35,7 +37,8 @@ class magic_form_field_spinedit extends magic_form_field {
   }
 
   public function set_min($min){
-    return $this->min = $min;
+    $this->min = $min;
+    return $this;
   }
 
   public function get_min(){
@@ -44,7 +47,8 @@ class magic_form_field_spinedit extends magic_form_field {
 
 
   public function set_max($max){
-    return $this->max = $max;
+    $this->max = $max;
+    return $this;
   }
 
   public function get_max(){
@@ -53,7 +57,8 @@ class magic_form_field_spinedit extends magic_form_field {
 
 
   public function set_step($step){
-    return $this->step = $step;
+    $this->step = $step;
+    return $this;
   }
 
   public function get_step(){

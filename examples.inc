@@ -173,9 +173,10 @@ function magic_form_examples() {
 
   // Add SpinEdit field
   $quantity = magic_form_field_spinedit::factory('quantity', 'Quantity');
-  $quantity->set_min(-10);
-  $quantity->set_max(10);
-  $quantity->set_step(1);
+  $quantity->set_min(5)
+          ->set_max(10)
+          ->set_step(1)
+          ->set_attributes(array("partID"=>"12", "asdasdsad" => "34"));
   $form->add_field($quantity);
 
 
