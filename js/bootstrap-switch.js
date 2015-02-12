@@ -108,7 +108,7 @@
         this.$wrapper = this.$container.wrap(this.$wrapper).parent();
         this.$element.before(this.options.inverse ? this.$off : this.$on).before(this.$label).before(this.options.inverse ? this.$on : this.$off);
         if (this.options.indeterminate) {
-          this.$element.prop("indeterminate", true);
+          this.$element.attr("indeterminate", true);
         }
         initInterval = window.setInterval((function(_this) {
           return function() {
@@ -147,7 +147,7 @@
           this.indeterminate(false);
         }
         value = !!value;
-        this.$element.prop("checked", value).trigger("change.bootstrapSwitch", skip);
+        this.$element.attr("checked", value).trigger("change.bootstrapSwitch", skip);
         return this.$element;
       };
 
@@ -159,7 +159,7 @@
           this.indeterminate(false);
           return this.state(true);
         } else {
-          return this.$element.prop("checked", !this.options.state).trigger("change.bootstrapSwitch", skip);
+          return this.$element.attr("checked", !this.options.state).trigger("change.bootstrapSwitch", skip);
         }
       };
 
@@ -209,7 +209,7 @@
 
       BootstrapSwitch.prototype.toggleDisabled = function() {
         this.options.disabled = !this.options.disabled;
-        this.$element.prop("disabled", this.options.disabled);
+        this.$element.attr("disabled", this.options.disabled);
         this.$wrapper.toggleClass("" + this.options.baseClass + "-disabled");
         return this.$element;
       };
@@ -227,7 +227,7 @@
 
       BootstrapSwitch.prototype.toggleReadonly = function() {
         this.options.readonly = !this.options.readonly;
-        this.$element.prop("readonly", this.options.readonly);
+        this.$element.attr("readonly", this.options.readonly);
         this.$wrapper.toggleClass("" + this.options.baseClass + "-readonly");
         return this.$element;
       };
@@ -245,7 +245,7 @@
 
       BootstrapSwitch.prototype.toggleIndeterminate = function() {
         this.options.indeterminate = !this.options.indeterminate;
-        this.$element.prop("indeterminate", this.options.indeterminate);
+        this.$element.attr("indeterminate", this.options.indeterminate);
         this.$wrapper.toggleClass("" + this.options.baseClass + "-indeterminate");
         this._containerPosition();
         return this.$element;
@@ -491,7 +491,7 @@
               _this.$wrapper.toggleClass("" + _this.options.baseClass + "-off").toggleClass("" + _this.options.baseClass + "-on");
               if (!skip) {
                 if (_this.$element.is(":radio")) {
-                  $("[name='" + (_this.$element.attr('name')) + "']").not(_this.$element).prop("checked", false).trigger("change.bootstrapSwitch", true);
+                  $("[name='" + (_this.$element.attr('name')) + "']").not(_this.$element).attr("checked", false).trigger("change.bootstrapSwitch", true);
                 }
                 return _this.$element.trigger("switchChange.bootstrapSwitch", [state]);
               }
