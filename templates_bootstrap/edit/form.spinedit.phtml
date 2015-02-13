@@ -6,6 +6,7 @@
 
     <input
       id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
+      name="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
       type="text"
       class="aSpinEdit"
       <?php if ($field->is_disabled()): ?>
