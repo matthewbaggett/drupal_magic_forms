@@ -6,7 +6,7 @@
  * Time: 10:31
  */
 
-class CheckboxInputTest extends PHPUnit_Framework_TestCase {
+class SwitchInputTest extends PHPUnit_Framework_TestCase {
 
     /** @var $magic_form magic_form */
     private $magic_form;
@@ -16,13 +16,13 @@ class CheckboxInputTest extends PHPUnit_Framework_TestCase {
         $this->magic_form->set_templates_directory("templates_bootstrap");
 
         //Set Some Vars
-        $this->input_default_name = 'checkbox';
-        $this->input_default_label = 'Test checkbox field';
+        $this->input_default_name = 'switch';
+        $this->input_default_label = 'Test switch field';
     }
 
-    public function testCheckboxInput()
+    public function testSwitchInput()
     {
-        $new_field = new magic_form_field_checkbox($this->input_default_name, $this->input_default_label);
+        $new_field = new magic_form_field_switch($this->input_default_name, $this->input_default_label);
         $new_field->set_value("test");
         $this->magic_form->add_fields($new_field);
 
@@ -39,9 +39,9 @@ class CheckboxInputTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($this->input_default_name.'', $test_checkbox_field1->attr['name'], "Checkbox Name Equals ".$this->input_default_name);
     }
 
-    public function testCheckboxInputOn()
+    public function testSwitchInputOn()
     {
-        $new_field = new magic_form_field_checkbox($this->input_default_name, $this->input_default_label);
+        $new_field = new magic_form_field_switch($this->input_default_name, $this->input_default_label);
         $new_field->set_value("on");
         $this->magic_form->add_fields($new_field);
         $html = $this->magic_form->__toString();
@@ -56,9 +56,9 @@ class CheckboxInputTest extends PHPUnit_Framework_TestCase {
         //Check Radio Inputs
         $this->assertEquals($this->input_default_name.'', $test_checkbox_field1->attr['name'], "Checkbox Name Equals ".$this->input_default_name);
     }
-    public function testCheckboxInputOff()
+    public function testSwitchInputOff()
     {
-        $new_field = new magic_form_field_checkbox($this->input_default_name, $this->input_default_label);
+        $new_field = new magic_form_field_switch($this->input_default_name, $this->input_default_label);
         $new_field->set_value("off");
         $this->magic_form->add_fields($new_field);
         $html = $this->magic_form->__toString();

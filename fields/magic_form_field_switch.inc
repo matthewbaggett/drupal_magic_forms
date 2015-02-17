@@ -16,8 +16,6 @@ class magic_form_field_switch extends magic_form_field {
       $this->value = true;
     }elseif($value == "off" || $value == 0 ){
       $this->value = false;
-    }else{
-      $this->value = $value;
     }
     return $this;
   }

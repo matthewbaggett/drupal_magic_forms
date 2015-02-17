@@ -32,7 +32,6 @@ class SpineditInputTest extends PHPUnit_Framework_TestCase {
 
         $html = $this->magic_form->__toString();
 
-
         //Get HTML Dom
         $dom = str_get_html($html);
         $form = $dom->find("//form")[0];
@@ -40,19 +39,9 @@ class SpineditInputTest extends PHPUnit_Framework_TestCase {
         //Find Text Input
         $test_spinedit_field = $form->find("input[name=".$this->input_default_name."]")[0];
 
-        //$jquery = $form->find("//script")[0];
-
-
-
         //Check Spinedit Field
         $this->assertEquals("text", $test_spinedit_field->attr['type'], "Type Equals Text");
         $this->assertEquals($this->input_default_name, $test_spinedit_field->attr['name'], "Name Equals ".$this->input_default_name);
-
-        //Check Min and Max
-        //$this->assertContains('minimum: 5', $jquery, "Check Min");
-        //$this->assertContains('maximum: 10', $jquery, "Check Min");
-
-
 
     }
 }

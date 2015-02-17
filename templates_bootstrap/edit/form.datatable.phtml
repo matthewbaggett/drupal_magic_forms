@@ -1,0 +1,35 @@
+<div
+  class="form_row form_datatable field-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?> <?php echo $field->get_classes('form_row_'); ?>">
+  <div class="inner">
+
+    <?php require("form.label.phtml"); ?>
+    <div class="widget">
+      <table
+        id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>"
+        >
+        <thead>
+        <tr>
+          <?php foreach ($field->get_headings() as $heading): ?>
+            <td><?php echo $heading; ?></td>
+          <?php endforeach; ?>
+        </tr>
+        </thead>
+        <tbody>
+        <?php $row_count = 0; ?>
+        <?php if (count($field->get_rows()) > 0): ?>
+          <?php foreach ($field->get_rows() as $row): ?>
+            <?php $row_count++; ?>
+            <tr class="<?php echo $row_count % 2 ? 'even' : 'odd' ?>">
+              <?php foreach ($row as $cell_name => $cell_value): ?>
+                <td><?php echo $cell_value; ?></td>
+              <?php endforeach; ?>
+            </tr>
+          <?php endforeach; ?>
+        <?php endif; ?>
+        </tbody>
+      </table>
+    </div>
+    <?php require "form.errors.phtml"; ?>
+  </div>
+  <div class="clear"></div>
+</div>
