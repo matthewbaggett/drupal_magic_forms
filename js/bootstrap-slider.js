@@ -150,8 +150,13 @@ var __slice = [].slice,
                     this.tooltip.text(value);
                 }
             }
-            if (value == 0) { this.tooltip.hide(); } else { this.tooltip.show();}
-
+            if (this.tooltip) {
+                if (value == 0) {
+                    this.tooltip.hide();
+                } else {
+                    this.tooltip.show();
+                }
+            }
             return this.input.val(value);
         };
         SimpleSlider.prototype.setRatio = function(ratio) {
