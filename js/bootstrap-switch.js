@@ -99,7 +99,7 @@
             return _this.options.onInit.apply(element, arguments);
           };
         })(this));
-        this.$element.on("switchChange.bootstrapSwitch", (function(_this) {
+        this.$element.on("switchChange", (function(_this) {
           return function() {
             return _this.options.onSwitchChange.apply(element, arguments);
           };
@@ -493,7 +493,7 @@
                 if (_this.$element.is(":radio")) {
                   $("[name='" + (_this.$element.attr('name')) + "']").not(_this.$element).attr("checked", false).trigger("change.bootstrapSwitch", true);
                 }
-                return _this.$element.trigger("switchChange.bootstrapSwitch", [state]);
+                return _this.$element.trigger("switchChange", [state]);
               }
             };
           })(this),

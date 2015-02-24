@@ -140,6 +140,23 @@ function magic_form_examples() {
   $form->add_field($switch);
 
 
+
+    drupal_add_js('jQuery(function() {
+       jQuery(".field-switch").on("switchChange","input", function(event, state) {
+        console.log("CHANGE");
+    });
+
+   });','inline');
+
+
+
+
+
+
+
+
+
+
   // Add Switch field
   $switch = new magic_form_field_switch('switchdisabled', 'Switch Disabled');
   $switch->disable();
