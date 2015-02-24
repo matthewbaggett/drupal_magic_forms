@@ -234,8 +234,8 @@ var __slice = [].slice,
                 this.pagePos = pagePos;
                 ratio = pagePos / this.slider.outerWidth();
                 value = this.ratioToValue(ratio);
+                this.displayValue(value);
                 //this.valueChanged(value, ratio, "domDrag");
-
                 if (this.settings.snap) {
                     return this.setSliderPositionFromValue(value, animate);
                 } else {
@@ -359,6 +359,7 @@ var __slice = [].slice,
                 return this.nearestValidValue(rawValue);
             }
         };
+
 
         SimpleSlider.prototype.valueChanged = function(value, ratio, trigger) {
             var eventData;
