@@ -7,7 +7,7 @@
     <input
       type="text" id="<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>_<?php echo uniqid(); ?>"
       class="span2 field-range-slider field-slider-<?php echo magic_forms_mangle_to_css_class($field->get_name()); ?>-input"
-      value="<?php if($field->get_value()) { echo $field->get_value(); } else {         if ($field->get_min()) { echo $field->get_min(); }         else { $incrementminmax = $field->get_increments(); reset($incrementminmax); echo $incrementminmax; }      } ?>"
+      value="<?php if($field->get_value()) { echo $field->get_value(); } else { if ($field->get_min()) { echo $field->get_min(); }  else { $incrementminmax = $field->get_increments(); echo reset($incrementminmax); }      } ?>"
       data-slider="true"
       <?php if (is_array($field->get_increments())) { ?>
         data-slider-values="<?php echo implode(',', $field->get_increments()); ?>"
