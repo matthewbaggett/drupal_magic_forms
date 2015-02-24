@@ -109,12 +109,12 @@ function magic_form_examples() {
 
 
 
-    drupal_add_js('jQuery(function() {
+    /*drupal_add_js('jQuery(function() {
          jQuery( ".field-distance .range_group .slider" ).mouseup(function() {
             console.log("mouse up");
     });
 
-    });','inline');
+    });','inline');*/
 
   $distance2 = magic_form_field_range::factory('distance2', 'Distance Disabled');
   $distance2->set_min(2)

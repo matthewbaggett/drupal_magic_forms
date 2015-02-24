@@ -93,6 +93,39 @@ var __slice = [].slice,
                     return false;
                 }
             });
+
+
+            this.slider.mouseup(function(e) {
+                if (_this.settings.disabled != 'disabled') {
+                   ;
+                    var pagePos, pageX;
+                    pageX = e.pageX;
+                    pagePos = pageX - _this.slider.offset().left;
+                    pagePos = Math.min(_this.slider.outerWidth(), pagePos);
+                    pagePos = Math.max(0, pagePos);
+                    ratio = pagePos / _this.slider.outerWidth();
+                    value = _this.ratioToValue(ratio);
+                    _this.valueChanged(value, ratio, "domDrag");
+                    console.log("Mouse Up");
+                    console.log(value);
+                    if (_this.dragging) {
+                        _this.dragging = false;
+                        _this.dragger.removeClass("dragging");
+                        return $("body").css({
+                            cursor: "auto"
+                        });
+                    }
+                    return false;
+                }
+            });
+
+
+
+
+
+
+
+
             $("body").mousemove(function(e) {
                 if (_this.dragging) {
                     _this.domDrag(e.pageX, e.pageY);
@@ -107,7 +140,9 @@ var __slice = [].slice,
                     return $("body").css({
                         cursor: "auto"
                     });
+
                 }
+
             });
             this.pagePos = 0;
             if (this.input.val() === "") {
@@ -185,6 +220,8 @@ var __slice = [].slice,
             return false;
         };
 
+
+
         SimpleSlider.prototype.domDrag = function(pageX, pageY, animate) {
             if (this.settings.disabled != 'disabled') {
 
@@ -199,7 +236,8 @@ var __slice = [].slice,
                 this.pagePos = pagePos;
                 ratio = pagePos / this.slider.outerWidth();
                 value = this.ratioToValue(ratio);
-                this.valueChanged(value, ratio, "domDrag");
+                //this.valueChanged(value, ratio, "domDrag");
+
                 if (this.settings.snap) {
                     return this.setSliderPositionFromValue(value, animate);
                 } else {
