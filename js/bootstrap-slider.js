@@ -106,8 +106,6 @@ var __slice = [].slice,
                     ratio = pagePos / _this.slider.outerWidth();
                     value = _this.ratioToValue(ratio);
                     _this.valueChanged(value, ratio, "domDrag");
-                    console.log("Mouse Up");
-                    console.log(value);
                     if (_this.dragging) {
                         _this.dragging = false;
                         _this.dragger.removeClass("dragging");
