@@ -149,14 +149,6 @@ function magic_form_examples() {
    });','inline');
 
 
-
-
-
-
-
-
-
-
   // Add Switch field
   $switch = new magic_form_field_switch('switchdisabled', 'Switch Disabled');
   $switch->disable();
