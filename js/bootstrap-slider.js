@@ -95,9 +95,8 @@ var __slice = [].slice,
             });
 
 
-            this.slider.mouseup(function(e) {
+            jQuery(this.slider).parent('.range_group').parent('.form-range').mouseup(function(e) {
                 if (_this.settings.disabled != 'disabled') {
-                   ;
                     var pagePos, pageX;
                     pageX = e.pageX;
                     pagePos = pageX - _this.slider.offset().left;
