@@ -1,5 +1,5 @@
 <?php
-class magic_form extends active_record {
+class magic_form extends \Thru\ActiveRecord\ActiveRecord {
   protected $_table = "magic_forms";
 
   const MAGIC_FORM_RENDER_MODE_VIEW = 'view';
