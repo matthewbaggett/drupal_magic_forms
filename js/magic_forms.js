@@ -393,5 +393,5 @@ var magic_form = {
 }
 
 jQuery(function () {
-    jQuery('.btn-disabled').prop('disabled', true);
+    jQuery('.btn-disabled').attr('disabled', true);
 });
