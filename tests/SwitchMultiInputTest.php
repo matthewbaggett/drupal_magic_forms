@@ -6,12 +6,14 @@
  * Time: 10:31
  */
 
-class SwitchMultiInputTest extends PHPUnit_Framework_TestCase {
+class SwitchMultiInputTest extends PHPUnit_Framework_TestCase
+{
 
     /** @var $magic_form magic_form */
     private $magic_form;
 
-    public function setUp(){
+    public function setUp()
+    {
         $this->magic_form = new magic_form();
         $this->magic_form->set_templates_directory("templates_bootstrap");
 
@@ -48,4 +50,3 @@ class SwitchMultiInputTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($this->input_default_name.'', $test_checkbox_field2->attr['name'], "Checkbox 2 Name Equals ".$this->input_default_name);
     }
 }
-

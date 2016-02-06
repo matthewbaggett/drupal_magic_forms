@@ -6,12 +6,14 @@
  * Time: 10:31
  */
 
-class SelectInputTest extends PHPUnit_Framework_TestCase {
+class SelectInputTest extends PHPUnit_Framework_TestCase
+{
 
     /** @var $magic_form magic_form */
     private $magic_form;
 
-    public function setUp(){
+    public function setUp()
+    {
         $this->magic_form = new magic_form();
         $this->magic_form->set_templates_directory("templates_bootstrap");
 
@@ -50,7 +52,8 @@ class SelectInputTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($this->input_default_label, $test_select_field_label->innertext(), "Check Label Text");
     }
 
-    function testSelectInputAllowNull() {
+    function testSelectInputAllowNull()
+    {
         $new_field = magic_form_field_select::factory($this->input_default_name, $this->input_default_label);
         // Add some options to it.
         $new_field->add_options(array(
@@ -72,7 +75,8 @@ class SelectInputTest extends PHPUnit_Framework_TestCase {
         $test_select_field = $form->find("select[name=".$this->input_default_name."]")[0];
     }
 
-    function testSelectInputBanNull() {
+    function testSelectInputBanNull()
+    {
         $new_field = magic_form_field_select::factory($this->input_default_name, $this->input_default_label);
         // Add some options to it.
         $new_field->add_options(array(
@@ -94,4 +98,3 @@ class SelectInputTest extends PHPUnit_Framework_TestCase {
         $test_select_field = $form->find("select[name=".$this->input_default_name."]")[0];
     }
 }
-

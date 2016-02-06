@@ -1,112 +1,123 @@
 <?php
-class magic_serialisable_closure {
+class magic_serialisable_closure
+{
 
-  protected $closure = NULL;
-  protected $reflection = NULL;
-  protected $code = NULL;
-  protected $used_variables = array();
+    protected $closure = null;
+    protected $reflection = null;
+    protected $code = null;
+    protected $used_variables = array();
 
-  public function __construct($function) {
-    if (!$function instanceOf Closure) {
-      throw new InvalidArgumentException();
+    public function __construct($function)
+    {
+        if (!$function instanceof Closure) {
+            throw new InvalidArgumentException();
+        }
+
+        $this->closure = $function;
+        $this->reflection = new ReflectionFunction($function);
+        $this->code = $this->_fetchCode();
+        $this->used_variables = $this->_fetchUsedVariables();
     }
 
-    $this->closure = $function;
-    $this->reflection = new ReflectionFunction($function);
-    $this->code = $this->_fetchCode();
-    $this->used_variables = $this->_fetchUsedVariables();
-  }
-
-  public function __invoke() {
-    $args = func_get_args();
-    return $this->reflection->invokeArgs($args);
-  }
-
-  public function getClosure() {
-    return $this->closure;
-  }
-
-  protected function _fetchCode() {
-    // Open file and seek to the first line of the closure
-    $file = new SplFileObject($this->reflection->getFileName());
-    $file->seek($this->reflection->getStartLine() - 1);
-
-    // Retrieve all of the lines that contain code for the closure
-    $code = '';
-    while ($file->key() < $this->reflection->getEndLine()) {
-      $code .= $file->current();
-      $file->next();
+    public function __invoke()
+    {
+        $args = func_get_args();
+        return $this->reflection->invokeArgs($args);
     }
 
-    // Only keep the code defining that closure
-    $begin = strpos($code, 'function');
-    $end = strrpos($code, '}');
-    $code = substr($code, $begin, $end - $begin + 1);
-
-    return $code;
-  }
-
-  public function getCode() {
-    return $this->code;
-  }
-
-  public function getParameters() {
-    return $this->reflection->getParameters();
-  }
-
-  protected function _fetchUsedVariables() {
-    // Make sure the use construct is actually used
-    $use_index = stripos($this->code, 'use');
-    if (!$use_index) {
-      return array();
+    public function getClosure()
+    {
+        return $this->closure;
     }
 
-    // Get the names of the variables inside the use statement
-    $begin = strpos($this->code, '(', $use_index) + 1;
-    $end = strpos($this->code, ')', $begin);
-    $vars = explode(',', substr($this->code, $begin, $end - $begin));
+    protected function _fetchCode()
+    {
+      // Open file and seek to the first line of the closure
+        $file = new SplFileObject($this->reflection->getFileName());
+        $file->seek($this->reflection->getStartLine() - 1);
 
-    // Get the static variables of the function via reflection
-    $static_vars = $this->reflection->getStaticVariables();
+      // Retrieve all of the lines that contain code for the closure
+        $code = '';
+        while ($file->key() < $this->reflection->getEndLine()) {
+            $code .= $file->current();
+            $file->next();
+        }
 
-    // Only keep the variables that appeared in both sets
-    $used_vars = array();
-    $replace_chars = array(' ', '$');
-    foreach ($vars as $var) {
-      foreach($replace_chars as $replace_char){
-        $var = trim($var, $replace_char);
-      }
+      // Only keep the code defining that closure
+        $begin = strpos($code, 'function');
+        $end = strrpos($code, '}');
+        $code = substr($code, $begin, $end - $begin + 1);
 
-      $used_vars[$var] = $static_vars[$var];
+        return $code;
     }
 
-    // Exclude the session from this, this was such a painful fault...
-    if (isset($used_vars['user'])) {
-      if (isset($used_vars['user']->session)) {
-        $used_vars['user']->session = '';
-      }
+    public function getCode()
+    {
+        return $this->code;
     }
 
-    return $used_vars;
-  }
-
-  public function getUsedVariables() {
-    return $this->used_variables;
-  }
-
-  public function __sleep() {
-    return array('code', 'used_variables');
-  }
-
-  public function __wakeup() {
-    extract($this->used_variables);
-
-    eval('$_function = ' . $this->code . ';');
-    if (isset($_function) AND $_function instanceOf Closure) {
-      $this->closure = $_function;
-      $this->reflection = new ReflectionFunction($_function);
-    } else {
-      throw new Exception();
+    public function getParameters()
+    {
+        return $this->reflection->getParameters();
     }
-  }
+
+    protected function _fetchUsedVariables()
+    {
+      // Make sure the use construct is actually used
+        $use_index = stripos($this->code, 'use');
+        if (!$use_index) {
+            return array();
+        }
+
+      // Get the names of the variables inside the use statement
+        $begin = strpos($this->code, '(', $use_index) + 1;
+        $end = strpos($this->code, ')', $begin);
+        $vars = explode(',', substr($this->code, $begin, $end - $begin));
+
+      // Get the static variables of the function via reflection
+        $static_vars = $this->reflection->getStaticVariables();
+
+      // Only keep the variables that appeared in both sets
+        $used_vars = array();
+        $replace_chars = array(' ', '$');
+        foreach ($vars as $var) {
+            foreach ($replace_chars as $replace_char) {
+                $var = trim($var, $replace_char);
+            }
+
+            $used_vars[$var] = $static_vars[$var];
+        }
+
+      // Exclude the session from this, this was such a painful fault...
+        if (isset($used_vars['user'])) {
+            if (isset($used_vars['user']->session)) {
+                $used_vars['user']->session = '';
+            }
+        }
+
+        return $used_vars;
+    }
+
+    public function getUsedVariables()
+    {
+        return $this->used_variables;
+    }
+
+    public function __sleep()
+    {
+        return array('code', 'used_variables');
+    }
+
+    public function __wakeup()
+    {
+        extract($this->used_variables);
+
+        eval('$_function = ' . $this->code . ';');
+        if (isset($_function) and $_function instanceof Closure) {
+            $this->closure = $_function;
+            $this->reflection = new ReflectionFunction($_function);
+        } else {
+            throw new Exception();
+        }
+    }
 }

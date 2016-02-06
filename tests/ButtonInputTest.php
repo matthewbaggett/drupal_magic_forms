@@ -6,12 +6,14 @@
  * Time: 10:31
  */
 
-class ButtonInputTest extends PHPUnit_Framework_TestCase {
+class ButtonInputTest extends PHPUnit_Framework_TestCase
+{
 
     /** @var $magic_form magic_form */
     private $magic_form;
 
-    public function setUp(){
+    public function setUp()
+    {
         $this->magic_form = new magic_form();
         $this->magic_form->set_templates_directory("templates_bootstrap");
 
@@ -57,4 +59,3 @@ class ButtonInputTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals("button", $test_button_field->attr['type'], "Type Equals button");
     }
 }
-

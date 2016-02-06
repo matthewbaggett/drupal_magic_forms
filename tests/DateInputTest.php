@@ -6,12 +6,14 @@
  * Time: 10:31
  */
 
-class DateInputTest extends PHPUnit_Framework_TestCase {
+class DateInputTest extends PHPUnit_Framework_TestCase
+{
 
     /** @var $magic_form magic_form */
     private $magic_form;
 
-    public function setUp(){
+    public function setUp()
+    {
         $this->magic_form = new magic_form();
         $this->magic_form->set_templates_directory("templates_bootstrap");
 
@@ -55,7 +57,7 @@ class DateInputTest extends PHPUnit_Framework_TestCase {
         $new_field->set_support_time(true)
             ->set_support_date(true);
 
-        $table = $new_field->draw_calendar(12,2014,null);
+        $table = $new_field->draw_calendar(12, 2014, null);
         $this->magic_form->add_field($new_field);
 
         $html = $this->magic_form->__toString();
@@ -77,4 +79,3 @@ class DateInputTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($this->input_default_label, $test_test_field_label->innertext(), "Check Label Text");
     }
 }
-

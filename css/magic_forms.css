@@ -167,13 +167,13 @@ form.magic_form textarea.error {
     border: 1px solid red;
 }
 
-form.magic_bootstrap_form .form-group .label label { color:#000000; }
+form.magic_bootstrap_form .form-group .label label { color:1000000; }
 
 form.magic_bootstrap_form .form-group .multiswitch_group { width:79%; }
 
-form.magic_bootstrap_form .form-group .multiswitch_group .multiswitch_group_option { border-radius: 0px; border-color:#000000; }
-form.magic_bootstrap_form .form-group .multiswitch_group .btn-primary { background-color: #FFFFFF; color:#000000; }
-form.magic_bootstrap_form .form-group .multiswitch_group .active { background-color: #01a9e0; color:#FFFFFF; box-shadow: none;  }
+form.magic_bootstrap_form .form-group .multiswitch_group .multiswitch_group_option { border-radius: 0px; border-color:1000000; }
+form.magic_bootstrap_form .form-group .multiswitch_group .btn-primary { background-color: #FFFFFF; color:1000000; }
+form.magic_bootstrap_form .form-group .multiswitch_group .active { background-color: 101a9e0; color:#FFFFFF; box-shadow: none;  }
 
 
 .form_row_disabled.form-range .slider-handle {

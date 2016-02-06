@@ -6,12 +6,14 @@
  * Time: 10:31
  */
 
-class RangeInputTest extends PHPUnit_Framework_TestCase {
+class RangeInputTest extends PHPUnit_Framework_TestCase
+{
 
     /** @var $magic_form magic_form */
     private $magic_form;
 
-    public function setUp(){
+    public function setUp()
+    {
         $this->magic_form = new magic_form();
         $this->magic_form->set_templates_directory("templates_bootstrap");
 
@@ -106,4 +108,3 @@ class RangeInputTest extends PHPUnit_Framework_TestCase {
 
     }
 }
-

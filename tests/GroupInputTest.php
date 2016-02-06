@@ -6,12 +6,14 @@
  * Time: 10:31
  */
 
-class GroupInputTest extends PHPUnit_Framework_TestCase {
+class GroupInputTest extends PHPUnit_Framework_TestCase
+{
 
     /** @var $magic_form magic_form */
     private $magic_form;
 
-    public function setUp(){
+    public function setUp()
+    {
         $this->magic_form = new magic_form();
         $this->magic_form->set_templates_directory("templates_bootstrap");
 
@@ -57,7 +59,7 @@ class GroupInputTest extends PHPUnit_Framework_TestCase {
         $new_field->set_attributes(array("testattribute" => "testattributevalue", "testattribute2" => "testattributevalue2"));
         $new_field2 = magic_form_field_text::factory($this->input_default_name."_2", $this->input_default_label."_2");
         $new_field2->set_attributes(array("testattribute" => "testattributevalue", "testattribute2" => "testattributevalue2"));
-        $test_wrapper->add_fields($new_field,$new_field2);
+        $test_wrapper->add_fields($new_field, $new_field2);
         $this->magic_form->add_field($test_wrapper);
 
         $html = $this->magic_form->__toString();
@@ -86,8 +88,8 @@ class GroupInputTest extends PHPUnit_Framework_TestCase {
         $new_field->set_attributes(array("testattribute" => "testattributevalue", "testattribute2" => "testattributevalue2"));
         $new_field2 = magic_form_field_text::factory($this->input_default_name."_2", $this->input_default_label."_2");
         $new_field2->set_attributes(array("testattribute" => "testattributevalue", "testattribute2" => "testattributevalue2"));
-        $test_wrapper->add_fields($new_field,$new_field2);
-        $test_wrapper->remove_fields($new_field,$new_field2);
+        $test_wrapper->add_fields($new_field, $new_field2);
+        $test_wrapper->remove_fields($new_field, $new_field2);
         $json = $test_wrapper->__toJsonArray();
         $this->magic_form->add_field($test_wrapper);
 
@@ -108,4 +110,3 @@ class GroupInputTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals("Test Wrapper", $test_group_h3->innertext(), "Check Label");
     }
 }
-

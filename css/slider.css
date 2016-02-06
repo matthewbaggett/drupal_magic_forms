@@ -3,7 +3,7 @@
 }
 
 .slider > .dragger {
-    background: #000000;
+    background: 1000000;
     margin-top:-5px !important;
     width:10px;
     height:24px;
@@ -21,7 +21,7 @@
 }
 
 .slider > .highlight-track {
-    background-color: #01a9e0;
+    background-color: 101a9e0;
 
 }
 
@@ -47,9 +47,9 @@
 
     background: #c5c5c5;
     background: -moz-linear-gradient(90deg, rgba(180,180,180,1) 20%, rgba(230,230,230,1) 50%, rgba(180,180,180,1) 80%);
-    background:	-webkit-radial-gradient(  50%   0%,  12% 50%, hsla(0,0%,100%,1) 0%, hsla(0,0%,100%,0) 100%),
+    background:     -webkit-radial-gradient(  50%   0%,  12% 50%, hsla(0,0%,100%,1) 0%, hsla(0,0%,100%,0) 100%),
     -webkit-radial-gradient(  50% 100%, 12% 50%, hsla(0,0%,100%,.6) 0%, hsla(0,0%,100%,0) 100%),
-    -webkit-radial-gradient(	50% 50%, 200% 50%, hsla(0,0%,90%,1) 5%, hsla(0,0%,85%,1) 30%, hsla(0,0%,60%,1) 100%);
+    -webkit-radial-gradient(    50% 50%, 200% 50%, hsla(0,0%,90%,1) 5%, hsla(0,0%,85%,1) 30%, hsla(0,0%,60%,1) 100%);
 }
 
 .slider-volume > .track, .slider-volume > .highlight-track {
@@ -120,7 +120,7 @@
 
 .dragger .tooltip {
     color:#FFFFFF;
-    background:#01a9e0;
+    background:101a9e0;
     margin-top: -24px;
     margin-left:-14px;
     opacity: 1;
@@ -132,7 +132,7 @@
 
 
 .dragger > .tooltip::before {
-    background-color: #01a9e0;
+    background-color: 101a9e0;
     content: '';
     display: block;
     height: 7px;

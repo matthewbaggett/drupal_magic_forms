@@ -18,7 +18,8 @@ jQuery.fn.mousehold = function (f) {
 
             clearMousehold = function () {
                 clearInterval(intervalId);
-                if (firstStep) f.call(this, 1);
+                if (firstStep) {
+                    f.call(this, 1); }
                 firstStep = false;
             };
 
@@ -31,7 +32,8 @@ jQuery.fn.mousehold = function (f) {
 jQuery(function () {
     jQuery.extend(jQuery.fn.disableTextSelect = function () {
         return this.each(function () {
-            jQuery(this).bind('selectstart click mousedown', function () { return false; });
+            jQuery(this).bind('selectstart click mousedown', function () {
+                return false; });
         });
     });
 });
@@ -67,7 +69,8 @@ jQuery(function () {
         } else {
             if (this.element.val()) {
                 var initialValue = parseFloat(this.element.val());
-                if (!isNaN(initialValue)) value = initialValue.toFixed(this.numberOfDecimals);
+                if (!isNaN(initialValue)) {
+                    value = initialValue.toFixed(this.numberOfDecimals); }
             }
         }
         this.setValue(value);
@@ -108,12 +111,12 @@ jQuery(function () {
 
         setValue: function (value) {
             value = parseFloat(value);
-            if (this.value == value)
-                return;
-            if (value < this.minimum)
-                value = this.minimum;
-            if (value > this.maximum)
-                value = this.maximum;
+            if (this.value == value) {
+                return; }
+            if (value < this.minimum) {
+                value = this.minimum; }
+            if (value > this.maximum) {
+                value = this.maximum; }
             this.value = value;
             this.element.val(this.value.toFixed(this.numberOfDecimals));
             this.element.change();
@@ -145,11 +148,11 @@ jQuery(function () {
             }
             // Ensure that it is a number and stop the keypress
             var a = [];
-            for (var i = 48; i < 58; i++)
-                a.push(i);
+            for (var i = 48; i < 58; i++) {
+                a.push(i); }
             var k = event.keyCode;
-            if (!(a.indexOf(k) >= 0))
-                event.preventDefault();
+            if (!(a.indexOf(k) >= 0)) {
+                event.preventDefault(); }
         },
 
         _checkConstraints: function (e) {

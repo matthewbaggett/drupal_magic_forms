@@ -6,12 +6,14 @@
  * Time: 10:31
  */
 
-class CheckboxInputTest extends PHPUnit_Framework_TestCase {
+class CheckboxInputTest extends PHPUnit_Framework_TestCase
+{
 
     /** @var $magic_form magic_form */
     private $magic_form;
 
-    public function setUp(){
+    public function setUp()
+    {
         $this->magic_form = new magic_form();
         $this->magic_form->set_templates_directory("templates_bootstrap");
 
@@ -73,6 +75,4 @@ class CheckboxInputTest extends PHPUnit_Framework_TestCase {
         //Check Radio Inputs
         $this->assertEquals($this->input_default_name.'', $test_checkbox_field1->attr['name'], "Checkbox Name Equals ".$this->input_default_name);
     }
-
 }
-
