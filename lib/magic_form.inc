@@ -641,7 +641,7 @@ class magic_form extends \Thru\ActiveRecord\ActiveRecord
         return $form;
     }
 
-    public function __toJson()
+    public function __toJson($anticipated_rows = NULL)
     {
         $response = new StdClass();
         foreach ($this as $name => $field) {
@@ -657,10 +657,6 @@ class magic_form extends \Thru\ActiveRecord\ActiveRecord
         }
         unset($response->form_elements);
 
-        if (isset($_GET['debug'])) {
-            krumo($response);
-            exit;
-        }
         header("Content-type: application/json");
         echo magic_form_print_json(json_encode($response));
         exit;
