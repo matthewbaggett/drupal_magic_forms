@@ -1,7 +1,6 @@
 <?php
 
 // Base libs
-require_once("lib/json.inc");
 require_once("lib/magic_form.inc");
 
 // Field Primitives

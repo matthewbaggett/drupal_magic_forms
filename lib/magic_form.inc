@@ -90,19 +90,22 @@ class magic_form extends \Thru\ActiveRecord\ActiveRecord
         return parent::is_update();
     }
 
-    public function __pre_save()
+    public function preSave()
     {
         $this->__magic_form_serialise();
+        parent::preSave();
     }
 
-    public function __post_save()
+    public function postSave()
     {
         $this->__magic_form_deserialise();
+        parent::postSave();
     }
 
-    public function __post_construct()
+    public function postConstruct()
     {
         $this->__magic_form_deserialise();
+        parent::postConstruct();
     }
 
     private function __magic_form_serialise()
@@ -658,7 +661,7 @@ class magic_form extends \Thru\ActiveRecord\ActiveRecord
         unset($response->form_elements);
 
         header("Content-type: application/json");
-        echo magic_form_print_json(json_encode($response));
+        echo json_encode($response, JSON_PRETTY_PRINT);
         exit;
     }
 }
