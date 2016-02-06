@@ -30,7 +30,7 @@ class magic_form extends \Thru\ActiveRecord\ActiveRecord {
   public $form_elements;
   public $submit_function;
   public $submit_destination = null;
-  private $templates_directory = 'templates';
+  private $templates_directory = 'templates_bootstrap';
   public $render_mode = self::MAGIC_FORM_RENDER_MODE_EDIT;
   public $action = null;
   public $classes = array();
