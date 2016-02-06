@@ -1,4 +1,21 @@
 <?php
+
+/**
+ * Class magic_form
+ * @var $magic_form_id INTEGER
+ * @var $form_id VARCHAR(24)
+ * @var $created DATETIME
+ * @var $uid INTEGER
+ * @var $form_elements TEXT
+ * @var $submit_function TEXT
+ * @var $submit_destination TEXT
+ * @var $render_mode VARCHAR(4)
+ * @var $action VARCHAR(255)
+ * @var $classes TEXT
+ * @var $form_name VARCHAR(255)
+ * @var $fields_to_omit TEXT
+ * @var $autocomplete TEXT
+ */
 class magic_form extends \Thru\ActiveRecord\ActiveRecord {
   protected $_table = "magic_forms";
 
